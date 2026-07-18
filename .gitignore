@@ -1,0 +1,23 @@
+# Node / Frontend
+node_modules/
+dist/
+build/
+.npm/
+
+# Python / Backend
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# IDEs / OS
+.DS_Store
+.vscode/
+.idea/
+
+# Supabase Local (if used later)
+supabase/.temp/
