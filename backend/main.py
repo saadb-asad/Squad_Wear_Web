@@ -265,25 +265,10 @@ async def websocket_endpoint(websocket: WebSocket):
 
 @app.post("/api/checkout")
 @limiter.limit("5/minute")
-async def create_checkout(request: Request, db: AsyncSession = Depends(get_db)):
+async def create_checkout(request: Request, current_user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
     # This is a simplified checkout. In reality, you'd receive cart items in the request body.
-    # For now, let's create a dummy order for testing the gateway.
-    
-    # Check if a test user exists, otherwise create one
-    result = await db.execute(select(User).where(User.email == "test@squadwear.com"))
-    user = result.scalar_one_or_none()
-    
-    if not user:
-        user = User(
-            email="test@squadwear.com", 
-            password_hash="fake", 
-            account_type="customer", 
-            first_name="Test", 
-            company_name="SquadWear"
-        )
-        db.add(user)
-        await db.commit()
-        await db.refresh(user)
+    # We will use the authenticated user instead of a dummy user.
+    user = current_user
 
     order = Order(user_id=user.id, total_amount=150.00, status="pending")
     db.add(order)

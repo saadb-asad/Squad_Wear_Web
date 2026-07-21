@@ -1,26 +1,67 @@
 import { useState } from 'react';
 import { useCart } from '../../contexts/CartContext';
+import { useAuth } from '../../contexts/AuthContext';
 import { PRODUCTS } from '../../data/mockData';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const CheckoutPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, total } = useCart();
+  const { isAuthenticated, token } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
   const navigate = useNavigate();
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (items.length === 0) return;
+    if (!isAuthenticated) {
+      navigate('/portal/login');
+      return;
+    }
+
     setIsProcessing(true);
-    
-    // Simulate payment processing
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:8000/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        // Redirect to Payfast gateway
+        if (data.payfast_url && data.payment_data) {
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = data.payfast_url;
+          
+          for (const key in data.payment_data) {
+            const hiddenField = document.createElement('input');
+            hiddenField.type = 'hidden';
+            hiddenField.name = key;
+            hiddenField.value = data.payment_data[key];
+            form.appendChild(hiddenField);
+          }
+          
+          document.body.appendChild(form);
+          clearCart(); // Clear the local cart before going to gateway
+          form.submit();
+        } else {
+          setIsProcessing(false);
+          alert('Missing payment gateway details.');
+        }
+      } else {
+        const errData = await response.json().catch(() => null);
+        console.error('Checkout failed', errData);
+        alert('Checkout failed: ' + (errData?.detail || 'Unknown error'));
+        setIsProcessing(false);
+      }
+    } catch (error) {
+      console.error('Error during checkout', error);
       setIsProcessing(false);
-      clearCart();
-      alert('Payment successful! Your order has been placed.');
-      navigate('/');
-    }, 1500);
+      alert('Network error during checkout.');
+    }
   };
 
   const applyPromo = () => {
@@ -179,7 +220,7 @@ export const CheckoutPage = () => {
                     : 'neo-extruded bg-secondary text-white hover:brightness-110 active:shadow-[inset_-4px_-4px_8px_#004d3e,inset_4px_4px_8px_#008a70] neo-button-active'
                 }`}
               >
-                <span>{isProcessing ? 'Processing...' : 'Proceed to Checkout'}</span>
+                <span>{isProcessing ? 'Processing...' : (!isAuthenticated ? 'Log in to Checkout' : 'Proceed to Checkout')}</span>
                 {!isProcessing && <span className="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>}
               </button>
             </div>
