@@ -2,9 +2,13 @@ from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict, Any
 import asyncio
+import os
 import random
 import string
 from datetime import datetime, timedelta
+import resend
+
+resend.api_key = os.getenv("RESEND_API_KEY")
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
@@ -115,7 +119,20 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSessi
     user.otp_expires_at = datetime.utcnow() + timedelta(minutes=10)
     await db.commit()
     
-    print(f"\n{'='*40}\nOTP FOR {user.email}: {otp}\n{'='*40}\n")
+    if resend.api_key:
+        try:
+            resend.Emails.send({
+                "from": "SquadWear Support <support@squadwear.com>",
+                "to": user.email,
+                "subject": "Your SquadWear Login OTP",
+                "html": f"<p>Your login code is: <strong>{otp}</strong></p><p>This code expires in 10 minutes.</p>"
+            })
+            print(f"Sent OTP email to {user.email}")
+        except Exception as e:
+            print(f"Failed to send OTP email: {e}")
+            print(f"\n{'='*40}\nOTP FOR {user.email}: {otp}\n{'='*40}\n")
+    else:
+        print(f"\n{'='*40}\nOTP FOR {user.email}: {otp}\n{'='*40}\n")
     
     return {"require_otp": True, "email": user.email}
 
