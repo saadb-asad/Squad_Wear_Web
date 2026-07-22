@@ -4,6 +4,8 @@ import autoTable from 'jspdf-autotable';
 import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
+
 
 // --- Mock Data ---
 type OrderStatus = 'pending' | 'paid' | 'processing' | 'shipped' | 'delivered';
@@ -44,7 +46,7 @@ export const AdminDashboard = () => {
   // Fetch initial orders and connect to WebSocket
   useEffect(() => {
     // 1. Fetch initial data
-    fetch('http://localhost:8000/api/orders')
+    fetch(`${API_BASE_URL}/api/orders`)
       .then(res => res.json())
       .then(data => setOrders(data))
       .catch(err => console.error("Error fetching orders:", err));
@@ -84,7 +86,7 @@ export const AdminDashboard = () => {
 
   const updateOrderStatus = async (orderId: string, newStatus: OrderStatus) => {
     try {
-      await fetch(`http://localhost:8000/api/orders/${orderId}/status?status=${newStatus}`, {
+      await fetch(`${API_BASE_URL}/api/orders/${orderId}/status?status=${newStatus}`, {
         method: 'PUT'
       });
       // We don't manually update state here because the WebSocket will broadcast the change back to us!

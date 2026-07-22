@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { LogOut, User as UserIcon, Package, Settings, ArrowLeft, Trash2 } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
+
 
 type PortalView = 'overview' | 'orders' | 'profile' | 'settings';
 
@@ -49,7 +51,7 @@ export const PortalPage = () => {
     if (!token) return;
     setLoadingOrders(true);
     try {
-      const res = await fetch('http://localhost:8000/api/orders/me', {
+      const res = await fetch(`${API_BASE_URL}/api/orders/me`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (res.ok) {
@@ -69,7 +71,7 @@ export const PortalPage = () => {
     setIsUpdating(true);
     setUpdateMsg('');
     try {
-      const res = await fetch('http://localhost:8000/api/auth/me', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -97,7 +99,7 @@ export const PortalPage = () => {
     if (!confirmDelete || !token) return;
     
     try {
-      const res = await fetch('http://localhost:8000/api/auth/me', {
+      const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });

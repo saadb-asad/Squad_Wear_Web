@@ -3,6 +3,8 @@ import { useCart } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { PRODUCTS } from '../../data/mockData';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../config';
+
 
 export const CheckoutPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, total } = useCart();
@@ -21,7 +23,7 @@ export const CheckoutPage = () => {
 
     setIsProcessing(true);
     try {
-      const response = await fetch('http://localhost:8000/api/checkout', {
+      const response = await fetch(`${API_BASE_URL}/api/checkout`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`

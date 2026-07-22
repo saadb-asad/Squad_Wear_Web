@@ -1,5 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
+import { API_BASE_URL } from '../config';
+
 
 type Role = 'customer' | 'business_client' | 'internal_admin';
 
@@ -31,7 +33,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       const storedToken = localStorage.getItem('squadwear_token');
       if (storedToken) {
         try {
-          const res = await fetch('http://localhost:8000/api/auth/me', {
+          const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
             headers: {
               'Authorization': `Bearer ${storedToken}`
             }

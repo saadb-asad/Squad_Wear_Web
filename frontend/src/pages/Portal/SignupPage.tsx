@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { UserPlus } from 'lucide-react';
+import { API_BASE_URL } from '../../config';
+
 
 export const SignupPage = () => {
   const [firstName, setFirstName] = useState('');
@@ -21,7 +23,7 @@ export const SignupPage = () => {
 
     try {
       // 1. Register User
-      const registerRes = await fetch('http://localhost:8000/api/auth/register', {
+      const registerRes = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +47,7 @@ export const SignupPage = () => {
       formData.append('username', email);
       formData.append('password', password);
 
-      const loginRes = await fetch('http://localhost:8000/api/auth/login', {
+      const loginRes = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -59,7 +61,7 @@ export const SignupPage = () => {
       const token = loginData.access_token;
 
       // 3. Fetch user profile
-      const userRes = await fetch('http://localhost:8000/api/auth/me', {
+      const userRes = await fetch(`${API_BASE_URL}/api/auth/me`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
