@@ -69,15 +69,15 @@ from database import AsyncSessionLocal
 @app.on_event("startup")
 async def startup_event():
     async with AsyncSessionLocal() as session:
-        result = await session.execute(select(User).where(User.email == "admin@squadwear.com"))
+        result = await session.execute(select(User).where(User.email == "admin@squadattire.com"))
         admin = result.scalar_one_or_none()
         if not admin:
             admin = User(
-                email="admin@squadwear.com",
+                email="admin@squadattire.com",
                 password_hash=get_password_hash("admin123"),
                 account_type="internal_admin",
                 first_name="Admin",
-                company_name="Squad Wear"
+                company_name="Squad Attire"
             )
             session.add(admin)
             await session.commit()
