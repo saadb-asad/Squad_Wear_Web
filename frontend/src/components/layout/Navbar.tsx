@@ -15,7 +15,7 @@ export const Navbar = () => {
     <nav className="w-full sticky top-0 px-4 lg:px-margin-desktop py-4 bg-surface z-50 shadow-[-8px_-8px_16px_#ffffff,8px_8px_16px_#d1d9e6]">
       <div className="flex justify-between items-center w-full max-w-max-width mx-auto">
         <Link to="/" className="flex items-center gap-3">
-          <img src="/logo.png" alt="Squad Wear Logo" className="h-8 md:h-10 object-contain" />
+          <img src="/logo.png" alt="Squad Wear Logo" className="h-8 md:h-10 object-contain invert" />
           <span className="font-headline-lg text-headline-md md:text-headline-lg font-extrabold text-on-surface tracking-tighter hidden sm:block">
             Squad Wear
           </span>
