@@ -1,7 +1,7 @@
 
 export const HomePage = () => {
   return (
-    <main className="w-full max-w-max-width mx-auto px-margin-desktop space-y-24 py-12">
+    <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-16 lg:space-y-24 py-8 lg:py-12">
       {/* Content ported from Stitch design */}
 
 {/* Hero Section: Editorial Streetwear */}
@@ -10,14 +10,14 @@ export const HomePage = () => {
 <div className="inline-block neo-recessed px-4 py-1 rounded-full text-secondary font-label-md text-label-sm uppercase tracking-widest">
                     Spring/Summer 2024
                 </div>
-<h1 className="font-headline-xl text-headline-xl text-on-surface">
-                    TECHNICAL <br/>PRECISION. <br/>STREET <br/>CULTURE.
+<h1 className="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface">
+                    TECHNICAL <br/>PRECISION. <br className="hidden lg:block"/>STREET <br className="hidden lg:block"/>CULTURE.
                 </h1>
 <p className="text-on-surface-variant max-w-md font-body-lg text-body-lg">
                     Engineered for the urban environment. Our latest drop fuses high-performance fabrics with silhouettes designed for movement.
                 </p>
-<div className="flex gap-6 pt-4">
-<button className="neo-extruded neo-interactive px-10 py-5 rounded-xl bg-surface border border-secondary/10 flex items-center gap-3">
+<div className="flex gap-4 pt-4 flex-col sm:flex-row">
+<button className="neo-extruded neo-interactive px-8 lg:px-10 py-4 lg:py-5 rounded-xl bg-surface border border-secondary/10 flex items-center justify-center gap-3 w-full sm:w-auto">
 <span className="font-label-md text-label-md text-on-surface font-bold">SHOP THE DROP</span>
 <span className="material-symbols-outlined">arrow_forward</span>
 </button>
@@ -44,10 +44,10 @@ export const HomePage = () => {
 <section className="space-y-12">
 <div className="flex justify-between items-end">
 <div className="space-y-2">
-<h2 className="font-headline-lg text-headline-lg text-on-surface">New Drops</h2>
+<h2 className="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface">New Drops</h2>
 <p className="text-on-surface-variant font-body-md text-body-md">Freshly extruded from the technical labs.</p>
 </div>
-<button className="neo-extruded-sm neo-interactive px-6 py-3 rounded-full font-label-md text-label-md">View All</button>
+<button className="neo-extruded-sm neo-interactive px-4 lg:px-6 py-2 lg:py-3 rounded-full font-label-md text-label-sm lg:text-label-md whitespace-nowrap">View All</button>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
 {/* Product Card 1 */}
@@ -120,7 +120,7 @@ export const HomePage = () => {
 <section className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
 <div className="neo-extruded p-8 rounded-[40px] bg-surface flex flex-col justify-between min-h-[500px]">
 <div className="space-y-4">
-<h2 className="font-headline-lg text-headline-lg text-on-surface">The Monolith <br/>Collection</h2>
+<h2 className="font-headline-lg text-headline-md lg:text-headline-lg text-on-surface">The Monolith <br className="hidden lg:block"/>Collection</h2>
 <p className="text-on-surface-variant font-body-md text-body-md max-w-xs">A tribute to minimalist forms and structural integrity. All-white technical gear for the purist.</p>
 </div>
 <div className="flex-grow my-8 neo-recessed rounded-3xl overflow-hidden">
@@ -132,41 +132,41 @@ export const HomePage = () => {
 </button>
 </div>
 <div className="space-y-gutter">
-<div className="neo-extruded p-8 rounded-[40px] bg-surface h-[calc(50%-12px)] flex items-center gap-8">
-<div className="w-1/2 space-y-4">
-<h3 className="font-headline-md text-headline-md text-on-surface">Modular <br/>Accessories</h3>
-<button className="text-secondary font-bold font-label-md text-label-md flex items-center gap-2">VIEW SHOP <span className="material-symbols-outlined">east</span></button>
+<div className="neo-extruded p-6 lg:p-8 rounded-[32px] lg:rounded-[40px] bg-surface h-auto lg:h-[calc(50%-12px)] flex flex-col-reverse lg:flex-row items-center gap-6 lg:gap-8">
+<div className="w-full lg:w-1/2 space-y-4">
+<h3 className="font-headline-md text-headline-md text-on-surface text-center lg:text-left">Modular <br className="hidden lg:block"/>Accessories</h3>
+<button className="text-secondary font-bold font-label-md text-label-md flex items-center gap-2 mx-auto lg:mx-0">VIEW SHOP <span className="material-symbols-outlined">east</span></button>
 </div>
-<div className="w-1/2 h-full neo-recessed rounded-2xl overflow-hidden">
+<div className="w-full lg:w-1/2 aspect-video lg:h-full lg:aspect-auto neo-recessed rounded-2xl overflow-hidden">
 <img className="w-full h-full object-cover" data-alt="Macro photography of modular techwear bag attachments, featuring heavy-duty buckles and waterproof nylon textures in a slate grey color. Soft shadows define the recessed buttons and straps, creating a tactile, neomorphic appearance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc1CSi3ilGPshixWU_bnwM1XuzRBGwBeQqa6RKa3rQP6-79L2djYCxyMU0PjOLlmhd_MoDnCuTzz-EsaB2RAMN2AXUt1d2z2_OpaX7D2StLUNpzM46cj8QOi9nX-GmO7El8LGwaa4l0G08ibrhIeogvCb2k7uA4bELuNZMfjKVl6FJmhKwO6GxomEmtkDzzEBIeAWC637EjLl6aHfunDSTaHnrKzXnUyJ-E7kPtEKS4-T5f3ucJYDhes71EwNm_rH5eO0NTGiB9qMT"/>
 </div>
 </div>
-<div className="neo-extruded p-8 rounded-[40px] bg-surface h-[calc(50%-12px)] flex items-center gap-8">
-<div className="w-1/2 h-full neo-recessed rounded-2xl overflow-hidden">
+<div className="neo-extruded p-6 lg:p-8 rounded-[32px] lg:rounded-[40px] bg-surface h-auto lg:h-[calc(50%-12px)] flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+<div className="w-full lg:w-1/2 aspect-video lg:h-full lg:aspect-auto neo-recessed rounded-2xl overflow-hidden">
 <img className="w-full h-full object-cover" data-alt="Streetwear model sitting on a minimalist white bench, wearing a reflective rain jacket that catches the light. The setting is a clean urban plaza at dusk with soft cool lighting. The aesthetic is modern, sleek, and premium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-lioRZGVJawYMojpIoUZEptZbjypLgnhhuzsDtRlmHSyL5jNv8yJzohqsV_3OTowAHDA6Bzta_6WPCkJDaJFg-OcpV02J5_NmtliDezUD0Ufbxtg1zpGr_SBW0N3-3AEN6OaFfE7EvUo_MZR3-F_GNggA-sLFrflg8JzQalW8JdzjK0aOQ6fS7oCdzi8cAayIzTtHWsqaLOTmBLTPvfGAn1wHNZdRmaFXjOYVQzVZG51UmJMBAnQhncwC1QOldawn4_Nu5Tfc8hW9"/>
 </div>
-<div className="w-1/2 space-y-4">
-<h3 className="font-headline-md text-headline-md text-on-surface">Waterproof <br/>Series</h3>
-<button className="text-secondary font-bold font-label-md text-label-md flex items-center gap-2">EXPLORE <span className="material-symbols-outlined">east</span></button>
+<div className="w-full lg:w-1/2 space-y-4">
+<h3 className="font-headline-md text-headline-md text-on-surface text-center lg:text-left">Waterproof <br className="hidden lg:block"/>Series</h3>
+<button className="text-secondary font-bold font-label-md text-label-md flex items-center gap-2 mx-auto lg:mx-0">EXPLORE <span className="material-symbols-outlined">east</span></button>
 </div>
 </div>
 </div>
 </section>
 {/* Stay Informed: Newsletter Section */}
-<section className="neo-extruded py-20 px-8 md:px-20 rounded-[60px] bg-surface text-center space-y-10">
+<section className="neo-extruded py-12 lg:py-20 px-6 lg:px-20 rounded-[32px] lg:rounded-[60px] bg-surface text-center space-y-8 lg:space-y-10">
 <div className="max-w-2xl mx-auto space-y-6">
 <div className="inline-flex neo-recessed p-4 rounded-full text-secondary mb-4">
 <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>mail</span>
 </div>
-<h2 className="font-headline-xl text-headline-xl text-on-surface">Stay Informed</h2>
+<h2 className="font-headline-xl text-headline-lg lg:text-headline-xl text-on-surface">Stay Informed</h2>
 <p className="text-on-surface-variant font-body-lg text-body-lg">
                     Join the Squad Wear Inner Circle. Receive early access to drops, exclusive technical insights, and community-only events.
                 </p>
-<div className="flex flex-col md:flex-row gap-4 pt-4">
+<div className="flex flex-col sm:flex-row gap-4 pt-4">
 <div className="flex-grow neo-recessed rounded-2xl p-2 flex items-center bg-surface">
-<input className="w-full bg-transparent border-none focus:ring-0 px-4 font-body-md text-on-surface" placeholder="your@email.com" type="email"/>
+<input className="w-full bg-transparent border-none focus:ring-0 px-4 font-body-md text-on-surface py-2 sm:py-0" placeholder="your@email.com" type="email"/>
 </div>
-<button className="neo-extruded neo-interactive px-10 py-5 rounded-2xl bg-on-surface text-surface font-bold font-label-md text-label-md whitespace-nowrap">
+<button className="neo-extruded neo-interactive px-8 lg:px-10 py-4 lg:py-5 rounded-2xl bg-on-surface text-surface font-bold font-label-md text-label-md whitespace-nowrap w-full sm:w-auto">
                         SUBSCRIBE NOW
                     </button>
 </div>
