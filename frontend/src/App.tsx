@@ -13,6 +13,10 @@ import { PortalPage } from './pages/Portal/PortalPage';
 import { LoginPage } from './pages/Portal/LoginPage';
 import { SignupPage } from './pages/Portal/SignupPage';
 import { AdminDashboard } from './pages/Admin/AdminDashboard';
+import { TermsPage } from './pages/Legal/TermsPage';
+import { PrivacyPage } from './pages/Legal/PrivacyPage';
+import { ReturnsPage } from './pages/Support/ReturnsPage';
+import { ShippingPage } from './pages/Support/ShippingPage';
 
 function App() {
   return (
@@ -30,6 +34,10 @@ function App() {
               <Route path="portal/login" element={<LoginPage />} />
               <Route path="portal/signup" element={<SignupPage />} />
               <Route path="admin" element={<AdminDashboard />} />
+              <Route path="terms" element={<TermsPage />} />
+              <Route path="privacy" element={<PrivacyPage />} />
+              <Route path="returns" element={<ReturnsPage />} />
+              <Route path="shipping" element={<ShippingPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
