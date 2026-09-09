@@ -57,8 +57,8 @@ export const ProductPage = () => {
         <div className="lg:col-span-5 flex flex-col gap-8">
           <div className="border border-outline p-8 space-y-6">
             <div>
-              <h1 className="font-display text-shout text-display-lg text-on-surface mb-2">{product.name}</h1>
-              <p className="text-secondary font-bold font-ui text-lg">${product.price.toFixed(2)}</p>
+              <h1 className="font-headline-lg text-headline-lg text-on-surface mb-2">{product.name}</h1>
+              <p className="text-secondary font-bold text-headline-md font-headline-md">${product.price.toFixed(2)}</p>
             </div>
             
             <div className="space-y-4">
@@ -68,14 +68,14 @@ export const ProductPage = () => {
               
               <div className="flex items-center gap-4 py-4">
                 <div className="flex -space-x-2">
-                  <div className="w-8 h-8 border-2 border-surface overflow-hidden">
+                  <div className="w-8 h-8 rounded-full border-2 border-surface overflow-hidden">
                     <img className="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKiPDHU9kvQInh5BTHzsrf-qizJ7hJkOkWzW-Zx07Uhf12ni53hetQ62yGhoKxZisF4huqlDrKCEDFDoIdjj0seX1UGqVgemHFhHdSIyKsfA_bIGhIHtDQRGubFC1pT-cut7fGxetwO57n9TJiH_S6-FVoHrN9_JTZFl3V6NcZp2XqUEjevC88GbBr6x2i8CQLADHI7tcWCP5VOS-OoeUf0NhfStYHgMLdU7tnVZc0TP3ZLH8IO9IWtVSAOvMDFXVS_Svr79fiCjhn"/>
                   </div>
-                  <div className="w-8 h-8 border-2 border-surface overflow-hidden bg-surface-container flex items-center justify-center text-[10px] font-bold">
+                  <div className="w-8 h-8 rounded-full border-2 border-surface overflow-hidden bg-surface-container flex items-center justify-center text-[10px] font-bold">
                     +42
                   </div>
                 </div>
-                <span className="font-ui text-xs text-on-surface-variant">Recommended by the Squad community</span>
+                <span className="text-label-sm font-label-sm text-on-surface-variant">Recommended by the Squad community</span>
               </div>
             </div>
 
