@@ -147,7 +147,7 @@ export const CatalogPage = () => {
           <div className="flex justify-between items-center mb-10">
             <p className="font-body-md text-body-md text-on-surface-variant">Showing <span className="font-bold text-on-surface">{filteredProducts.length}</span> technical pieces</p>
             <div className="relative">
-              <button className="neo-extruded px-6 py-3 rounded-xl flex items-center gap-3 font-label-md text-label-md">
+              <button className="border border-outline px-6 py-3 flex items-center gap-3 font-label-md text-label-md">
                 Sort by: Featured
                 <span className="material-symbols-outlined">expand_more</span>
               </button>
@@ -167,7 +167,7 @@ export const CatalogPage = () => {
           <div className="mt-20 flex justify-center items-center gap-4">
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              className="neo-extruded w-12 h-12 rounded-xl flex items-center justify-center text-outline hover:text-secondary transition-all"
+              className="border border-outline w-12 h-12 flex items-center justify-center text-outline hover:border-secondary hover:text-secondary transition-colors"
             >
               <span className="material-symbols-outlined">chevron_left</span>
             </button>
@@ -175,10 +175,10 @@ export const CatalogPage = () => {
               <button
                 key={page}
                 onClick={() => setCurrentPage(page)}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold transition-all ${
+                className={`w-12 h-12 border flex items-center justify-center font-bold transition-colors ${
                   currentPage === page
-                    ? 'neo-recessed text-secondary'
-                    : 'neo-extruded text-on-surface hover:neo-recessed'
+                    ? 'border-secondary text-secondary'
+                    : 'border-outline text-on-surface hover:border-secondary'
                 }`}
               >
                 {page}
@@ -186,7 +186,7 @@ export const CatalogPage = () => {
             ))}
             <button
               onClick={() => setCurrentPage(Math.min(3, currentPage + 1))}
-              className="neo-extruded w-12 h-12 rounded-xl flex items-center justify-center text-outline hover:text-secondary transition-all"
+              className="border border-outline w-12 h-12 flex items-center justify-center text-outline hover:border-secondary hover:text-secondary transition-colors"
             >
               <span className="material-symbols-outlined">chevron_right</span>
             </button>
