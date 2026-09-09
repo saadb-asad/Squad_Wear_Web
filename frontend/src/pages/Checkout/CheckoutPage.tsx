@@ -4,6 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { PRODUCTS } from '../../data/mockData';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config';
+import { Button } from '../../components/ui/Button';
 
 
 export const CheckoutPage = () => {
@@ -91,11 +92,11 @@ export const CheckoutPage = () => {
           <h1 className="font-headline-xl text-headline-xl text-on-surface mb-8">Your Bag</h1>
           
           {items.length === 0 ? (
-            <div className="neo-extruded rounded-2xl p-12 text-center">
+            <div className="border border-outline p-12 text-center">
               <span className="material-symbols-outlined text-6xl text-on-surface-variant mb-4">shopping_bag</span>
               <h2 className="font-headline-md text-headline-md text-on-surface mb-4">Your bag is empty</h2>
               <Link to="/catalog">
-                <button className="neo-extruded px-8 py-3 rounded-xl font-label-md text-label-md text-secondary hover:neo-recessed transition-all">
+                <button className="border border-outline px-8 py-3 font-label-md text-label-md text-secondary hover:bg-secondary hover:text-on-secondary transition-all">
                   Continue Shopping
                 </button>
               </Link>
@@ -105,8 +106,8 @@ export const CheckoutPage = () => {
               const productInfo = PRODUCTS.find(p => p.id === item.productId);
               
               return (
-                <div key={item.productId} className="neo-extruded rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center">
-                  <div className="w-32 h-32 neo-recessed rounded-xl overflow-hidden flex-shrink-0">
+                <div key={item.productId} className="border border-outline p-6 flex flex-col md:flex-row gap-6 items-center">
+                  <div className="w-32 h-32 border border-outline overflow-hidden flex-shrink-0">
                     <img className="w-full h-full object-cover" data-alt={item.name} src={productInfo?.image || ''}/>
                   </div>
                   <div className="flex-grow w-full">
@@ -122,17 +123,17 @@ export const CheckoutPage = () => {
                     
                     <div className="flex items-center justify-between mt-6">
                       <div className="flex items-center gap-4">
-                        <div className="flex items-center neo-recessed rounded-full px-4 py-2">
-                          <button 
+                        <div className="flex items-center border border-outline px-4 py-2">
+                          <button
                             onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                            className="neo-extruded rounded-full w-8 h-8 flex items-center justify-center neo-button-active hover:text-secondary"
+                            className="border border-outline w-8 h-8 flex items-center justify-center hover:text-secondary"
                           >
                             <span className="material-symbols-outlined text-sm" data-icon="remove">remove</span>
                           </button>
                           <span className="px-6 font-label-md text-label-md">{item.quantity}</span>
-                          <button 
+                          <button
                             onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                            className="neo-extruded rounded-full w-8 h-8 flex items-center justify-center neo-button-active hover:text-secondary"
+                            className="border border-outline w-8 h-8 flex items-center justify-center hover:text-secondary"
                           >
                             <span className="material-symbols-outlined text-sm" data-icon="add">add</span>
                           </button>
@@ -157,8 +158,8 @@ export const CheckoutPage = () => {
             <h2 className="font-headline-md text-headline-md text-on-surface mb-6">Complete the Kit</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {recommendations.map(rec => (
-                <Link to={`/catalog/${rec.id}`} key={rec.id} className="neo-extruded rounded-xl p-4 group cursor-pointer block">
-                  <div className="aspect-square neo-recessed rounded-lg mb-3 overflow-hidden">
+                <Link to={`/catalog/${rec.id}`} key={rec.id} className="border border-outline p-4 group cursor-pointer block">
+                  <div className="aspect-square border border-outline mb-3 overflow-hidden">
                     <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt={rec.name} src={rec.image}/>
                   </div>
                   <p className="font-label-sm text-label-sm text-on-surface-variant truncate">{rec.name}</p>
@@ -171,7 +172,7 @@ export const CheckoutPage = () => {
 
         {/* Order Summary Sidebar */}
         <aside className="lg:col-span-4 lg:sticky lg:top-28">
-          <div className="neo-extruded rounded-3xl p-8 space-y-6">
+          <div className="border border-outline p-8 space-y-6">
             <h2 className="font-headline-md text-headline-md text-on-surface">Order Summary</h2>
             
             <div className="space-y-4">
@@ -195,7 +196,7 @@ export const CheckoutPage = () => {
               </div>
             </div>
             
-            <div className="h-px bg-outline-variant/30 neo-recessed py-[1px]"></div>
+            <div className="h-px bg-outline-variant/30"></div>
             
             <div className="flex justify-between items-center">
               <span className="font-headline-md text-headline-md text-on-surface">Total</span>
@@ -203,28 +204,25 @@ export const CheckoutPage = () => {
             </div>
             
             <div className="pt-4">
-              <div className="neo-recessed rounded-xl p-2 flex items-center mb-6">
-                <input 
-                  className="bg-transparent border-none focus:ring-0 flex-grow font-body-md text-body-md px-4 outline-none" 
-                  placeholder="Promo Code" 
+              <div className="border border-outline p-2 flex items-center mb-6">
+                <input
+                  className="bg-transparent border-none focus:ring-0 flex-grow font-body-md text-body-md px-4 outline-none"
+                  placeholder="Promo Code"
                   type="text"
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                 />
-                <button onClick={applyPromo} className="neo-extruded px-6 py-2 rounded-lg font-label-md text-label-md text-primary neo-button-active hover:text-secondary transition-colors">Apply</button>
+                <button onClick={applyPromo} className="border border-outline px-6 py-2 font-label-md text-label-md text-primary hover:text-secondary transition-colors">Apply</button>
               </div>
-              <button 
+              <Button
+                variant="solid"
                 onClick={handleCheckout}
                 disabled={items.length === 0 || isProcessing}
-                className={`w-full py-5 rounded-2xl font-headline-md flex items-center justify-center gap-3 transition-all ${
-                  items.length === 0 
-                    ? 'neo-recessed text-on-surface-variant cursor-not-allowed' 
-                    : 'neo-extruded bg-secondary text-white hover:brightness-110 active:shadow-[inset_-4px_-4px_8px_#004d3e,inset_4px_4px_8px_#008a70] neo-button-active'
-                }`}
+                className="w-full py-4 flex items-center justify-center gap-3"
               >
                 <span>{isProcessing ? 'Processing...' : (!isAuthenticated ? 'Log in to Checkout' : 'Proceed to Checkout')}</span>
                 {!isProcessing && <span className="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>}
-              </button>
+              </Button>
             </div>
             
             <div className="pt-4 flex flex-col items-center gap-4">
