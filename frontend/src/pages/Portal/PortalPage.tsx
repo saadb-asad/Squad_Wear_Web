@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { LogOut, User as UserIcon, Package, Settings, ArrowLeft, Trash2 } from 'lucide-react';
 import { API_BASE_URL } from '../../config';
+import { Button } from '../../components/ui/Button';
 
 
 type PortalView = 'overview' | 'orders' | 'profile' | 'settings';
@@ -168,49 +169,49 @@ export const PortalPage = () => {
       {/* Views */}
       {activeView === 'overview' && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-          <div className="neo-extruded bg-surface p-8 rounded-[32px] flex flex-col items-start gap-4">
-            <div className="neo-recessed p-4 rounded-2xl bg-surface-container-low text-secondary">
+          <div className="border border-outline bg-surface p-8 flex flex-col items-start gap-4">
+            <div className="border border-outline p-4 bg-surface-container-low text-secondary">
               <Package size={28} />
             </div>
             <h2 className="font-headline-md text-headline-md text-on-surface">My Orders</h2>
             <p className="text-on-surface-variant font-body-md text-body-md mb-4 flex-grow">
               View your past and current custom gear orders.
             </p>
-            <button onClick={() => navigateView('orders')} className="neo-extruded-sm neo-interactive w-full py-4 rounded-xl bg-on-surface text-surface font-label-md font-bold">
+            <Button variant="solid" onClick={() => navigateView('orders')} className="w-full py-4">
               View Orders
-            </button>
+            </Button>
           </div>
-          
-          <div className="neo-extruded bg-surface p-8 rounded-[32px] flex flex-col items-start gap-4">
-            <div className="neo-recessed p-4 rounded-2xl bg-surface-container-low text-secondary">
+
+          <div className="border border-outline bg-surface p-8 flex flex-col items-start gap-4">
+            <div className="border border-outline p-4 bg-surface-container-low text-secondary">
               <UserIcon size={28} />
             </div>
             <h2 className="font-headline-md text-headline-md text-on-surface">Profile Details</h2>
             <p className="text-on-surface-variant font-body-md text-body-md mb-4 flex-grow">
               Update your personal information and email.
             </p>
-            <button onClick={() => navigateView('profile')} className="neo-extruded-sm neo-interactive w-full py-4 rounded-xl bg-surface text-on-surface font-label-md font-bold">
+            <Button variant="solid" onClick={() => navigateView('profile')} className="w-full py-4">
               Edit Profile
-            </button>
+            </Button>
           </div>
 
-          <div className="neo-extruded bg-surface p-8 rounded-[32px] flex flex-col items-start gap-4">
-            <div className="neo-recessed p-4 rounded-2xl bg-surface-container-low text-on-surface-variant">
+          <div className="border border-outline bg-surface p-8 flex flex-col items-start gap-4">
+            <div className="border border-outline p-4 bg-surface-container-low text-on-surface-variant">
               <Settings size={28} />
             </div>
             <h2 className="font-headline-md text-headline-md text-on-surface">Settings</h2>
             <p className="text-on-surface-variant font-body-md text-body-md mb-4 flex-grow">
               Manage your account preferences and notifications.
             </p>
-            <button onClick={() => navigateView('settings')} className="neo-extruded-sm neo-interactive w-full py-4 rounded-xl bg-surface text-on-surface font-label-md font-bold">
+            <Button variant="solid" onClick={() => navigateView('settings')} className="w-full py-4">
               Account Settings
-            </button>
+            </Button>
           </div>
         </div>
       )}
 
       {activeView === 'orders' && (
-        <div className="neo-extruded bg-surface p-8 rounded-[32px]">
+        <div className="border border-outline bg-surface p-8">
           {loadingOrders ? (
             <p className="text-on-surface font-body-md">Loading orders...</p>
           ) : orders.length === 0 ? (
@@ -218,7 +219,7 @@ export const PortalPage = () => {
           ) : (
             <div className="space-y-6">
               {orders.map(order => (
-                <div key={order.id} className="neo-recessed p-6 rounded-2xl bg-surface-container-low flex flex-col md:flex-row justify-between gap-4">
+                <div key={order.id} className="border border-outline p-6 bg-surface-container-low flex flex-col md:flex-row justify-between gap-4">
                   <div>
                     <h3 className="font-headline-sm text-on-surface">Order #{order.id.split('-')[0]}</h3>
                     <p className="text-on-surface-variant font-body-sm mt-1">{new Date(order.date).toLocaleDateString()}</p>
@@ -250,7 +251,7 @@ export const PortalPage = () => {
       )}
 
       {activeView === 'profile' && (
-        <div className="neo-extruded bg-surface p-8 rounded-[32px] max-w-2xl mx-auto">
+        <div className="border border-outline bg-surface p-8 max-w-2xl mx-auto">
           {updateMsg && (
             <div className={`p-4 rounded-xl mb-6 text-center font-body-md font-medium ${updateMsg.includes('success') ? 'bg-primary/20 text-primary' : 'bg-error-container text-on-error-container'}`}>
               {updateMsg}
@@ -264,7 +265,7 @@ export const PortalPage = () => {
                 type="email"
                 value={user.email}
                 disabled
-                className="neo-recessed bg-surface-container-low w-full p-4 rounded-xl font-body-md text-on-surface-variant cursor-not-allowed opacity-70"
+                className="border border-outline bg-surface-container-low w-full p-4 font-body-md text-on-surface-variant cursor-not-allowed opacity-70"
               />
               <p className="text-xs text-on-surface-variant mt-1">Email cannot be changed.</p>
             </div>
@@ -277,7 +278,7 @@ export const PortalPage = () => {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
 
@@ -289,25 +290,21 @@ export const PortalPage = () => {
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
                 placeholder="Optional"
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
 
-            <button 
-              type="submit" 
-              className="neo-extruded-sm neo-interactive w-full py-4 mt-4 rounded-xl bg-on-surface text-surface font-label-md font-bold"
-              disabled={isUpdating}
-            >
+            <Button variant="solid" type="submit" disabled={isUpdating} className="w-full py-4 mt-4">
               {isUpdating ? 'Saving...' : 'Save Changes'}
-            </button>
+            </Button>
           </form>
         </div>
       )}
 
       {activeView === 'settings' && (
-        <div className="neo-extruded bg-surface p-8 rounded-[32px] max-w-2xl mx-auto border border-error-container/30">
+        <div className="border border-error-container/30 bg-surface p-8 max-w-2xl mx-auto">
           <div className="flex items-center gap-4 mb-6">
-            <div className="neo-recessed p-4 rounded-2xl bg-error-container/20 text-on-error-container">
+            <div className="border border-outline p-4 bg-error-container/20 text-on-error-container">
               <Trash2 size={32} />
             </div>
             <div>
@@ -323,13 +320,14 @@ export const PortalPage = () => {
             </p>
           </div>
 
-          <button 
+          <Button
+            variant="outline"
             onClick={handleDeleteAccount}
-            className="neo-extruded-sm neo-interactive w-full py-4 rounded-xl bg-error-container text-on-error-container font-label-md font-bold flex items-center justify-center gap-2"
+            className="w-full border-error text-on-error-container hover:bg-error hover:text-on-error flex items-center justify-center gap-2"
           >
             <Trash2 size={20} />
             I understand, delete my account
-          </button>
+          </Button>
         </div>
       )}
     </main>
