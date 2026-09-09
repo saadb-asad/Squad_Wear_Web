@@ -67,7 +67,9 @@ module.exports = {
                 "max-width": "1280px",
                 "unit": "8px",
                 "margin-mobile": "16px",
-                "gutter": "24px"
+                "gutter": "24px",
+                "section-y": "96px",
+                "section-y-mobile": "56px"
             },
             "fontFamily": {
                 "label-md": ["Anybody"],
@@ -77,7 +79,9 @@ module.exports = {
                 "headline-lg-mobile": ["Anybody"],
                 "body-lg": ["Anybody"],
                 "body-md": ["Anybody"],
-                "label-sm": ["Anybody"]
+                "label-sm": ["Anybody"],
+                "display": ["Bebas Neue"],
+                "ui": ["Montserrat"]
             },
             "fontSize": {
                 "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
@@ -87,7 +91,10 @@ module.exports = {
                 "headline-lg-mobile": ["28px", {"lineHeight": "1.2", "fontWeight": "700"}],
                 "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
                 "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
-                "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}]
+                "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                "display-xl": ["64px", {"lineHeight": "1.05", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                "display-lg": ["40px", {"lineHeight": "1.1", "letterSpacing": "0.01em", "fontWeight": "400"}],
+                "display-md": ["28px", {"lineHeight": "1.15", "letterSpacing": "0.01em", "fontWeight": "400"}]
             }
           },
         },
