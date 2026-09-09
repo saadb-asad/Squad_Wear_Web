@@ -140,7 +140,7 @@ export const PortalPage = () => {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div className="flex items-center gap-4">
           {activeView !== 'overview' && (
-            <button onClick={() => setActiveView('overview')} className="neo-extruded-sm p-3 rounded-xl text-on-surface">
+            <button onClick={() => setActiveView('overview')} className="border border-outline p-3 text-on-surface">
               <ArrowLeft size={24} />
             </button>
           )}
@@ -157,9 +157,9 @@ export const PortalPage = () => {
             </p>
           </div>
         </div>
-        <button 
+        <button
           onClick={() => { logout(); navigate('/'); }}
-          className="neo-extruded-sm neo-interactive px-6 py-3 rounded-xl flex items-center gap-2 font-label-md text-label-md text-on-surface bg-surface"
+          className="border border-outline px-6 py-3 flex items-center gap-2 font-label-md text-label-md text-on-surface bg-surface"
         >
           <LogOut size={18} />
           Sign Out
