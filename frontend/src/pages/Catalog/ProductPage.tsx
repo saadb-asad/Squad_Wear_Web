@@ -44,10 +44,10 @@ export const ProductPage = () => {
           </div>
           {/* Secondary Detail Grid */}
           <div className="grid grid-cols-2 gap-gutter">
-            <div className="neo-extruded rounded-[24px] overflow-hidden aspect-square">
+            <div className="border border-outline overflow-hidden aspect-square">
               <img className="w-full h-full object-cover" data-alt="Detail shot 1" src={product.image}/>
             </div>
-            <div className="neo-extruded rounded-[24px] overflow-hidden aspect-square">
+            <div className="border border-outline overflow-hidden aspect-square">
               <img className="w-full h-full object-cover" data-alt="Detail shot 2" src={product.image}/>
             </div>
           </div>
@@ -55,10 +55,10 @@ export const ProductPage = () => {
 
         {/* Product Information & CTAs */}
         <div className="lg:col-span-5 flex flex-col gap-8">
-          <div className="neo-extruded p-8 rounded-[32px] space-y-6">
+          <div className="border border-outline p-8 space-y-6">
             <div>
-              <h1 className="font-headline-lg text-headline-lg text-on-surface mb-2">{product.name}</h1>
-              <p className="text-secondary font-bold text-headline-md font-headline-md">${product.price.toFixed(2)}</p>
+              <h1 className="font-display text-shout text-display-lg text-on-surface mb-2">{product.name}</h1>
+              <p className="text-secondary font-bold font-ui text-lg">${product.price.toFixed(2)}</p>
             </div>
             
             <div className="space-y-4">
@@ -68,14 +68,14 @@ export const ProductPage = () => {
               
               <div className="flex items-center gap-4 py-4">
                 <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full border-2 border-surface neo-extruded overflow-hidden">
+                  <div className="w-8 h-8 border-2 border-surface overflow-hidden">
                     <img className="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKiPDHU9kvQInh5BTHzsrf-qizJ7hJkOkWzW-Zx07Uhf12ni53hetQ62yGhoKxZisF4huqlDrKCEDFDoIdjj0seX1UGqVgemHFhHdSIyKsfA_bIGhIHtDQRGubFC1pT-cut7fGxetwO57n9TJiH_S6-FVoHrN9_JTZFl3V6NcZp2XqUEjevC88GbBr6x2i8CQLADHI7tcWCP5VOS-OoeUf0NhfStYHgMLdU7tnVZc0TP3ZLH8IO9IWtVSAOvMDFXVS_Svr79fiCjhn"/>
                   </div>
-                  <div className="w-8 h-8 rounded-full border-2 border-surface neo-extruded overflow-hidden bg-surface-container flex items-center justify-center text-[10px] font-bold">
+                  <div className="w-8 h-8 border-2 border-surface overflow-hidden bg-surface-container flex items-center justify-center text-[10px] font-bold">
                     +42
                   </div>
                 </div>
-                <span className="text-label-sm font-label-sm text-on-surface-variant">Recommended by the Squad community</span>
+                <span className="font-ui text-xs text-on-surface-variant">Recommended by the Squad community</span>
               </div>
             </div>
 
@@ -166,10 +166,10 @@ export const ProductPage = () => {
             <p className="text-on-surface-variant">Curated pairings for your new staple.</p>
           </div>
           <div className="flex gap-4">
-            <button className="p-4 rounded-full neo-extruded hover:neo-recessed active:neo-recessed transition-all">
+            <button className="w-12 h-12 border border-outline flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors">
               <span className="material-symbols-outlined">arrow_back</span>
             </button>
-            <button className="p-4 rounded-full neo-extruded hover:neo-recessed active:neo-recessed transition-all">
+            <button className="w-12 h-12 border border-outline flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors">
               <span className="material-symbols-outlined">arrow_forward</span>
             </button>
           </div>
