@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { PRODUCTS } from '../../data/mockData';
+import { useProducts } from '../../contexts/ProductsContext';
 import { useCart } from '../../contexts/CartContext';
 import { ProductCard } from '../../components/ui/ProductCard';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 
 export const CatalogPage = () => {
   const { addToCart } = useCart();
+  const { products } = useProducts();
   const [searchParams] = useSearchParams();
   const [selectedCategories, setSelectedCategories] = useState<string[]>(['Outerwear', 'T-Shirts']);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -27,7 +28,7 @@ export const CatalogPage = () => {
     );
   };
 
-  const filteredProducts = PRODUCTS.filter(product => {
+  const filteredProducts = products.filter(product => {
     if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) return false;
     if (selectedSize && !product.sizes.includes(selectedSize)) return false;
     if (selectedColor && !product.colors.some(c => c.name === selectedColor)) return false;
