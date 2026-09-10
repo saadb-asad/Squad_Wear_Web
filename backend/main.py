@@ -81,7 +81,7 @@ SEED_PRODUCTS = [
             {"name": "Midnight Black", "hex": "#1a1a1a"},
             {"name": "Industrial Grey", "hex": "#e5e5e5"},
         ],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Outerwear", "display_order": 0,
     },
     {
         "id": "stealth-cargo-jogger", "sku": "SQD-STEALTH-CARGO-JOGGER",
@@ -93,7 +93,7 @@ SEED_PRODUCTS = [
         "description": "Modern tactical joggers in matte black, featuring reinforced knee panels and multiple functional cargo pockets with teal zipper pulls.",
         "sizes": ["30", "32", "34", "36"],
         "colors": [{"name": "Midnight Black", "hex": "#1a1a1a"}],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Outerwear", "display_order": 1,
     },
     {
         "id": "vector-core-tee", "sku": "SQD-VECTOR-CORE-TEE",
@@ -105,7 +105,7 @@ SEED_PRODUCTS = [
         "description": "A crisp, white oversized graphic T-shirt with a minimalist technical diagram printed on the chest in reflective teal ink. Boxy oversized fit.",
         "sizes": ["S", "M", "L", "XL"],
         "colors": [{"name": "Optic White", "hex": "#ffffff"}],
-        "inventory_count": 25, "category": "T-Shirts",
+        "inventory_count": 25, "category": "T-Shirts", "display_order": 2,
     },
     {
         "id": "storm-shell-v2", "sku": "SQD-STORM-SHELL-V2",
@@ -117,7 +117,7 @@ SEED_PRODUCTS = [
         "description": "A futuristic technical shell jacket in a muted forest teal color, featuring waterproof zippers and an asymmetrical front closure.",
         "sizes": ["S", "M", "L", "XL"],
         "colors": [{"name": "Forest Teal", "hex": "#0a4242"}],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Outerwear", "display_order": 3,
     },
     {
         "id": "kinetix-hi-top", "sku": "SQD-KINETIX-HI-TOP",
@@ -129,7 +129,7 @@ SEED_PRODUCTS = [
         "description": "A pair of high-top techwear sneakers in multi-tonal grey and white, with complex strap systems and a chunky, sculpted sole.",
         "sizes": ["8", "9", "10", "11", "12"],
         "colors": [{"name": "Stone Grey", "hex": "#8c8c8c"}],
-        "inventory_count": 25, "category": "Footwear",
+        "inventory_count": 25, "category": "Footwear", "display_order": 4,
     },
     {
         "id": "signal-sling-bag", "sku": "SQD-SIGNAL-SLING-BAG",
@@ -141,7 +141,7 @@ SEED_PRODUCTS = [
         "description": "A sleek black technical crossbody bag with carbon-fiber textured panels and magnetic FIDLOCK buckles.",
         "sizes": ["One Size"],
         "colors": [{"name": "Carbon Black", "hex": "#111111"}],
-        "inventory_count": 0, "category": "Accessories",
+        "inventory_count": 0, "category": "Accessories", "display_order": 5,
     },
     {
         "id": "core-heavyweight-hoodie", "sku": "SQD-CORE-HEAVYWEIGHT-HOODIE",
@@ -157,7 +157,7 @@ SEED_PRODUCTS = [
             {"name": "Midnight Black", "hex": "#1a1a1a"},
             {"name": "Industrial Grey", "hex": "#e5e5e5"},
         ],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Outerwear", "display_order": 6,
     },
 ]
 
@@ -266,7 +266,7 @@ async def read_users_me(current_user: User = Depends(get_current_user)):
 @app.get("/api/products")
 @limiter.limit("60/minute")
 async def get_products(request: Request, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Product).order_by(Product.name))
+    result = await db.execute(select(Product).order_by(Product.display_order))
     products = result.scalars().all()
     return [
         {

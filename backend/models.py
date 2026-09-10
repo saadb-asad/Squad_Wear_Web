@@ -36,6 +36,7 @@ class Product(Base):
     colors = Column(JSON, nullable=False, default=list)
     inventory_count = Column(Integer, CheckConstraint('inventory_count >= 0'), nullable=False, default=0)
     category = Column(String, nullable=False)
+    display_order = Column(Integer, nullable=False, default=0)
 
 class Order(Base):
     __tablename__ = "orders"

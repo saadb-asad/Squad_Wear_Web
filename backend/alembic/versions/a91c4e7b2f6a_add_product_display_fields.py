@@ -28,12 +28,14 @@ def upgrade() -> None:
     op.add_column('products', sa.Column('description', sa.Text(), nullable=False, server_default=''))
     op.add_column('products', sa.Column('sizes', sa.JSON(), nullable=False, server_default='[]'))
     op.add_column('products', sa.Column('colors', sa.JSON(), nullable=False, server_default='[]'))
+    op.add_column('products', sa.Column('display_order', sa.Integer(), nullable=False, server_default='0'))
     op.alter_column('products', 'image', server_default=None)
     op.alter_column('products', 'description', server_default=None)
 
 
 def downgrade() -> None:
     """Downgrade schema."""
+    op.drop_column('products', 'display_order')
     op.drop_column('products', 'colors')
     op.drop_column('products', 'sizes')
     op.drop_column('products', 'description')
