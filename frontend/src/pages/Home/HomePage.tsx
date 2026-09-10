@@ -24,6 +24,7 @@ export const HomePage = () => {
 
   return (
     <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-16 lg:space-y-section-y py-section-y-mobile lg:py-section-y">
+      <h1 className="sr-only">Squad Wear</h1>
       <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {CATEGORY_TILES.map(tile => (
           <CategoryTile key={tile.category} {...tile} />

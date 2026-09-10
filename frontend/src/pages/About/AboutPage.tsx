@@ -6,6 +6,7 @@ export const AboutPage = () => {
   return (
     <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-16 py-section-y-mobile lg:py-section-y">
       <SectionHeading
+        as="h1"
         title="About Squad Wear"
         subtitle="Engineered for the urban environment. Our mission is to fuse high-performance fabrics with streetwear silhouettes built for movement."
       />
