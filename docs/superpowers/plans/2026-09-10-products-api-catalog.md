@@ -375,7 +375,7 @@ git commit -m "Add GET /api/products endpoint and startup product seeding"
 - Create: `frontend/src/contexts/ProductsContext.tsx`
 
 **Interfaces:**
-- Consumes: `Product` type from `../data/mockData` (still exported after Task 8), `API_BASE_URL` from `../config`.
+- Consumes: `Product` type from `../data/mockData` (the `PRODUCTS` array is still exported at this point — Task 11 is what removes it, after all consumers are migrated), `API_BASE_URL` from `../config`.
 - Produces: `ProductsProvider({ children })`, `useProducts()` returning `{ products: Product[], loading: boolean, error: string | null }`. Tasks 5–10 all consume this exact hook and shape.
 
 - [ ] **Step 1: Create the context**
