@@ -45,14 +45,14 @@ export const Navbar = () => {
           )}
         </div>
         <div className="flex items-center gap-4">
-          <div className="border border-outline flex items-center px-4 py-2 hidden lg:flex">
+          <div className="border border-outline items-center px-4 py-2 hidden lg:flex">
             <span className="material-symbols-outlined text-on-surface-variant mr-2">search</span>
             <input className="bg-transparent border-none focus:ring-0 text-sm w-32 font-ui outline-none" placeholder="Search gear..." type="text"/>
           </div>
           <button onClick={openDrawer} className="border border-outline p-3 flex items-center justify-center relative" aria-label="Open cart">
             <span className="material-symbols-outlined text-on-surface">shopping_bag</span>
             {cartItemsCount > 0 && (
-              <span className="absolute -top-1 -right-1 bg-secondary text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              <span className="absolute -top-1 -right-1 bg-secondary text-on-secondary text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
                 {cartItemsCount}
               </span>
             )}
