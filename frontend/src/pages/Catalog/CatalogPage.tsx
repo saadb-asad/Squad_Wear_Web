@@ -16,9 +16,7 @@ export const CatalogPage = () => {
 
   useEffect(() => {
     const category = searchParams.get('category');
-    if (category) {
-      setSelectedCategories([category]);
-    }
+    setSelectedCategories(category ? [category] : []);
   }, [searchParams]);
 
   const handleCategoryToggle = (category: string) => {
@@ -56,7 +54,7 @@ export const CatalogPage = () => {
                       <div className={`w-5 h-5 border flex items-center justify-center transition-colors ${selectedCategories.includes(cat) ? 'border-secondary' : 'border-outline group-hover:border-secondary'}`}>
                         <div className={`w-2.5 h-2.5 bg-secondary transition-opacity ${selectedCategories.includes(cat) ? 'opacity-100' : 'opacity-0'}`}></div>
                       </div>
-                      <span className={`font-body-md text-body-md ${selectedCategories.includes(cat) ? 'text-secondary font-semibold' : ''}`}>{cat}</span>
+                      <span className={`font-ui text-sm ${selectedCategories.includes(cat) ? 'text-secondary font-semibold' : ''}`}>{cat}</span>
                       <input
                         className="hidden"
                         type="checkbox"
@@ -145,9 +143,9 @@ export const CatalogPage = () => {
         {/* Product Grid */}
         <div className="flex-1">
           <div className="flex justify-between items-center mb-10">
-            <p className="font-body-md text-body-md text-on-surface-variant">Showing <span className="font-bold text-on-surface">{filteredProducts.length}</span> technical pieces</p>
+            <p className="font-ui text-sm text-on-surface-variant">Showing <span className="font-bold text-on-surface">{filteredProducts.length}</span> technical pieces</p>
             <div className="relative">
-              <button className="border border-outline px-6 py-3 flex items-center gap-3 font-label-md text-label-md">
+              <button className="border border-outline px-6 py-3 flex items-center gap-3 font-ui text-xs">
                 Sort by: Featured
                 <span className="material-symbols-outlined">expand_more</span>
               </button>
