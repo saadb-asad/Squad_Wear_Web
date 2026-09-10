@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { LogIn, KeyRound, ArrowLeft } from 'lucide-react';
 import { API_BASE_URL } from '../../config';
+import { Button } from '../../components/ui/Button';
 
 
 export const LoginPage = () => {
@@ -103,10 +104,10 @@ export const LoginPage = () => {
 
   return (
     <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop py-12 flex justify-center items-center min-h-[calc(100vh-100px)] animate-fade-in">
-      <div className="neo-extruded bg-surface p-8 md:p-12 rounded-[40px] w-full max-w-md">
+      <div className="border border-outline bg-surface p-8 md:p-12 w-full max-w-md">
         {step === 'login' ? (
           <div className="flex flex-col items-center mb-8">
-            <div className="neo-recessed p-4 rounded-2xl bg-surface-container-low mb-6">
+            <div className="border border-outline p-4 bg-surface-container-low mb-6">
               <LogIn size={32} className="text-secondary" />
             </div>
             <h1 className="font-headline-xl text-headline-xl text-on-surface mb-2">Welcome Back</h1>
@@ -116,14 +117,14 @@ export const LoginPage = () => {
           </div>
         ) : (
           <div className="flex flex-col items-center mb-8 relative">
-            <button 
+            <button
               onClick={() => { setStep('login'); setOtp(''); setError(''); }}
               className="absolute left-0 top-2 text-on-surface-variant hover:text-on-surface transition-colors"
               aria-label="Back to login"
             >
               <ArrowLeft size={24} />
             </button>
-            <div className="neo-recessed p-4 rounded-2xl bg-surface-container-low mb-6">
+            <div className="border border-outline p-4 bg-surface-container-low mb-6">
               <KeyRound size={32} className="text-secondary" />
             </div>
             <h1 className="font-headline-xl text-headline-xl text-on-surface mb-2">Two-Factor Auth</h1>
@@ -149,7 +150,7 @@ export const LoginPage = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -160,17 +161,13 @@ export const LoginPage = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
-            
-            <button 
-              type="submit" 
-              className="neo-extruded-sm neo-interactive w-full py-4 mt-2 rounded-xl bg-on-surface text-surface font-label-md font-bold"
-              disabled={isLoading}
-            >
+
+            <Button variant="solid" type="submit" disabled={isLoading} className="w-full py-4 mt-2">
               {isLoading ? 'Signing In...' : 'Sign In'}
-            </button>
+            </Button>
           </form>
         ) : (
           <form onSubmit={handleOtpSubmit} className="flex flex-col gap-6">
@@ -184,17 +181,13 @@ export const LoginPage = () => {
                 onChange={(e) => setOtp(e.target.value.replace(/[^0-9]/g, ''))}
                 placeholder="000000"
                 required
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-headline-xl text-on-surface text-center tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-headline-xl text-on-surface text-center tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
-            
-            <button 
-              type="submit" 
-              className="neo-extruded-sm neo-interactive w-full py-4 mt-2 rounded-xl bg-on-surface text-surface font-label-md font-bold"
-              disabled={isLoading || otp.length !== 6}
-            >
+
+            <Button variant="solid" type="submit" disabled={isLoading || otp.length !== 6} className="w-full py-4 mt-2">
               {isLoading ? 'Verifying...' : 'Verify Code'}
-            </button>
+            </Button>
           </form>
         )}
         <p className="mt-8 text-center text-on-surface-variant font-body-md text-body-md">

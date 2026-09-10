@@ -3,8 +3,11 @@ export interface Product {
   name: string;
   subtitle: string;
   price: number;
+  originalPrice?: number;
   image: string;
+  hoverImage?: string;
   badge?: string;
+  soldOut?: boolean;
   description: string;
   sizes: string[];
   colors: { name: string; hex: string }[];
@@ -19,6 +22,7 @@ export const PRODUCTS: Product[] = [
     price: 120.00,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBA8aYq6haC7i626RBAxGikRimxUIaCXW3sWd1UnyxtN_m2xiVcx8Is2fqlh-hlyJtRktD3Ob-g-R-Vpo8wvVax4TP9tcVuI9RNRQ1ys8k3i0imLsdPNfQkakzfznNpHlv33usRvykg2QhQK7EXd-6QiaWF6JUglpeNVk7q0QpQRLHeCTvkOd390S7-rxKiQdqOWboaAwMoBzUgtvFiy-xJTDcmAQ5qCR9Tf593FpCzW_uNnHqJs3kP8Q3VzTyQX-aWbawGDqA8P89g',
     badge: 'New Drop',
+    hoverImage: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB7RVti_D9Ep15yDLDJkNUIeP4Gf6RDf9_ZZtTSUafk1xNSP64P35KRtO4Z7u5BxtI1k1a0QvhUW61iylcTRLCL6QFg1P3rv8vBZzMsz6yXnD1KvM3l5NhddE-NzfVVKI-GvO6cV96v0vbIehRHx1QanpK-pFJPziOYfZVNcn8sRJgasKZSxLpaxG8bFiqnpMxSF1mvdkU-2eaRx5U8BYsh4NyzGWFxpYZR-kievm4CNYMJvIKlPoiuIagRaEuw923-GgT54YbA6x-V',
     description: 'Engineered for the modern urban landscape. Our Apex Tech Hoodie features a bespoke cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
@@ -46,6 +50,7 @@ export const PRODUCTS: Product[] = [
     name: 'Vector Core Tee',
     subtitle: 'Optic White / Tech Print',
     price: 45.00,
+    originalPrice: 60.00,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuChhhWwdFkw6JeM2lQj7uHd6zHCbDlUBxlCHp2VyinovZaxAdFiIOQjYcQ0VRSRs3ANk0Un63yF84Br9sFSwh0cEsLRrewGXzQUrOZGcCHVj_mhZhj5DSTtl2q4-IDHyMU9LdI92W_VbxgiJCTMQBjv1o5FCcmnaXzE-lrO0l4c69qR_TU0M_0cleQt3Bi9V0qb9Q84fW64ubOe8SFzegttyD_EhhH3kkCWjY2wwqU7LKsXX_iXqUtDgx3aUJgVng3MWLpdkmp_hSWC',
     description: 'A crisp, white oversized graphic T-shirt with a minimalist technical diagram printed on the chest in reflective teal ink. Boxy oversized fit.',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -91,7 +96,8 @@ export const PRODUCTS: Product[] = [
     colors: [
       { name: 'Carbon Black', hex: '#111111' }
     ],
-    category: 'Accessories'
+    category: 'Accessories',
+    soldOut: true
   },
   {
     id: 'core-heavyweight-hoodie',

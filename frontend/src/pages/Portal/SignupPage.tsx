@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { UserPlus } from 'lucide-react';
 import { API_BASE_URL } from '../../config';
+import { Button } from '../../components/ui/Button';
 
 
 export const SignupPage = () => {
@@ -87,9 +88,9 @@ export const SignupPage = () => {
 
   return (
     <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop py-12 flex justify-center items-center min-h-[calc(100vh-100px)] animate-fade-in">
-      <div className="neo-extruded bg-surface p-8 md:p-12 rounded-[40px] w-full max-w-md">
+      <div className="border border-outline bg-surface p-8 md:p-12 w-full max-w-md">
         <div className="flex flex-col items-center mb-8">
-          <div className="neo-recessed p-4 rounded-2xl bg-surface-container-low mb-6">
+          <div className="border border-outline p-4 bg-surface-container-low mb-6">
             <UserPlus size={32} className="text-secondary" />
           </div>
           <h1 className="font-headline-xl text-headline-xl text-on-surface mb-2 text-center">Create an Account</h1>
@@ -113,7 +114,7 @@ export const SignupPage = () => {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -123,7 +124,7 @@ export const SignupPage = () => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+                className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
               />
             </div>
           </div>
@@ -135,7 +136,7 @@ export const SignupPage = () => {
               type="text"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+              className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
             />
           </div>
 
@@ -147,7 +148,7 @@ export const SignupPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+              className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
             />
           </div>
 
@@ -160,17 +161,13 @@ export const SignupPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="neo-recessed bg-surface w-full p-4 rounded-xl font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
+              className="border border-outline bg-surface w-full p-4 font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary/50 transition-all"
             />
           </div>
-          
-          <button 
-            type="submit" 
-            className="neo-extruded-sm neo-interactive w-full py-4 mt-2 rounded-xl bg-on-surface text-surface font-label-md font-bold"
-            disabled={isLoading}
-          >
+
+          <Button variant="solid" type="submit" disabled={isLoading} className="w-full py-4 mt-2">
             {isLoading ? 'Creating Account...' : 'Sign Up'}
-          </button>
+          </Button>
         </form>
         <p className="mt-8 text-center text-on-surface-variant font-body-md text-body-md">
           Already have an account? <Link to="/portal/login" className="text-secondary font-bold hover:underline">Sign in</Link>
