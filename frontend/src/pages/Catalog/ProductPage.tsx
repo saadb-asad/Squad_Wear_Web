@@ -1,21 +1,22 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
-import { PRODUCTS } from '../../data/mockData';
+import { useProducts } from '../../contexts/ProductsContext';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { ProductCard } from '../../components/ui/ProductCard';
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
-  const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0]; // fallback to first product if not found
+  const { products } = useProducts();
+  const product = products.find(p => p.id === id) || products[0]; // fallback to first product if not found
   const { addToCart } = useCart();
   
   const [selectedSize, setSelectedSize] = useState<string>(product.sizes[0]);
   const [selectedColor, setSelectedColor] = useState<string>(product.colors[0].name);
 
   // Get some recommendations excluding the current product
-  const recommendations = PRODUCTS.filter(p => p.id !== product.id).slice(0, 4);
+  const recommendations = products.filter(p => p.id !== product.id).slice(0, 4);
 
   const handleAddToCart = () => {
     addToCart({
