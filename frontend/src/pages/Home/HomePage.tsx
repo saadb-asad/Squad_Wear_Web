@@ -1,17 +1,10 @@
-import { PRODUCTS } from '../../data/mockData';
 import { useCart } from '../../contexts/CartContext';
+import { useProducts } from '../../contexts/ProductsContext';
 import { CategoryTile } from '../../components/ui/CategoryTile';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 import { ProductCard } from '../../components/ui/ProductCard';
 import { BrandMessageBlock } from '../../components/ui/BrandMessageBlock';
 import { TestimonialCard } from '../../components/ui/TestimonialCard';
-
-const CATEGORY_TILES = [
-  { label: 'Outerwear', category: 'Outerwear', image: PRODUCTS[0].image },
-  { label: 'T-Shirts', category: 'T-Shirts', image: PRODUCTS.find(p => p.category === 'T-Shirts')!.image },
-  { label: 'Footwear', category: 'Footwear', image: PRODUCTS.find(p => p.category === 'Footwear')!.image },
-  { label: 'Accessories', category: 'Accessories', image: PRODUCTS.find(p => p.category === 'Accessories')!.image },
-];
 
 const TESTIMONIALS = [
   { name: 'Ahmed R.', date: 'Aug 2026', quote: 'Fit is exactly as pictured and the fabric feels heavyweight. Reordering already.' },
@@ -21,12 +14,20 @@ const TESTIMONIALS = [
 
 export const HomePage = () => {
   const { addToCart } = useCart();
+  const { products } = useProducts();
+
+  const categoryTiles = [
+    { label: 'Outerwear', category: 'Outerwear', image: products[0]?.image ?? '' },
+    { label: 'T-Shirts', category: 'T-Shirts', image: products.find(p => p.category === 'T-Shirts')?.image ?? '' },
+    { label: 'Footwear', category: 'Footwear', image: products.find(p => p.category === 'Footwear')?.image ?? '' },
+    { label: 'Accessories', category: 'Accessories', image: products.find(p => p.category === 'Accessories')?.image ?? '' },
+  ];
 
   return (
     <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-16 lg:space-y-section-y py-section-y-mobile lg:py-section-y">
       <h1 className="sr-only">Squad Wear</h1>
       <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        {CATEGORY_TILES.map(tile => (
+        {categoryTiles.map(tile => (
           <CategoryTile key={tile.category} {...tile} />
         ))}
       </section>
@@ -34,7 +35,7 @@ export const HomePage = () => {
       <section className="space-y-10">
         <SectionHeading title="New Drops" subtitle="Freshly stocked. Shop before they're gone." />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {PRODUCTS.slice(0, 4).map(product => (
+          {products.slice(0, 4).map(product => (
             <ProductCard
               key={product.id}
               product={product}

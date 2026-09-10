@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, Numeric, Integer, ForeignKey, Text, DateTime, CheckConstraint
+from sqlalchemy import Column, String, Numeric, Integer, ForeignKey, Text, DateTime, CheckConstraint, JSON
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -25,9 +25,18 @@ class Product(Base):
     id = Column(String, primary_key=True, default=generate_uuid)
     sku = Column(String, unique=True, nullable=False)
     name = Column(String, nullable=False)
+    subtitle = Column(String, nullable=True)
     price = Column(Numeric(10, 2), nullable=False)
+    original_price = Column(Numeric(10, 2), nullable=True)
+    image = Column(String, nullable=False)
+    hover_image = Column(String, nullable=True)
+    badge = Column(String, nullable=True)
+    description = Column(Text, nullable=False)
+    sizes = Column(JSON, nullable=False, default=list)
+    colors = Column(JSON, nullable=False, default=list)
     inventory_count = Column(Integer, CheckConstraint('inventory_count >= 0'), nullable=False, default=0)
     category = Column(String, nullable=False)
+    display_order = Column(Integer, nullable=False, default=0)
 
 class Order(Base):
     __tablename__ = "orders"
