@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useCart } from '../../contexts/CartContext';
 import { useAuth } from '../../contexts/AuthContext';
-import { PRODUCTS } from '../../data/mockData';
+import { useProducts } from '../../contexts/ProductsContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config';
 import { Button } from '../../components/ui/Button';
@@ -10,6 +10,7 @@ import { Button } from '../../components/ui/Button';
 export const CheckoutPage = () => {
   const { items, removeFromCart, updateQuantity, clearCart, total } = useCart();
   const { isAuthenticated, token } = useAuth();
+  const { products } = useProducts();
   const [isProcessing, setIsProcessing] = useState(false);
   const [promoCode, setPromoCode] = useState('');
   const [discount, setDiscount] = useState(0);
@@ -81,7 +82,7 @@ export const CheckoutPage = () => {
   const finalTotal = subtotal - discount + tax;
 
   // Get some recommendations for 'Complete the Kit'
-  const recommendations = PRODUCTS.slice(0, 2);
+  const recommendations = products.slice(0, 2);
 
   return (
     <main className="w-full max-w-max-width mx-auto px-margin-desktop space-y-12 py-12">
@@ -103,7 +104,7 @@ export const CheckoutPage = () => {
             </div>
           ) : (
             items.map(item => {
-              const productInfo = PRODUCTS.find(p => p.id === item.productId);
+              const productInfo = products.find(p => p.id === item.productId);
               
               return (
                 <div key={item.productId} className="border border-outline p-6 flex flex-col md:flex-row gap-6 items-center">
