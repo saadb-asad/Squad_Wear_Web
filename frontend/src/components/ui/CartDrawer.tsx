@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import { PRODUCTS } from '../../data/mockData';
 import { FREE_SHIPPING_THRESHOLD } from '../../config';
@@ -6,6 +6,7 @@ import { Button } from './Button';
 
 export const CartDrawer = () => {
   const { items, removeFromCart, updateQuantity, total, isDrawerOpen, closeDrawer } = useCart();
+  const navigate = useNavigate();
 
   if (!isDrawerOpen) return null;
 
@@ -89,11 +90,14 @@ export const CartDrawer = () => {
             <span className="font-ui text-sm text-on-surface-variant">Subtotal</span>
             <span className="font-display text-display-md text-on-surface">${total.toFixed(2)}</span>
           </div>
-          <Link to="/checkout" onClick={closeDrawer}>
-            <Button variant="solid" className="w-full" disabled={items.length === 0}>
-              Go to Checkout
-            </Button>
-          </Link>
+          <Button
+            variant="solid"
+            disabled={items.length === 0}
+            className="w-full"
+            onClick={() => { closeDrawer(); navigate('/checkout'); }}
+          >
+            Go to Checkout
+          </Button>
         </div>
       </div>
     </div>
