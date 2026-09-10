@@ -1,18 +1,19 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
-import { PRODUCTS } from '../../data/mockData';
+import { useProducts } from '../../contexts/ProductsContext';
 import { FREE_SHIPPING_THRESHOLD } from '../../config';
 import { Button } from './Button';
 
 export const CartDrawer = () => {
   const { items, removeFromCart, updateQuantity, total, isDrawerOpen, closeDrawer } = useCart();
+  const { products } = useProducts();
   const navigate = useNavigate();
 
   if (!isDrawerOpen) return null;
 
   const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
   const progressPct = Math.min(100, (total / FREE_SHIPPING_THRESHOLD) * 100);
-  const suggestions = PRODUCTS.slice(0, 3);
+  const suggestions = products.slice(0, 3);
 
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
@@ -56,7 +57,7 @@ export const CartDrawer = () => {
               {items.map(item => (
                 <li key={item.productId} className="flex gap-4">
                   <img
-                    src={PRODUCTS.find(p => p.id === item.productId)?.image}
+                    src={products.find(p => p.id === item.productId)?.image}
                     alt={item.name}
                     className="h-20 w-20 flex-shrink-0 border border-outline object-cover"
                   />
