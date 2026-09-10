@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'solid' | 'outline';
+  variant?: 'solid' | 'outline' | 'danger';
 }
 
 export const Button = ({ variant = 'solid', className = '', ...props }: ButtonProps) => {
@@ -10,6 +10,8 @@ export const Button = ({ variant = 'solid', className = '', ...props }: ButtonPr
   const styles =
     variant === 'solid'
       ? 'bg-on-surface text-surface border-on-surface hover:bg-secondary hover:border-secondary'
+      : variant === 'danger'
+      ? 'bg-transparent text-error border-error hover:bg-error hover:text-on-error'
       : 'bg-transparent text-on-surface border-on-surface hover:bg-on-surface hover:text-surface';
 
   return <button className={`${base} ${styles} ${className}`} {...props} />;

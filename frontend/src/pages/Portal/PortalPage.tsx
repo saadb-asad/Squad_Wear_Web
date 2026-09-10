@@ -321,9 +321,9 @@ export const PortalPage = () => {
           </div>
 
           <Button
-            variant="outline"
+            variant="danger"
             onClick={handleDeleteAccount}
-            className="w-full border-error text-on-error-container hover:bg-error hover:text-on-error flex items-center justify-center gap-2"
+            className="w-full flex items-center justify-center gap-2"
           >
             <Trash2 size={20} />
             I understand, delete my account
