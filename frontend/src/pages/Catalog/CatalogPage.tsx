@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { useProducts } from '../../contexts/ProductsContext';
 import { useCart } from '../../contexts/CartContext';
+import { useProducts } from '../../contexts/ProductsContext';
 import { ProductCard } from '../../components/ui/ProductCard';
 import { SectionHeading } from '../../components/ui/SectionHeading';
 

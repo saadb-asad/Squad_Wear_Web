@@ -1,8 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+load_dotenv(os.path.join(BASE_DIR, ".env"), override=True)
+load_dotenv(override=True)
+
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List, Dict, Any
 import asyncio
-import os
 import random
 import string
 from datetime import datetime, timedelta
@@ -64,7 +70,103 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
-from database import AsyncSessionLocal
+import database
+from database import Base, use_sqlite_fallback
+
+SEED_PRODUCTS = [
+    {
+        "id": "apex-tech-hoodie", "sku": "SQD-APEX-TECH-HOODIE",
+        "name": "Apex Tech Hoodie", "subtitle": "Industrial Grey / Heavyweight",
+        "price": 120.00, "original_price": None,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBA8aYq6haC7i626RBAxGikRimxUIaCXW3sWd1UnyxtN_m2xiVcx8Is2fqlh-hlyJtRktD3Ob-g-R-Vpo8wvVax4TP9tcVuI9RNRQ1ys8k3i0imLsdPNfQkakzfznNpHlv33usRvykg2QhQK7EXd-6QiaWF6JUglpeNVk7q0QpQRLHeCTvkOd390S7-rxKiQdqOWboaAwMoBzUgtvFiy-xJTDcmAQ5qCR9Tf593FpCzW_uNnHqJs3kP8Q3VzTyQX-aWbawGDqA8P89g",
+        "hover_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuB7RVti_D9Ep15yDLDJkNUIeP4Gf6RDf9_ZZtTSUafk1xNSP64P35KRtO4Z7u5BxtI1k1a0QvhUW61iylcTRLCL6QFg1P3rv8vBZzMsz6yXnD1KvM3l5NhddE-NzfVVKI-GvO6cV96v0vbIehRHx1QanpK-pFJPziOYfZVNcn8sRJgasKZSxLpaxG8bFiqnpMxSF1mvdkU-2eaRx5U8BYsh4NyzGWFxpYZR-kievm4CNYMJvIKlPoiuIagRaEuw923-GgT54YbA6x-V",
+        "badge": "New Drop",
+        "description": "Engineered for the modern urban landscape. Our Apex Tech Hoodie features a bespoke cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.",
+        "sizes": ["S", "M", "L", "XL"],
+        "colors": [
+            {"name": "Stealth Grey", "hex": "#3d3d3d"},
+            {"name": "Midnight Black", "hex": "#1a1a1a"},
+            {"name": "Industrial Grey", "hex": "#e5e5e5"},
+        ],
+        "inventory_count": 25, "category": "Outerwear",
+    },
+    {
+        "id": "stealth-cargo-jogger", "sku": "SQD-STEALTH-CARGO-JOGGER",
+        "name": "Stealth Cargo Jogger", "subtitle": "Midnight Black / Ripstop",
+        "price": 95.00, "original_price": None,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA-zGPVr8F43eZRbcgSLtL0A2cJduWP1zwq-G4IwMqnAXza-xleI70RSqL0P6pTiogXW1zJ-ta3PLQuqwnf3TznSdAlaez6WUUEv9EsQwDFleDpLJdn5DOM1pKeHHAuUn5EK8SY0Rq4wXpGEGgtX0IABus1Y6bLqMkLJHOhscJCbrVQGeG3mKLtI81Ff30v6oIkWEkUmy1fHYhtQN9-E_zeUOTQxZfrrDrGir7JgtaXfVputTsHL50suK_x7RZ0E2ezV5tDc72KkwsH",
+        "hover_image": None,
+        "badge": None,
+        "description": "Modern tactical joggers in matte black, featuring reinforced knee panels and multiple functional cargo pockets with teal zipper pulls.",
+        "sizes": ["30", "32", "34", "36"],
+        "colors": [{"name": "Midnight Black", "hex": "#1a1a1a"}],
+        "inventory_count": 25, "category": "Outerwear",
+    },
+    {
+        "id": "vector-core-tee", "sku": "SQD-VECTOR-CORE-TEE",
+        "name": "Vector Core Tee", "subtitle": "Optic White / Tech Print",
+        "price": 45.00, "original_price": 60.00,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuChhhWwdFkw6JeM2lQj7uHd6zHCbDlUBxlCHp2VyinovZaxAdFiIOQjYcQ0VRSRs3ANk0Un63yF84Br9sFSwh0cEsLRrewGXzQUrOZGcCHVj_mhZhj5DSTtl2q4-IDHyMU9LdI92W_VbxgiJCTMQBjv1o5FCcmnaXzE-lrO0l4c69qR_TU0M_0cleQt3Bi9V0qb9Q84fW64ubOe8SFzegttyD_EhhH3kkCWjY2wwqU7LKsXX_iXqUtDgx3aUJgVng3MWLpdkmp_hSWC",
+        "hover_image": None,
+        "badge": None,
+        "description": "A crisp, white oversized graphic T-shirt with a minimalist technical diagram printed on the chest in reflective teal ink. Boxy oversized fit.",
+        "sizes": ["S", "M", "L", "XL"],
+        "colors": [{"name": "Optic White", "hex": "#ffffff"}],
+        "inventory_count": 25, "category": "T-Shirts",
+    },
+    {
+        "id": "storm-shell-v2", "sku": "SQD-STORM-SHELL-V2",
+        "name": "Storm Shell V2", "subtitle": "Forest Teal / Waterproof",
+        "price": 210.00, "original_price": None,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCeFU7BfWYTIq4feA0tS37_M_Fj_jU8r3lUwEAK36s2pZ78EOvUs8xqyyCS1epz-1MyFZ2gDDEkSDOKizsV7lDE6rHgufMzAuOoKQJZAutCy6aHF2Qkly1Y7Ok6smNsY6WgZVsnnepBwggXiq3aIpm3rLe_DeAwB_6TenruHOAnZbcs8G1wUEACw0k-FtfdZeiYlIXc0G4KgmeTdcd5WTrIfFFPpOHM5-36gX8EbTu28B-hMTukKt8CN3V7ThVck9eNL6iSnKOXwLL3",
+        "hover_image": None,
+        "badge": None,
+        "description": "A futuristic technical shell jacket in a muted forest teal color, featuring waterproof zippers and an asymmetrical front closure.",
+        "sizes": ["S", "M", "L", "XL"],
+        "colors": [{"name": "Forest Teal", "hex": "#0a4242"}],
+        "inventory_count": 25, "category": "Outerwear",
+    },
+    {
+        "id": "kinetix-hi-top", "sku": "SQD-KINETIX-HI-TOP",
+        "name": "Kinetix Hi-Top", "subtitle": "Stone Grey / Modular",
+        "price": 185.00, "original_price": None,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCs_tF23I_0G3NubpwVqPOSk1R2dOESOUs5jtPsrNGxC0Q4e8RwUYtAfDmJJeEVsviJEjvj8coq_Rphsiij9BpHClf5suKO81IGbSPYK3hCSdr8DPTAF9H-w5zEJaWJKOyITQjASdFZNbMZu0F36J7qF5wmEdQ5Ecm6JGoaAkUbh9OeqDBBLGIVgioolldL3otPrMY7T0JR6So_i65k2WlD7Ef52mRGBAYS9wHCnaKdU17UnKfgcqlw_peDZPAkqcwxkznkzawquk16",
+        "hover_image": None,
+        "badge": None,
+        "description": "A pair of high-top techwear sneakers in multi-tonal grey and white, with complex strap systems and a chunky, sculpted sole.",
+        "sizes": ["8", "9", "10", "11", "12"],
+        "colors": [{"name": "Stone Grey", "hex": "#8c8c8c"}],
+        "inventory_count": 25, "category": "Footwear",
+    },
+    {
+        "id": "signal-sling-bag", "sku": "SQD-SIGNAL-SLING-BAG",
+        "name": "Signal Sling Bag", "subtitle": "Carbon Black / Weatherproof",
+        "price": 65.00, "original_price": None,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuANW-fMLouqfrFpOy2qJROnDWOAl7x25XjxkDTGdkGw9SZpMmnLvB9XykTPfLjaOMqRykuAkOWNJpaDSHD0-oSI_Yi1MToGbxL0BLtIFaLv76PSheDhwA86lul4SIEj_q2CIULbttSvQkA0myxY02ilQIQDMH3LIFboUoN_HgYoBd8CURraAq4xPP3cPR-UFDCsuXaU7XOuQ5_6q-tN5waIgRS4xBhjR66h_h7LPy-CzuIAVQFd1Eq8r6fUtPQ_XAwRjbMOTdqHmrwQ",
+        "hover_image": None,
+        "badge": None,
+        "description": "A sleek black technical crossbody bag with carbon-fiber textured panels and magnetic FIDLOCK buckles.",
+        "sizes": ["One Size"],
+        "colors": [{"name": "Carbon Black", "hex": "#111111"}],
+        "inventory_count": 0, "category": "Accessories",
+    },
+    {
+        "id": "core-heavyweight-hoodie", "sku": "SQD-CORE-HEAVYWEIGHT-HOODIE",
+        "name": "Core Heavyweight Hoodie", "subtitle": "Industrial Grey / Heavyweight",
+        "price": 145.00, "original_price": None,
+        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDOShzYyebbEZcW7zMY2IdXnt2mN4bluylu_e_4BLg6zrYumO2u5enwq8-mQGjZPuLLgshq1TloNlmV_Be1yZ_4qXoMJm4KM8isxAHIyeelQ7dWth6SLFoBhj3fN7nSM4PTfyaTnRJm8GDtH8lCKqXRIwPQHI4XN8vgNBYEoxT1PwEKeeM0rzBbRFfbYBGeeYSivJHGsljp4A161E5-SnnC6WQZjQn_yaW0pp1VdYELKDL4AHaNzsIEyeZ4M7U5m1--DiCO5WSKebb_",
+        "hover_image": None,
+        "badge": "COLLECTION 01 / ESSENTIALS",
+        "description": "Engineered for the modern urban landscape. Our Core Heavyweight Hoodie features a bespoke 500GSM cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.",
+        "sizes": ["S", "M", "L", "XL"],
+        "colors": [
+            {"name": "Stealth Grey", "hex": "#3d3d3d"},
+            {"name": "Midnight Black", "hex": "#1a1a1a"},
+            {"name": "Industrial Grey", "hex": "#e5e5e5"},
+        ],
+        "inventory_count": 25, "category": "Outerwear",
+    },
+]
 
 SEED_PRODUCTS = [
     {
@@ -163,7 +265,16 @@ SEED_PRODUCTS = [
 
 @app.on_event("startup")
 async def startup_event():
-    async with AsyncSessionLocal() as session:
+    try:
+        async with database.engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+    except Exception as e:
+        print(f"Warning: Primary database connection failed ({e}), switching to SQLite fallback...")
+        use_sqlite_fallback()
+        async with database.engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+
+    async with database.AsyncSessionLocal() as session:
         result = await session.execute(select(User).where(User.email == "admin@squadattire.com"))
         admin = result.scalar_one_or_none()
         if not admin:
@@ -184,6 +295,30 @@ async def startup_event():
             await session.commit()
 
 # --- Endpoints ---
+
+@app.get("/api/products")
+@limiter.limit("60/minute")
+async def get_products(request: Request, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Product).order_by(Product.name))
+    products = result.scalars().all()
+    return [
+        {
+            "id": p.id,
+            "name": p.name,
+            "subtitle": p.subtitle,
+            "price": float(p.price),
+            "originalPrice": float(p.original_price) if p.original_price is not None else None,
+            "image": p.image,
+            "hoverImage": p.hover_image,
+            "badge": p.badge,
+            "soldOut": p.inventory_count <= 0,
+            "description": p.description,
+            "sizes": p.sizes,
+            "colors": p.colors,
+            "category": p.category,
+        }
+        for p in products
+    ]
 
 @app.post("/api/auth/register", response_model=UserResponse)
 async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ProductsProvider } from './contexts/ProductsContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
+import { ProductsProvider } from './contexts/ProductsContext';
 import { Layout } from './components/layout/Layout';
 
 // Pages
@@ -22,29 +22,29 @@ import { ShippingPage } from './pages/Support/ShippingPage';
 function App() {
   return (
     <ProductsProvider>
-    <AuthProvider>
-      <CartProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="catalog" element={<CatalogPage />} />
-              <Route path="catalog/:id" element={<ProductPage />} />
-              <Route path="checkout" element={<CheckoutPage />} />
-              <Route path="about" element={<AboutPage />} />
-              <Route path="portal" element={<PortalPage />} />
-              <Route path="portal/login" element={<LoginPage />} />
-              <Route path="portal/signup" element={<SignupPage />} />
-              <Route path="admin" element={<AdminDashboard />} />
-              <Route path="terms" element={<TermsPage />} />
-              <Route path="privacy" element={<PrivacyPage />} />
-              <Route path="returns" element={<ReturnsPage />} />
-              <Route path="shipping" element={<ShippingPage />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </CartProvider>
-    </AuthProvider>
+      <AuthProvider>
+        <CartProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Layout />}>
+                <Route index element={<HomePage />} />
+                <Route path="catalog" element={<CatalogPage />} />
+                <Route path="catalog/:id" element={<ProductPage />} />
+                <Route path="checkout" element={<CheckoutPage />} />
+                <Route path="about" element={<AboutPage />} />
+                <Route path="portal" element={<PortalPage />} />
+                <Route path="portal/login" element={<LoginPage />} />
+                <Route path="portal/signup" element={<SignupPage />} />
+                <Route path="admin" element={<AdminDashboard />} />
+                <Route path="terms" element={<TermsPage />} />
+                <Route path="privacy" element={<PrivacyPage />} />
+                <Route path="returns" element={<ReturnsPage />} />
+                <Route path="shipping" element={<ShippingPage />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </CartProvider>
+      </AuthProvider>
     </ProductsProvider>
   );
 }
