@@ -9,7 +9,7 @@ export const CatalogPage = () => {
   const { addToCart } = useCart();
   const { products } = useProducts();
   const [searchParams] = useSearchParams();
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(['Outerwear', 'T-Shirts']);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,7 +50,7 @@ export const CatalogPage = () => {
               <section className="mb-8">
                 <h4 className="font-ui text-shout text-xs text-outline mb-4">Category</h4>
                 <div className="space-y-3">
-                  {['Outerwear', 'T-Shirts', 'Accessories', 'Footwear'].map(cat => (
+                  {['Full Track Suits', 'Hoodies', 'Trousers'].map(cat => (
                     <label key={cat} className="flex items-center gap-3 cursor-pointer group">
                       <div className={`w-5 h-5 border flex items-center justify-center transition-colors ${selectedCategories.includes(cat) ? 'border-secondary' : 'border-outline group-hover:border-secondary'}`}>
                         <div className={`w-2.5 h-2.5 bg-secondary transition-opacity ${selectedCategories.includes(cat) ? 'opacity-100' : 'opacity-0'}`}></div>

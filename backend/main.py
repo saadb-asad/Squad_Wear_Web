@@ -88,67 +88,67 @@ SEED_PRODUCTS = [
             {"name": "Midnight Black", "hex": "#1a1a1a"},
             {"name": "Industrial Grey", "hex": "#e5e5e5"},
         ],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Hoodies", "display_order": 0,
     },
     {
         "id": "stealth-cargo-jogger", "sku": "SQD-STEALTH-CARGO-JOGGER",
-        "name": "Stealth Cargo Jogger", "subtitle": "Midnight Black / Ripstop",
+        "name": "Stealth Cargo Trousers", "subtitle": "Midnight Black / Ripstop",
         "price": 95.00, "original_price": None,
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA-zGPVr8F43eZRbcgSLtL0A2cJduWP1zwq-G4IwMqnAXza-xleI70RSqL0P6pTiogXW1zJ-ta3PLQuqwnf3TznSdAlaez6WUUEv9EsQwDFleDpLJdn5DOM1pKeHHAuUn5EK8SY0Rq4wXpGEGgtX0IABus1Y6bLqMkLJHOhscJCbrVQGeG3mKLtI81Ff30v6oIkWEkUmy1fHYhtQN9-E_zeUOTQxZfrrDrGir7JgtaXfVputTsHL50suK_x7RZ0E2ezV5tDc72KkwsH",
         "hover_image": None,
         "badge": None,
-        "description": "Modern tactical joggers in matte black, featuring reinforced knee panels and multiple functional cargo pockets with teal zipper pulls.",
+        "description": "Modern tactical trousers in matte black, featuring reinforced knee panels and multiple functional cargo pockets with teal zipper pulls.",
         "sizes": ["30", "32", "34", "36"],
         "colors": [{"name": "Midnight Black", "hex": "#1a1a1a"}],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Trousers", "display_order": 1,
     },
     {
         "id": "vector-core-tee", "sku": "SQD-VECTOR-CORE-TEE",
-        "name": "Vector Core Tee", "subtitle": "Optic White / Tech Print",
-        "price": 45.00, "original_price": 60.00,
+        "name": "Vector Tech Tracksuit", "subtitle": "Optic White / Full Set",
+        "price": 145.00, "original_price": 180.00,
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuChhhWwdFkw6JeM2lQj7uHd6zHCbDlUBxlCHp2VyinovZaxAdFiIOQjYcQ0VRSRs3ANk0Un63yF84Br9sFSwh0cEsLRrewGXzQUrOZGcCHVj_mhZhj5DSTtl2q4-IDHyMU9LdI92W_VbxgiJCTMQBjv1o5FCcmnaXzE-lrO0l4c69qR_TU0M_0cleQt3Bi9V0qb9Q84fW64ubOe8SFzegttyD_EhhH3kkCWjY2wwqU7LKsXX_iXqUtDgx3aUJgVng3MWLpdkmp_hSWC",
         "hover_image": None,
         "badge": None,
-        "description": "A crisp, white oversized graphic T-shirt with a minimalist technical diagram printed on the chest in reflective teal ink. Boxy oversized fit.",
+        "description": "A premium technical tracksuit in optic white and charcoal, featuring an oversized track jacket and matching tapered track pants.",
         "sizes": ["S", "M", "L", "XL"],
         "colors": [{"name": "Optic White", "hex": "#ffffff"}],
-        "inventory_count": 25, "category": "T-Shirts",
+        "inventory_count": 25, "category": "Full Track Suits", "display_order": 2,
     },
     {
         "id": "storm-shell-v2", "sku": "SQD-STORM-SHELL-V2",
-        "name": "Storm Shell V2", "subtitle": "Forest Teal / Waterproof",
+        "name": "Storm Shell Tracksuit", "subtitle": "Forest Teal / Waterproof Set",
         "price": 210.00, "original_price": None,
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCeFU7BfWYTIq4feA0tS37_M_Fj_jU8r3lUwEAK36s2pZ78EOvUs8xqyyCS1epz-1MyFZ2gDDEkSDOKizsV7lDE6rHgufMzAuOoKQJZAutCy6aHF2Qkly1Y7Ok6smNsY6WgZVsnnepBwggXiq3aIpm3rLe_DeAwB_6TenruHOAnZbcs8G1wUEACw0k-FtfdZeiYlIXc0G4KgmeTdcd5WTrIfFFPpOHM5-36gX8EbTu28B-hMTukKt8CN3V7ThVck9eNL6iSnKOXwLL3",
         "hover_image": None,
         "badge": None,
-        "description": "A futuristic technical shell jacket in a muted forest teal color, featuring waterproof zippers and an asymmetrical front closure.",
+        "description": "A futuristic technical tracksuit set in muted forest teal, featuring waterproof zip jacket and articulated track pants.",
         "sizes": ["S", "M", "L", "XL"],
         "colors": [{"name": "Forest Teal", "hex": "#0a4242"}],
-        "inventory_count": 25, "category": "Outerwear",
+        "inventory_count": 25, "category": "Full Track Suits", "display_order": 3,
     },
     {
         "id": "kinetix-hi-top", "sku": "SQD-KINETIX-HI-TOP",
-        "name": "Kinetix Hi-Top", "subtitle": "Stone Grey / Modular",
-        "price": 185.00, "original_price": None,
+        "name": "Kinetix Tech Trousers", "subtitle": "Stone Grey / Modular",
+        "price": 115.00, "original_price": None,
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCs_tF23I_0G3NubpwVqPOSk1R2dOESOUs5jtPsrNGxC0Q4e8RwUYtAfDmJJeEVsviJEjvj8coq_Rphsiij9BpHClf5suKO81IGbSPYK3hCSdr8DPTAF9H-w5zEJaWJKOyITQjASdFZNbMZu0F36J7qF5wmEdQ5Ecm6JGoaAkUbh9OeqDBBLGIVgioolldL3otPrMY7T0JR6So_i65k2WlD7Ef52mRGBAYS9wHCnaKdU17UnKfgcqlw_peDZPAkqcwxkznkzawquk16",
         "hover_image": None,
         "badge": None,
-        "description": "A pair of high-top techwear sneakers in multi-tonal grey and white, with complex strap systems and a chunky, sculpted sole.",
-        "sizes": ["8", "9", "10", "11", "12"],
+        "description": "Multi-pocket modular techwear trousers in stone grey with adjustable ankle cuffs and articulated knees.",
+        "sizes": ["30", "32", "34", "36"],
         "colors": [{"name": "Stone Grey", "hex": "#8c8c8c"}],
-        "inventory_count": 25, "category": "Footwear",
+        "inventory_count": 25, "category": "Trousers", "display_order": 4,
     },
     {
         "id": "signal-sling-bag", "sku": "SQD-SIGNAL-SLING-BAG",
-        "name": "Signal Sling Bag", "subtitle": "Carbon Black / Weatherproof",
-        "price": 65.00, "original_price": None,
+        "name": "Signal Stealth Tracksuit", "subtitle": "Carbon Black / Weatherproof Set",
+        "price": 165.00, "original_price": None,
         "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuANW-fMLouqfrFpOy2qJROnDWOAl7x25XjxkDTGdkGw9SZpMmnLvB9XykTPfLjaOMqRykuAkOWNJpaDSHD0-oSI_Yi1MToGbxL0BLtIFaLv76PSheDhwA86lul4SIEj_q2CIULbttSvQkA0myxY02ilQIQDMH3LIFboUoN_HgYoBd8CURraAq4xPP3cPR-UFDCsuXaU7XOuQ5_6q-tN5waIgRS4xBhjR66h_h7LPy-CzuIAVQFd1Eq8r6fUtPQ_XAwRjbMOTdqHmrwQ",
         "hover_image": None,
         "badge": None,
-        "description": "A sleek black technical crossbody bag with carbon-fiber textured panels and magnetic FIDLOCK buckles.",
-        "sizes": ["One Size"],
+        "description": "A sleek carbon black technical tracksuit with weather-resistant panels and ergonomic fit.",
+        "sizes": ["S", "M", "L", "XL"],
         "colors": [{"name": "Carbon Black", "hex": "#111111"}],
-        "inventory_count": 0, "category": "Accessories",
+        "inventory_count": 0, "category": "Full Track Suits", "display_order": 5,
     },
     {
         "id": "core-heavyweight-hoodie", "sku": "SQD-CORE-HEAVYWEIGHT-HOODIE",
@@ -164,102 +164,7 @@ SEED_PRODUCTS = [
             {"name": "Midnight Black", "hex": "#1a1a1a"},
             {"name": "Industrial Grey", "hex": "#e5e5e5"},
         ],
-        "inventory_count": 25, "category": "Outerwear",
-    },
-]
-
-SEED_PRODUCTS = [
-    {
-        "id": "apex-tech-hoodie", "sku": "SQD-APEX-TECH-HOODIE",
-        "name": "Apex Tech Hoodie", "subtitle": "Industrial Grey / Heavyweight",
-        "price": 120.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBA8aYq6haC7i626RBAxGikRimxUIaCXW3sWd1UnyxtN_m2xiVcx8Is2fqlh-hlyJtRktD3Ob-g-R-Vpo8wvVax4TP9tcVuI9RNRQ1ys8k3i0imLsdPNfQkakzfznNpHlv33usRvykg2QhQK7EXd-6QiaWF6JUglpeNVk7q0QpQRLHeCTvkOd390S7-rxKiQdqOWboaAwMoBzUgtvFiy-xJTDcmAQ5qCR9Tf593FpCzW_uNnHqJs3kP8Q3VzTyQX-aWbawGDqA8P89g",
-        "hover_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuB7RVti_D9Ep15yDLDJkNUIeP4Gf6RDf9_ZZtTSUafk1xNSP64P35KRtO4Z7u5BxtI1k1a0QvhUW61iylcTRLCL6QFg1P3rv8vBZzMsz6yXnD1KvM3l5NhddE-NzfVVKI-GvO6cV96v0vbIehRHx1QanpK-pFJPziOYfZVNcn8sRJgasKZSxLpaxG8bFiqnpMxSF1mvdkU-2eaRx5U8BYsh4NyzGWFxpYZR-kievm4CNYMJvIKlPoiuIagRaEuw923-GgT54YbA6x-V",
-        "badge": "New Drop",
-        "description": "Engineered for the modern urban landscape. Our Apex Tech Hoodie features a bespoke cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [
-            {"name": "Stealth Grey", "hex": "#3d3d3d"},
-            {"name": "Midnight Black", "hex": "#1a1a1a"},
-            {"name": "Industrial Grey", "hex": "#e5e5e5"},
-        ],
-        "inventory_count": 25, "category": "Outerwear", "display_order": 0,
-    },
-    {
-        "id": "stealth-cargo-jogger", "sku": "SQD-STEALTH-CARGO-JOGGER",
-        "name": "Stealth Cargo Jogger", "subtitle": "Midnight Black / Ripstop",
-        "price": 95.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA-zGPVr8F43eZRbcgSLtL0A2cJduWP1zwq-G4IwMqnAXza-xleI70RSqL0P6pTiogXW1zJ-ta3PLQuqwnf3TznSdAlaez6WUUEv9EsQwDFleDpLJdn5DOM1pKeHHAuUn5EK8SY0Rq4wXpGEGgtX0IABus1Y6bLqMkLJHOhscJCbrVQGeG3mKLtI81Ff30v6oIkWEkUmy1fHYhtQN9-E_zeUOTQxZfrrDrGir7JgtaXfVputTsHL50suK_x7RZ0E2ezV5tDc72KkwsH",
-        "hover_image": None,
-        "badge": None,
-        "description": "Modern tactical joggers in matte black, featuring reinforced knee panels and multiple functional cargo pockets with teal zipper pulls.",
-        "sizes": ["30", "32", "34", "36"],
-        "colors": [{"name": "Midnight Black", "hex": "#1a1a1a"}],
-        "inventory_count": 25, "category": "Outerwear", "display_order": 1,
-    },
-    {
-        "id": "vector-core-tee", "sku": "SQD-VECTOR-CORE-TEE",
-        "name": "Vector Core Tee", "subtitle": "Optic White / Tech Print",
-        "price": 45.00, "original_price": 60.00,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuChhhWwdFkw6JeM2lQj7uHd6zHCbDlUBxlCHp2VyinovZaxAdFiIOQjYcQ0VRSRs3ANk0Un63yF84Br9sFSwh0cEsLRrewGXzQUrOZGcCHVj_mhZhj5DSTtl2q4-IDHyMU9LdI92W_VbxgiJCTMQBjv1o5FCcmnaXzE-lrO0l4c69qR_TU0M_0cleQt3Bi9V0qb9Q84fW64ubOe8SFzegttyD_EhhH3kkCWjY2wwqU7LKsXX_iXqUtDgx3aUJgVng3MWLpdkmp_hSWC",
-        "hover_image": None,
-        "badge": None,
-        "description": "A crisp, white oversized graphic T-shirt with a minimalist technical diagram printed on the chest in reflective teal ink. Boxy oversized fit.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [{"name": "Optic White", "hex": "#ffffff"}],
-        "inventory_count": 25, "category": "T-Shirts", "display_order": 2,
-    },
-    {
-        "id": "storm-shell-v2", "sku": "SQD-STORM-SHELL-V2",
-        "name": "Storm Shell V2", "subtitle": "Forest Teal / Waterproof",
-        "price": 210.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCeFU7BfWYTIq4feA0tS37_M_Fj_jU8r3lUwEAK36s2pZ78EOvUs8xqyyCS1epz-1MyFZ2gDDEkSDOKizsV7lDE6rHgufMzAuOoKQJZAutCy6aHF2Qkly1Y7Ok6smNsY6WgZVsnnepBwggXiq3aIpm3rLe_DeAwB_6TenruHOAnZbcs8G1wUEACw0k-FtfdZeiYlIXc0G4KgmeTdcd5WTrIfFFPpOHM5-36gX8EbTu28B-hMTukKt8CN3V7ThVck9eNL6iSnKOXwLL3",
-        "hover_image": None,
-        "badge": None,
-        "description": "A futuristic technical shell jacket in a muted forest teal color, featuring waterproof zippers and an asymmetrical front closure.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [{"name": "Forest Teal", "hex": "#0a4242"}],
-        "inventory_count": 25, "category": "Outerwear", "display_order": 3,
-    },
-    {
-        "id": "kinetix-hi-top", "sku": "SQD-KINETIX-HI-TOP",
-        "name": "Kinetix Hi-Top", "subtitle": "Stone Grey / Modular",
-        "price": 185.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCs_tF23I_0G3NubpwVqPOSk1R2dOESOUs5jtPsrNGxC0Q4e8RwUYtAfDmJJeEVsviJEjvj8coq_Rphsiij9BpHClf5suKO81IGbSPYK3hCSdr8DPTAF9H-w5zEJaWJKOyITQjASdFZNbMZu0F36J7qF5wmEdQ5Ecm6JGoaAkUbh9OeqDBBLGIVgioolldL3otPrMY7T0JR6So_i65k2WlD7Ef52mRGBAYS9wHCnaKdU17UnKfgcqlw_peDZPAkqcwxkznkzawquk16",
-        "hover_image": None,
-        "badge": None,
-        "description": "A pair of high-top techwear sneakers in multi-tonal grey and white, with complex strap systems and a chunky, sculpted sole.",
-        "sizes": ["8", "9", "10", "11", "12"],
-        "colors": [{"name": "Stone Grey", "hex": "#8c8c8c"}],
-        "inventory_count": 25, "category": "Footwear", "display_order": 4,
-    },
-    {
-        "id": "signal-sling-bag", "sku": "SQD-SIGNAL-SLING-BAG",
-        "name": "Signal Sling Bag", "subtitle": "Carbon Black / Weatherproof",
-        "price": 65.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuANW-fMLouqfrFpOy2qJROnDWOAl7x25XjxkDTGdkGw9SZpMmnLvB9XykTPfLjaOMqRykuAkOWNJpaDSHD0-oSI_Yi1MToGbxL0BLtIFaLv76PSheDhwA86lul4SIEj_q2CIULbttSvQkA0myxY02ilQIQDMH3LIFboUoN_HgYoBd8CURraAq4xPP3cPR-UFDCsuXaU7XOuQ5_6q-tN5waIgRS4xBhjR66h_h7LPy-CzuIAVQFd1Eq8r6fUtPQ_XAwRjbMOTdqHmrwQ",
-        "hover_image": None,
-        "badge": None,
-        "description": "A sleek black technical crossbody bag with carbon-fiber textured panels and magnetic FIDLOCK buckles.",
-        "sizes": ["One Size"],
-        "colors": [{"name": "Carbon Black", "hex": "#111111"}],
-        "inventory_count": 0, "category": "Accessories", "display_order": 5,
-    },
-    {
-        "id": "core-heavyweight-hoodie", "sku": "SQD-CORE-HEAVYWEIGHT-HOODIE",
-        "name": "Core Heavyweight Hoodie", "subtitle": "Industrial Grey / Heavyweight",
-        "price": 145.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDOShzYyebbEZcW7zMY2IdXnt2mN4bluylu_e_4BLg6zrYumO2u5enwq8-mQGjZPuLLgshq1TloNlmV_Be1yZ_4qXoMJm4KM8isxAHIyeelQ7dWth6SLFoBhj3fN7nSM4PTfyaTnRJm8GDtH8lCKqXRIwPQHI4XN8vgNBYEoxT1PwEKeeM0rzBbRFfbYBGeeYSivJHGsljp4A161E5-SnnC6WQZjQn_yaW0pp1VdYELKDL4AHaNzsIEyeZ4M7U5m1--DiCO5WSKebb_",
-        "hover_image": None,
-        "badge": "COLLECTION 01 / ESSENTIALS",
-        "description": "Engineered for the modern urban landscape. Our Core Heavyweight Hoodie features a bespoke 500GSM cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [
-            {"name": "Stealth Grey", "hex": "#3d3d3d"},
-            {"name": "Midnight Black", "hex": "#1a1a1a"},
-            {"name": "Industrial Grey", "hex": "#e5e5e5"},
-        ],
-        "inventory_count": 25, "category": "Outerwear", "display_order": 6,
+        "inventory_count": 25, "category": "Hoodies", "display_order": 6,
     },
 ]
 
@@ -288,10 +193,21 @@ async def startup_event():
             session.add(admin)
             await session.commit()
 
-        existing_product = await session.execute(select(Product).limit(1))
-        if existing_product.scalars().first() is None:
+        existing_products = (await session.execute(select(Product))).scalars().all()
+        if not existing_products:
             for p in SEED_PRODUCTS:
                 session.add(Product(**p))
+            await session.commit()
+        else:
+            seed_map = {p["id"]: p for p in SEED_PRODUCTS}
+            for prod in existing_products:
+                if prod.id in seed_map:
+                    s_item = seed_map[prod.id]
+                    prod.category = s_item["category"]
+                    prod.name = s_item["name"]
+                    prod.subtitle = s_item["subtitle"]
+                    prod.description = s_item["description"]
+                    prod.price = s_item["price"]
             await session.commit()
 
 # --- Endpoints ---

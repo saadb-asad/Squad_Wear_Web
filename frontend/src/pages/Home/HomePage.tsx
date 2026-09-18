@@ -17,16 +17,15 @@ export const HomePage = () => {
   const { products } = useProducts();
 
   const categoryTiles = [
-    { label: 'Outerwear', category: 'Outerwear', image: products[0]?.image ?? '' },
-    { label: 'T-Shirts', category: 'T-Shirts', image: products.find(p => p.category === 'T-Shirts')?.image ?? '' },
-    { label: 'Footwear', category: 'Footwear', image: products.find(p => p.category === 'Footwear')?.image ?? '' },
-    { label: 'Accessories', category: 'Accessories', image: products.find(p => p.category === 'Accessories')?.image ?? '' },
+    { label: 'Full Track Suits', category: 'Full Track Suits', image: products.find(p => p.category === 'Full Track Suits')?.image ?? products[0]?.image ?? '' },
+    { label: 'Hoodies', category: 'Hoodies', image: products.find(p => p.category === 'Hoodies')?.image ?? '' },
+    { label: 'Trousers', category: 'Trousers', image: products.find(p => p.category === 'Trousers')?.image ?? '' },
   ];
 
   return (
     <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-16 lg:space-y-section-y py-section-y-mobile lg:py-section-y">
       <h1 className="sr-only">Squad Wear</h1>
-      <section className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-6">
         {categoryTiles.map(tile => (
           <CategoryTile key={tile.category} {...tile} />
         ))}
