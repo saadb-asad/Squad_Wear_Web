@@ -19,6 +19,11 @@ env/
 .vscode/
 .idea/
 
-# Supabase Local (if used later)
-supabase/.temp/
+# Theme Inspiration Exports
+theme_export*.zip
+theme_inspiration/
+.Rhistory
+.claude/
 *.db
+
+

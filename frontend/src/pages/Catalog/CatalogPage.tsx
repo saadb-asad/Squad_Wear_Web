@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import { useProducts } from '../../contexts/ProductsContext';
 import { ProductCard } from '../../components/ui/ProductCard';
-import { SectionHeading } from '../../components/ui/SectionHeading';
+
+const CATEGORIES = ['Full Track Suits', 'Hoodies', 'Trousers'];
 
 export const CatalogPage = () => {
   const { addToCart } = useCart();
@@ -12,12 +13,13 @@ export const CatalogPage = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [priceRange, setPriceRange] = useState(250);
+  const [priceRange, setPriceRange] = useState(500);
 
   useEffect(() => {
     const category = searchParams.get('category');
-    setSelectedCategories(category ? [category] : []);
+    if (category) {
+      setSelectedCategories([category]);
+    }
   }, [searchParams]);
 
   const handleCategoryToggle = (category: string) => {
@@ -28,7 +30,12 @@ export const CatalogPage = () => {
     );
   };
 
+  const searchQuery = searchParams.get('search')?.toLowerCase() || '';
+
   const filteredProducts = products.filter(product => {
+    if (searchQuery && !product.name.toLowerCase().includes(searchQuery) && !product.category.toLowerCase().includes(searchQuery)) {
+      return false;
+    }
     if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) return false;
     if (selectedSize && !product.sizes.includes(selectedSize)) return false;
     if (selectedColor && !product.colors.some(c => c.name === selectedColor)) return false;
@@ -37,161 +44,130 @@ export const CatalogPage = () => {
   });
 
   return (
-    <main className="w-full max-w-max-width mx-auto px-margin-desktop space-y-12 py-12">
-      <SectionHeading title="Shop All" subtitle="Every drop, one place." className="mb-4" />
-      <div className="flex flex-col md:flex-row gap-gutter">
+    <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-10 py-10">
+      <div className="border-b border-outline pb-4">
+        <span className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">
+          Catalog
+        </span>
+        <h1 className="font-heading font-black text-3xl uppercase tracking-tight text-on-surface">
+          All Collections
+        </h1>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar Filters */}
-        <aside className="w-full md:w-72 shrink-0">
-          <div className="sticky top-28 space-y-10">
-            <div>
-              <h3 className="font-display text-shout text-display-md mb-6 text-on-surface">Filters</h3>
-
-              {/* Category Filter */}
-              <section className="mb-8">
-                <h4 className="font-ui text-shout text-xs text-outline mb-4">Category</h4>
-                <div className="space-y-3">
-                  {['Full Track Suits', 'Hoodies', 'Trousers'].map(cat => (
-                    <label key={cat} className="flex items-center gap-3 cursor-pointer group">
-                      <div className={`w-5 h-5 border flex items-center justify-center transition-colors ${selectedCategories.includes(cat) ? 'border-secondary' : 'border-outline group-hover:border-secondary'}`}>
-                        <div className={`w-2.5 h-2.5 bg-secondary transition-opacity ${selectedCategories.includes(cat) ? 'opacity-100' : 'opacity-0'}`}></div>
-                      </div>
-                      <span className={`font-ui text-sm ${selectedCategories.includes(cat) ? 'text-secondary font-semibold' : ''}`}>{cat}</span>
-                      <input
-                        className="hidden"
-                        type="checkbox"
-                        checked={selectedCategories.includes(cat)}
-                        onChange={() => handleCategoryToggle(cat)}
-                      />
-                    </label>
-                  ))}
-                </div>
-              </section>
-
-              {/* Size Filter */}
-              <section className="mb-8">
-                <h4 className="font-ui text-shout text-xs text-outline mb-4">Size</h4>
-                <div className="grid grid-cols-3 gap-3">
-                  {['S', 'M', 'L', 'XL', 'XXL'].map(size => (
-                    <button
-                      key={size}
-                      onClick={() => setSelectedSize(selectedSize === size ? null : size)}
-                      className={`py-2 border font-ui text-shout text-xs transition-colors ${
-                        selectedSize === size
-                          ? 'border-secondary text-secondary font-bold'
-                          : 'border-outline text-on-surface hover:border-secondary'
-                      }`}
-                    >
-                      {size}
-                    </button>
-                  ))}
-                </div>
-              </section>
-
-              {/* Color Filter */}
-              <section className="mb-8">
-                <h4 className="font-ui text-shout text-xs text-outline mb-4">Color</h4>
-                <div className="flex flex-wrap gap-4">
-                  {[
-                    { name: 'Midnight Black', color: 'bg-on-surface' },
-                    { name: 'Teal Green', color: 'bg-secondary' },
-                    { name: 'Industrial Grey', color: 'bg-outline' },
-                    { name: 'Off-White', color: 'bg-surface-container-highest' },
-                  ].map(c => (
-                    <button
-                      key={c.name}
-                      onClick={() => setSelectedColor(selectedColor === c.name ? null : c.name)}
-                      className={`w-8 h-8 border ${c.color} transition-colors ${
-                        selectedColor === c.name ? 'border-secondary ring-2 ring-secondary ring-offset-2 ring-offset-surface' : 'border-outline'
-                      }`}
-                      title={c.name}
-                    />
-                  ))}
-                </div>
-              </section>
-
-              {/* Price Filter */}
-              <section className="mb-8">
-                <div className="flex justify-between items-center mb-4">
-                  <h4 className="font-ui text-shout text-xs text-outline">Price</h4>
-                  <span className="text-secondary font-bold text-label-md">$40 - ${priceRange}</span>
-                </div>
-                <div className="px-2">
-                  <input
-                    className="w-full"
-                    max="500"
-                    min="40"
-                    type="range"
-                    value={priceRange}
-                    onChange={(e) => setPriceRange(Number(e.target.value))}
-                  />
-                </div>
-              </section>
+        <aside className="w-full md:w-64 shrink-0">
+          <div className="sticky top-24 space-y-8 border border-outline p-5 bg-surface">
+            <div className="flex items-center justify-between border-b border-outline pb-3">
+              <h3 className="font-heading font-bold text-xs uppercase tracking-widest text-on-surface">Filters</h3>
+              <button
+                onClick={() => {
+                  setSelectedCategories([]);
+                  setSelectedSize(null);
+                  setSelectedColor(null);
+                  setPriceRange(500);
+                }}
+                className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-on-surface underline"
+              >
+                Clear All
+              </button>
             </div>
-            <button
-              onClick={() => {
-                setSelectedCategories([]);
-                setSelectedSize(null);
-                setSelectedColor(null);
-                setPriceRange(500);
-              }}
-              className="w-full border border-outline py-4 font-display text-shout text-display-md text-secondary hover:bg-secondary hover:text-on-secondary active:bg-secondary active:text-on-secondary transition-colors"
-            >
-              Clear Filters
-            </button>
+
+            {/* Category Filter */}
+            <section className="space-y-3">
+              <h4 className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant">Category</h4>
+              <div className="space-y-2">
+                {CATEGORIES.map(cat => (
+                  <label key={cat} className="flex items-center gap-2.5 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(cat)}
+                      onChange={() => handleCategoryToggle(cat)}
+                      className="accent-on-surface h-3.5 w-3.5"
+                    />
+                    <span className={`font-heading text-xs uppercase tracking-wider ${selectedCategories.includes(cat) ? 'text-on-surface font-bold' : 'text-on-surface-variant group-hover:text-on-surface'}`}>
+                      {cat}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </section>
+
+            {/* Size Filter */}
+            <section className="space-y-3">
+              <h4 className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant">Size</h4>
+              <div className="grid grid-cols-4 gap-2">
+                {['S', 'M', 'L', 'XL'].map(size => (
+                  <button
+                    key={size}
+                    onClick={() => setSelectedSize(selectedSize === size ? null : size)}
+                    className={`py-1.5 border font-heading text-[10px] uppercase tracking-wider transition-colors ${
+                      selectedSize === size
+                        ? 'border-on-surface bg-on-surface text-surface font-bold'
+                        : 'border-outline text-on-surface hover:border-on-surface'
+                    }`}
+                  >
+                    {size}
+                  </button>
+                ))}
+              </div>
+            </section>
+
+            {/* Price Filter */}
+            <section className="space-y-3">
+              <div className="flex justify-between items-center">
+                <h4 className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant">Max Price</h4>
+                <span className="font-sans text-xs font-semibold text-on-surface">${priceRange}</span>
+              </div>
+              <input
+                className="w-full accent-on-surface cursor-pointer"
+                max="500"
+                min="30"
+                type="range"
+                value={priceRange}
+                onChange={(e) => setPriceRange(Number(e.target.value))}
+              />
+            </section>
           </div>
         </aside>
 
         {/* Product Grid */}
-        <div className="flex-1">
-          <div className="flex justify-between items-center mb-10">
-            <p className="font-ui text-sm text-on-surface-variant">Showing <span className="font-bold text-on-surface">{filteredProducts.length}</span> technical pieces</p>
-            <div className="relative">
-              <button className="border border-outline px-6 py-3 flex items-center gap-3 font-ui text-xs">
-                Sort by: Featured
-                <span className="material-symbols-outlined">expand_more</span>
-              </button>
-            </div>
-          </div>
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredProducts.map(product => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAddToCart={p => addToCart({ productId: p.id, name: p.name, price: p.price, quantity: 1 })}
-              />
-            ))}
+        <div className="flex-1 space-y-6">
+          <div className="flex justify-between items-center border-b border-outline pb-3">
+            <p className="font-heading text-xs uppercase tracking-wider text-on-surface-variant">
+              Showing <span className="font-bold text-on-surface">{filteredProducts.length}</span> pieces
+            </p>
           </div>
 
-          {/* Pagination */}
-          <div className="mt-20 flex justify-center items-center gap-4">
-            <button
-              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-              className="border border-outline w-12 h-12 flex items-center justify-center text-outline hover:border-secondary hover:text-secondary transition-colors"
-            >
-              <span className="material-symbols-outlined">chevron_left</span>
-            </button>
-            {[1, 2, 3].map(page => (
+          {filteredProducts.length === 0 ? (
+            <div className="py-20 text-center space-y-4 border border-outline bg-surface-container-low">
+              <p className="font-heading text-xs uppercase tracking-widest text-on-surface-variant">No products found matching your filters</p>
               <button
-                key={page}
-                onClick={() => setCurrentPage(page)}
-                className={`w-12 h-12 border flex items-center justify-center font-bold transition-colors ${
-                  currentPage === page
-                    ? 'border-secondary text-secondary'
-                    : 'border-outline text-on-surface hover:border-secondary'
-                }`}
+                onClick={() => {
+                  setSelectedCategories([]);
+                  setSelectedSize(null);
+                  setSelectedColor(null);
+                  setPriceRange(500);
+                }}
+                className="px-6 py-2.5 border border-on-surface font-heading text-xs uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-colors"
               >
-                {page}
+                Reset Filters
               </button>
-            ))}
-            <button
-              onClick={() => setCurrentPage(Math.min(3, currentPage + 1))}
-              className="border border-outline w-12 h-12 flex items-center justify-center text-outline hover:border-secondary hover:text-secondary transition-colors"
-            >
-              <span className="material-symbols-outlined">chevron_right</span>
-            </button>
-          </div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredProducts.map(product => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={p => addToCart({ productId: p.id, name: p.name, price: p.price, quantity: 1 })}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </main>
   );
 };
+
