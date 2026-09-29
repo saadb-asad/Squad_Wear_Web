@@ -109,7 +109,7 @@ export const CheckoutPage = () => {
               return (
                 <div key={item.productId} className="border border-outline p-6 flex flex-col md:flex-row gap-6 items-center">
                   <div className="w-32 h-32 border border-outline overflow-hidden flex-shrink-0">
-                    <img className="w-full h-full object-cover" data-alt={item.name} src={productInfo?.image || ''}/>
+                    <img className="w-full h-full object-cover" data-alt={item.name} src={productInfo?.image || ''} loading="lazy" decoding="async"/>
                   </div>
                   <div className="flex-grow w-full">
                     <div className="flex justify-between items-start">
@@ -161,7 +161,7 @@ export const CheckoutPage = () => {
               {recommendations.map(rec => (
                 <Link to={`/catalog/${rec.id}`} key={rec.id} className="border border-outline p-4 group cursor-pointer block">
                   <div className="aspect-square border border-outline mb-3 overflow-hidden">
-                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt={rec.name} src={rec.image}/>
+                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt={rec.name} src={rec.image} loading="lazy" decoding="async"/>
                   </div>
                   <p className="font-label-sm text-label-sm text-on-surface-variant truncate">{rec.name}</p>
                   <p className="font-label-md text-label-md text-on-surface">${rec.price.toFixed(2)}</p>

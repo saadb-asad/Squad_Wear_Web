@@ -35,8 +35,8 @@ export const ProductPage = () => {
         <div className="lg:col-span-7 space-y-gutter">
           {/* Hero Editorial Shot */}
           <div className="group border border-outline overflow-hidden aspect-[4/5] relative">
-            <img className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" data-alt={product.name} src={product.image}/>
-            <img className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" data-alt="" aria-hidden="true" src={product.hoverImage || product.image}/>
+            <img className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" data-alt={product.name} src={product.image} fetchPriority="high"/>
+            <img className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" data-alt="" aria-hidden="true" src={product.hoverImage || product.image} loading="lazy" decoding="async"/>
             {product.badge && (
               <div className="absolute bottom-8 left-8">
                 <Badge variant="new">{product.badge}</Badge>
@@ -46,10 +46,10 @@ export const ProductPage = () => {
           {/* Secondary Detail Grid */}
           <div className="grid grid-cols-2 gap-gutter">
             <div className="border border-outline overflow-hidden aspect-square">
-              <img className="w-full h-full object-cover" data-alt="Detail shot 1" src={product.image}/>
+              <img className="w-full h-full object-cover" data-alt="Detail shot 1" src={product.image} loading="lazy" decoding="async"/>
             </div>
             <div className="border border-outline overflow-hidden aspect-square">
-              <img className="w-full h-full object-cover" data-alt="Detail shot 2" src={product.image}/>
+              <img className="w-full h-full object-cover" data-alt="Detail shot 2" src={product.image} loading="lazy" decoding="async"/>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export const ProductPage = () => {
               <div className="flex items-center gap-4 py-4">
                 <div className="flex -space-x-2">
                   <div className="w-8 h-8 rounded-full border-2 border-surface overflow-hidden">
-                    <img className="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKiPDHU9kvQInh5BTHzsrf-qizJ7hJkOkWzW-Zx07Uhf12ni53hetQ62yGhoKxZisF4huqlDrKCEDFDoIdjj0seX1UGqVgemHFhHdSIyKsfA_bIGhIHtDQRGubFC1pT-cut7fGxetwO57n9TJiH_S6-FVoHrN9_JTZFl3V6NcZp2XqUEjevC88GbBr6x2i8CQLADHI7tcWCP5VOS-OoeUf0NhfStYHgMLdU7tnVZc0TP3ZLH8IO9IWtVSAOvMDFXVS_Svr79fiCjhn"/>
+                    <img className="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKiPDHU9kvQInh5BTHzsrf-qizJ7hJkOkWzW-Zx07Uhf12ni53hetQ62yGhoKxZisF4huqlDrKCEDFDoIdjj0seX1UGqVgemHFhHdSIyKsfA_bIGhIHtDQRGubFC1pT-cut7fGxetwO57n9TJiH_S6-FVoHrN9_JTZFl3V6NcZp2XqUEjevC88GbBr6x2i8CQLADHI7tcWCP5VOS-OoeUf0NhfStYHgMLdU7tnVZc0TP3ZLH8IO9IWtVSAOvMDFXVS_Svr79fiCjhn" loading="lazy" decoding="async"/>
                   </div>
                   <div className="w-8 h-8 rounded-full border-2 border-surface overflow-hidden bg-surface-container flex items-center justify-center text-[10px] font-bold">
                     +42

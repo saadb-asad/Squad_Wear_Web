@@ -64,6 +64,7 @@ export const HomePage = () => {
               src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1200"
               alt="Squad Wear Editorial Campaign"
               className="w-full h-full object-cover"
+              fetchPriority="high"
             />
           </div>
         </div>
@@ -74,7 +75,7 @@ export const HomePage = () => {
 
       {/* 3 Core Collections Grid */}
       <main className="w-full max-w-max-width mx-auto px-4 lg:px-margin-desktop space-y-16">
-        <section className="space-y-6">
+        <section className="deferred-section space-y-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 border-b border-outline pb-4">
             <div>
               <span className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">
@@ -97,7 +98,7 @@ export const HomePage = () => {
         </section>
 
         {/* New Drops Grid */}
-        <section className="space-y-6">
+        <section className="deferred-section space-y-6">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 border-b border-outline pb-4">
             <div>
               <span className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">
@@ -124,7 +125,7 @@ export const HomePage = () => {
         </section>
 
         {/* Editorial Story Section */}
-        <section className="border border-outline bg-surface-container-low grid grid-cols-1 md:grid-cols-2 items-center">
+        <section className="deferred-section border border-outline bg-surface-container-low grid grid-cols-1 md:grid-cols-2 items-center">
           <div className="p-8 lg:p-12 space-y-6">
             <span className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant border border-outline px-3 py-1 inline-block">
               Craft & Quality
@@ -150,12 +151,14 @@ export const HomePage = () => {
               src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&q=80&w=1000"
               alt="Heavyweight apparel detail"
               className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </section>
 
         {/* Testimonials */}
-        <section className="space-y-6">
+        <section className="deferred-section space-y-6">
           <div className="border-b border-outline pb-4">
             <span className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant block mb-1">
               Feedback
@@ -174,4 +177,3 @@ export const HomePage = () => {
     </div>
   );
 };
-

@@ -17,6 +17,8 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           src={product.image}
           alt={product.name}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
         />
         {product.hoverImage && (
           <img
@@ -24,6 +26,8 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+            loading="lazy"
+            decoding="async"
           />
         )}
         <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
@@ -70,4 +74,3 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
     </div>
   );
 };
-

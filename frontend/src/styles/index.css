@@ -39,6 +39,11 @@
     background-color: #f5f5f5;
   }
 
+  .deferred-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 640px;
+  }
+
   .card-hover-zoom {
     overflow: hidden;
   }

@@ -58,7 +58,7 @@ export const CartDrawer = () => {
                 <div className="grid w-full grid-cols-3 gap-3">
                   {suggestions.map(p => (
                     <Link key={p.id} to={`/catalog/${p.id}`} onClick={closeDrawer} className="block group">
-                      <img src={p.image} alt={p.name} className="aspect-square w-full border border-outline object-cover transition-transform duration-300 group-hover:scale-105" />
+                      <img src={p.image} alt={p.name} className="aspect-square w-full border border-outline object-cover transition-transform duration-300 group-hover:scale-105" loading="lazy" decoding="async" />
                       <p className="font-heading mt-1.5 truncate text-[10px] uppercase tracking-wider text-on-surface">{p.name}</p>
                     </Link>
                   ))}
@@ -75,6 +75,8 @@ export const CartDrawer = () => {
                       src={product?.image}
                       alt={item.name}
                       className="h-20 w-20 flex-shrink-0 border border-outline object-cover"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <div className="flex flex-1 flex-col justify-between">
                       <div className="flex justify-between gap-2">
@@ -127,4 +129,3 @@ export const CartDrawer = () => {
     </div>
   );
 };
-
