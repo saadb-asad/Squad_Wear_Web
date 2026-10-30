@@ -6,7 +6,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = ({ variant = 'solid', className = '', ...props }: ButtonProps) => {
   const base =
-    'font-ui text-shout text-sm px-6 py-3 border transition-colors disabled:opacity-40 disabled:cursor-not-allowed';
+    'font-ui text-shout text-sm px-6 py-3 border rounded-xl transition-colors disabled:opacity-40 disabled:cursor-not-allowed';
   const styles =
     variant === 'solid'
       ? 'bg-on-surface text-surface border-on-surface hover:bg-secondary hover:border-secondary'

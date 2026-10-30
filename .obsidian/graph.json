@@ -1,0 +1,31 @@
+{
+  "collapse-filter": false,
+  "search": "",
+  "showTags": true,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "path:\"01 - System Architecture\"",
+      "color": { "a": 1, "rgb": 14701130 }
+    },
+    {
+      "query": "path:\"02 - Frontend\"",
+      "color": { "a": 1, "rgb": 4901375 }
+    },
+    {
+      "query": "path:\"03 - Backend\"",
+      "color": { "a": 1, "rgb": 5025616 }
+    },
+    {
+      "query": "path:\"04 - Workflows & Optimization\"",
+      "color": { "a": 1, "rgb": 15822390 }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": true,
+  "textScale": 1,
+  "showLabels": true
+}

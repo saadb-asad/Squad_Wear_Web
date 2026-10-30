@@ -30,11 +30,7 @@ export const Footer = () => {
                 Hoodies
               </Link>
             </li>
-            <li>
-              <Link to="/catalog?category=Trousers" className="hover:text-on-surface transition-colors">
-                Trousers
-              </Link>
-            </li>
+
             <li>
               <Link to="/catalog" className="hover:text-on-surface transition-colors">
                 Shop All Drops
@@ -84,11 +80,11 @@ export const Footer = () => {
             <input
               type="email"
               placeholder="Enter email..."
-              className="w-full px-3 py-2 bg-surface-container-low border border-outline font-sans text-xs focus:outline-none focus:border-on-surface rounded-none"
+              className="w-full px-3 py-2 bg-surface-container-low border border-outline font-sans text-xs focus:outline-none focus:border-on-surface rounded-xl"
             />
             <button
               type="submit"
-              className="px-4 py-2 bg-on-surface text-surface font-heading text-xs uppercase tracking-widest hover:bg-on-surface/90 transition-colors"
+              className="px-4 py-2 bg-on-surface text-surface font-heading text-xs uppercase tracking-widest hover:bg-on-surface/90 transition-colors rounded-xl"
             >
               Join
             </button>

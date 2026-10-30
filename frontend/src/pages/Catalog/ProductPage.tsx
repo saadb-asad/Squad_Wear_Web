@@ -5,6 +5,7 @@ import { useProducts } from '../../contexts/ProductsContext';
 import { Button } from '../../components/ui/Button';
 import { Badge } from '../../components/ui/Badge';
 import { ProductCard } from '../../components/ui/ProductCard';
+import { formatPrice } from '../../utils/format';
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,9 +35,9 @@ export const ProductPage = () => {
         {/* Product Visuals (Editorial & Product Shots) */}
         <div className="lg:col-span-7 space-y-gutter">
           {/* Hero Editorial Shot */}
-          <div className="group border border-outline overflow-hidden aspect-[4/5] relative">
-            <img className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" data-alt={product.name} src={product.image}/>
-            <img className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" data-alt="" aria-hidden="true" src={product.hoverImage || product.image}/>
+          <div className="group border border-outline rounded-3xl overflow-hidden aspect-[4/5] relative">
+            <img className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-0" data-alt={product.name} src={product.image} loading="lazy" decoding="async"/>
+            <img className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100" data-alt="" aria-hidden="true" src={product.hoverImage || product.image} loading="lazy" decoding="async"/>
             {product.badge && (
               <div className="absolute bottom-8 left-8">
                 <Badge variant="new">{product.badge}</Badge>
@@ -45,21 +46,21 @@ export const ProductPage = () => {
           </div>
           {/* Secondary Detail Grid */}
           <div className="grid grid-cols-2 gap-gutter">
-            <div className="border border-outline overflow-hidden aspect-square">
-              <img className="w-full h-full object-cover" data-alt="Detail shot 1" src={product.image}/>
+            <div className="border border-outline rounded-2xl overflow-hidden aspect-square">
+              <img className="w-full h-full object-cover" data-alt="Detail shot 1" src={product.image} loading="lazy" decoding="async"/>
             </div>
-            <div className="border border-outline overflow-hidden aspect-square">
-              <img className="w-full h-full object-cover" data-alt="Detail shot 2" src={product.image}/>
+            <div className="border border-outline rounded-2xl overflow-hidden aspect-square">
+              <img className="w-full h-full object-cover" data-alt="Detail shot 2" src={product.image} loading="lazy" decoding="async"/>
             </div>
           </div>
         </div>
 
         {/* Product Information & CTAs */}
         <div className="lg:col-span-5 flex flex-col gap-8">
-          <div className="border border-outline p-8 space-y-6">
+          <div className="border border-outline rounded-3xl p-8 space-y-6">
             <div>
               <h1 className="font-headline-lg text-headline-lg text-on-surface mb-2">{product.name}</h1>
-              <p className="text-secondary font-bold text-headline-md font-headline-md">${product.price.toFixed(2)}</p>
+              <p className="text-secondary font-bold text-headline-md font-headline-md">{formatPrice(product.price)}</p>
             </div>
             
             <div className="space-y-4">
@@ -70,7 +71,7 @@ export const ProductPage = () => {
               <div className="flex items-center gap-4 py-4">
                 <div className="flex -space-x-2">
                   <div className="w-8 h-8 rounded-full border-2 border-surface overflow-hidden">
-                    <img className="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKiPDHU9kvQInh5BTHzsrf-qizJ7hJkOkWzW-Zx07Uhf12ni53hetQ62yGhoKxZisF4huqlDrKCEDFDoIdjj0seX1UGqVgemHFhHdSIyKsfA_bIGhIHtDQRGubFC1pT-cut7fGxetwO57n9TJiH_S6-FVoHrN9_JTZFl3V6NcZp2XqUEjevC88GbBr6x2i8CQLADHI7tcWCP5VOS-OoeUf0NhfStYHgMLdU7tnVZc0TP3ZLH8IO9IWtVSAOvMDFXVS_Svr79fiCjhn"/>
+                    <img className="w-full h-full object-cover" data-alt="User avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKiPDHU9kvQInh5BTHzsrf-qizJ7hJkOkWzW-Zx07Uhf12ni53hetQ62yGhoKxZisF4huqlDrKCEDFDoIdjj0seX1UGqVgemHFhHdSIyKsfA_bIGhIHtDQRGubFC1pT-cut7fGxetwO57n9TJiH_S6-FVoHrN9_JTZFl3V6NcZp2XqUEjevC88GbBr6x2i8CQLADHI7tcWCP5VOS-OoeUf0NhfStYHgMLdU7tnVZc0TP3ZLH8IO9IWtVSAOvMDFXVS_Svr79fiCjhn" loading="lazy" decoding="async"/>
                   </div>
                   <div className="w-8 h-8 rounded-full border-2 border-surface overflow-hidden bg-surface-container flex items-center justify-center text-[10px] font-bold">
                     +42
@@ -91,7 +92,7 @@ export const ProductPage = () => {
                   <button 
                     key={size}
                     onClick={() => setSelectedSize(size)}
-                    className={`size-btn py-4 font-label-md text-label-md border transition-colors duration-200 ${
+                    className={`size-btn py-4 font-label-md text-label-md border rounded-xl transition-colors duration-200 ${
                       selectedSize === size
                         ? 'border-secondary text-secondary font-bold'
                         : 'border-outline text-on-surface hover:border-secondary'
@@ -145,12 +146,12 @@ export const ProductPage = () => {
 
           {/* Product Features Bento */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="border border-outline p-6 space-y-2">
+            <div className="border border-outline rounded-2xl p-6 space-y-2">
               <span className="material-symbols-outlined text-secondary">architecture</span>
               <h4 className="font-label-md text-label-md font-bold">Structural Fit</h4>
               <p className="text-label-sm font-label-sm text-on-surface-variant">Double-lined hood and reinforced seams.</p>
             </div>
-            <div className="border border-outline p-6 space-y-2">
+            <div className="border border-outline rounded-2xl p-6 space-y-2">
               <span className="material-symbols-outlined text-secondary">eco</span>
               <h4 className="font-label-md text-label-md font-bold">100% Organic</h4>
               <p className="text-label-sm font-label-sm text-on-surface-variant">Sustainably sourced technical material.</p>
@@ -167,10 +168,10 @@ export const ProductPage = () => {
             <p className="text-on-surface-variant">Curated pairings for your new staple.</p>
           </div>
           <div className="flex gap-4">
-            <button className="w-12 h-12 border border-outline flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors">
+            <button className="w-12 h-12 border border-outline rounded-full flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors">
               <span className="material-symbols-outlined">arrow_back</span>
             </button>
-            <button className="w-12 h-12 border border-outline flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors">
+            <button className="w-12 h-12 border border-outline rounded-full flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors">
               <span className="material-symbols-outlined">arrow_forward</span>
             </button>
           </div>

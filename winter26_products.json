@@ -1,0 +1,392 @@
+[
+  {
+    "id": "sqd-hd-blk-350",
+    "sku": "SQD-HD-BLK-350",
+    "name": "Squad Black Hoodie",
+    "subtitle": "Midnight Black / 350 GSM Cotton Fleece",
+    "price": 2800.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-HD-BLK-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-HD-BLK-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Premium 350 GSM heavyweight cotton fleece hoodie in Midnight Black. Features plush interior lining, drop-shoulder athletic cut, double-lined hood, and high-density Squad logo detailing.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Midnight Black",
+        "hex": "#121212"
+      }
+    ],
+    "category": "Hoodies",
+    "inventoryCount": 50
+  },
+  {
+    "id": "sqd-hd-gry-350",
+    "sku": "SQD-HD-GRY-350",
+    "name": "Squad Grey Hoodie",
+    "subtitle": "Heather Grey / 350 GSM Cotton Fleece",
+    "price": 2800.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-HD-GRY-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-HD-GRY-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Signature 350 GSM heavyweight cotton fleece hoodie in Heather Grey. Engineered with ribbed cuffs, deep front kangaroo pocket, and breathable warmth for cold weather.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Heather Grey",
+        "hex": "#8e8e8e"
+      }
+    ],
+    "category": "Hoodies",
+    "inventoryCount": 50
+  },
+  {
+    "id": "sqd-hd-nvy-350",
+    "sku": "SQD-HD-NVY-350",
+    "name": "Squad Navy Hoodie",
+    "subtitle": "Deep Navy / 350 GSM Cotton Fleece",
+    "price": 2800.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-HD-NVY-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-HD-NVY-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Rich Deep Navy 350 GSM fleece hoodie built for street luxury and warmth. Crafted from ultra-soft cotton blend with reinforced stitching.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Deep Navy",
+        "hex": "#1b263b"
+      }
+    ],
+    "category": "Hoodies",
+    "inventoryCount": 50
+  },
+  {
+    "id": "sqd-hd-olv-350",
+    "sku": "SQD-HD-OLV-350",
+    "name": "Squad Olive Hoodie",
+    "subtitle": "Tactical Olive / 350 GSM Cotton Fleece",
+    "price": 2800.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-HD-OLV-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-HD-OLV-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Tactical Olive green 350 GSM cotton fleece hoodie. Perfect balance of streetwear aesthetic and heavy cold protection.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Tactical Olive",
+        "hex": "#4b5320"
+      }
+    ],
+    "category": "Hoodies",
+    "inventoryCount": 50
+  },
+  {
+    "id": "sqd-hd-red-350",
+    "sku": "SQD-HD-RED-350",
+    "name": "Squad Red Hoodie",
+    "subtitle": "Crimson Red / 350 GSM Cotton Fleece",
+    "price": 2800.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-HD-RED-350_front.png",
+    "hoverImage": "/products/winter26/SQD-HD-RED-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Bold Crimson Red 350 GSM fleece hoodie. Stand out with vibrant color fastness, drop shoulder fit, and premium cotton feel.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Crimson Red",
+        "hex": "#8b0000"
+      }
+    ],
+    "category": "Hoodies",
+    "inventoryCount": 50
+  },
+  {
+    "id": "sqd-ts-blk-350",
+    "sku": "SQD-TS-BLK-350",
+    "name": "Black Drop Tracksuit",
+    "subtitle": "Full Set / 350 GSM Cotton Fleece",
+    "price": 5990.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TS-BLK-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-TS-BLK-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Complete 2-piece heavyweight 350 GSM fleece tracksuit set in Black Drop. Includes oversized hoodie and matching tapered fleece joggers with zip pockets.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Black Drop",
+        "hex": "#121212"
+      }
+    ],
+    "category": "Tracksuits",
+    "inventoryCount": 45
+  },
+  {
+    "id": "sqd-ts-nvy-350",
+    "sku": "SQD-TS-NVY-350",
+    "name": "Navy Drop Tracksuit",
+    "subtitle": "Full Set / 350 GSM Cotton Fleece",
+    "price": 5990.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TS-NVY-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-TS-NVY-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Deep Navy full 2-piece tracksuit crafted from 350 GSM high-grade cotton fleece. Features ergonomic waistband and precision branding.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Navy Drop",
+        "hex": "#1b263b"
+      }
+    ],
+    "category": "Tracksuits",
+    "inventoryCount": 45
+  },
+  {
+    "id": "sqd-ts-stblk-350",
+    "sku": "SQD-TS-STBLK-350",
+    "name": "Strip Black Tracksuit",
+    "subtitle": "Stripe Edition / 350 GSM Cotton Fleece",
+    "price": 5990.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TS-STBLK-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-TS-STBLK-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Urban Strip Black 2-piece fleece tracksuit featuring athletic side panel striping, 350 GSM heavyweight fleece, and custom hardware.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Strip Black",
+        "hex": "#1c1c1c"
+      }
+    ],
+    "category": "Tracksuits",
+    "inventoryCount": 40
+  },
+  {
+    "id": "sqd-ts-mrn-350",
+    "sku": "SQD-TS-MRN-350",
+    "name": "Maroon Heritage Tracksuit",
+    "subtitle": "Heritage Edition / 350 GSM Cotton Fleece",
+    "price": 5990.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TS-MRN-350_front.png",
+    "hoverImage": "/products/winter26/SQD-TS-MRN-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Rich Maroon Heritage 2-piece tracksuit. Built with 350 GSM cotton fleece for superior thermal insulation and distinct style.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Maroon Heritage",
+        "hex": "#58111a"
+      }
+    ],
+    "category": "Tracksuits",
+    "inventoryCount": 40
+  },
+  {
+    "id": "sqd-ts-olv-350",
+    "sku": "SQD-TS-OLV-350",
+    "name": "Olive Riyasat Tracksuit",
+    "subtitle": "Riyasat Edition / 350 GSM Cotton Fleece",
+    "price": 5990.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TS-OLV-350_front.jpeg",
+    "hoverImage": "/products/winter26/SQD-TS-OLV-350_back.jpeg",
+    "badge": "Winter '26 Drop",
+    "description": "Olive Riyasat edition full 2-piece tracksuit in 350 GSM brushed fleece. Tailored fit with deep side pockets and flexible stretch cuffs.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Olive Riyasat",
+        "hex": "#3b4d29"
+      }
+    ],
+    "category": "Tracksuits",
+    "inventoryCount": 40
+  },
+  {
+    "id": "sqd-tr-gdst-350",
+    "sku": "SQD-TR-GDST-350",
+    "name": "Golden Strip Trouser",
+    "subtitle": "Gold Detail / 350 GSM Cotton Fleece",
+    "price": 2700.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TR-GDST-350_front.png",
+    "hoverImage": null,
+    "badge": "Winter '26 Drop",
+    "description": "Heavyweight 350 GSM fleece trousers featuring metallic Golden Strip side tape, elasticated drawcord waist, and deep zip pockets.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Black & Gold",
+        "hex": "#121212"
+      }
+    ],
+    "category": "Trousers",
+    "inventoryCount": 60
+  },
+  {
+    "id": "sqd-tr-sqdst-350",
+    "sku": "SQD-TR-SQDST-350",
+    "name": "Squad Strip Trouser",
+    "subtitle": "Squad Tape / 350 GSM Cotton Fleece",
+    "price": 2700.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TR-SQDST-350_front.jpeg",
+    "hoverImage": null,
+    "badge": "Winter '26 Drop",
+    "description": "Signature Squad Strip trousers in 350 GSM heavy fleece. Designed for comfort, durability, and modern urban styling.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#121212"
+      }
+    ],
+    "category": "Trousers",
+    "inventoryCount": 60
+  },
+  {
+    "id": "sqd-tr-blksg-350",
+    "sku": "SQD-TR-BLKSG-350",
+    "name": "Black Signature Trouser",
+    "subtitle": "Signature / 350 GSM Cotton Fleece",
+    "price": 2700.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TR-BLKSG-350_front.jpeg",
+    "hoverImage": null,
+    "badge": "Winter '26 Drop",
+    "description": "Minimalist Black Signature fleece trousers in 350 GSM plush cotton fleece. Clean cuff finish with subtle Squad emblem.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Black",
+        "hex": "#121212"
+      }
+    ],
+    "category": "Trousers",
+    "inventoryCount": 60
+  },
+  {
+    "id": "sqd-tr-nvyb-350",
+    "sku": "SQD-TR-NVYB-350",
+    "name": "Navy Blue Squad Trouser",
+    "subtitle": "Navy Squad / 350 GSM Cotton Fleece",
+    "price": 2700.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TR-NVYB-350_front.jpeg",
+    "hoverImage": null,
+    "badge": "Winter '26 Drop",
+    "description": "Deep Navy Blue fleece trousers crafted from 350 GSM cotton fleece with custom waistband drawstrings.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Navy Blue",
+        "hex": "#1b263b"
+      }
+    ],
+    "category": "Trousers",
+    "inventoryCount": 60
+  },
+  {
+    "id": "sqd-tr-mrnst-350",
+    "sku": "SQD-TR-MRNST-350",
+    "name": "Maroon Strip Trouser",
+    "subtitle": "Maroon Strip / 350 GSM Cotton Fleece",
+    "price": 2700.0,
+    "originalPrice": null,
+    "image": "/products/winter26/SQD-TR-MRNST-350_front.jpeg",
+    "hoverImage": null,
+    "badge": "Winter '26 Drop",
+    "description": "Maroon Strip fleece trousers engineered with 350 GSM cotton fleece and side accent striping.",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Maroon",
+        "hex": "#58111a"
+      }
+    ],
+    "category": "Trousers",
+    "inventoryCount": 60
+  }
+]

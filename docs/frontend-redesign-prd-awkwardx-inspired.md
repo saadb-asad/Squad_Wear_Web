@@ -313,7 +313,7 @@ Redesign the SquadGear Web frontend to adopt a premium streetwear aesthetic insp
 - [ ] Implement/checkout flow steps (address, payment, review)
 - [ ] Integrate with existing `/api/checkout` and payfast webhook
 - [ ] Add order confirmation page
-- [ ] Performance optimization: lazy loading, code splitting
+- [x] Performance optimization: lazy loading, code splitting
 - [ ] Accessibility audit and fixes
 - [ ] Cross-browser and device testing
 - [ ] SEO optimization: meta tags, structured data

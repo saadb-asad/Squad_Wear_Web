@@ -5,6 +5,7 @@ import { useProducts } from '../../contexts/ProductsContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config';
 import { Button } from '../../components/ui/Button';
+import { formatPrice } from '../../utils/format';
 
 
 export const CheckoutPage = () => {
@@ -93,11 +94,11 @@ export const CheckoutPage = () => {
           <h1 className="font-headline-xl text-headline-xl text-on-surface mb-8">Your Bag</h1>
           
           {items.length === 0 ? (
-            <div className="border border-outline p-12 text-center">
+            <div className="border border-outline rounded-3xl p-12 text-center">
               <span className="material-symbols-outlined text-6xl text-on-surface-variant mb-4">shopping_bag</span>
               <h2 className="font-headline-md text-headline-md text-on-surface mb-4">Your bag is empty</h2>
               <Link to="/catalog">
-                <button className="border border-outline px-8 py-3 font-label-md text-label-md text-secondary hover:bg-secondary hover:text-on-secondary transition-all">
+                <button className="border border-outline rounded-xl px-8 py-3 font-label-md text-label-md text-secondary hover:bg-secondary hover:text-on-secondary transition-all">
                   Continue Shopping
                 </button>
               </Link>
@@ -107,9 +108,9 @@ export const CheckoutPage = () => {
               const productInfo = products.find(p => p.id === item.productId);
               
               return (
-                <div key={item.productId} className="border border-outline p-6 flex flex-col md:flex-row gap-6 items-center">
-                  <div className="w-32 h-32 border border-outline overflow-hidden flex-shrink-0">
-                    <img className="w-full h-full object-cover" data-alt={item.name} src={productInfo?.image || ''}/>
+                <div key={item.productId} className="border border-outline rounded-2xl p-6 flex flex-col md:flex-row gap-6 items-center">
+                  <div className="w-32 h-32 border border-outline rounded-xl overflow-hidden flex-shrink-0">
+                    <img className="w-full h-full object-cover" data-alt={item.name} src={productInfo?.image || ''} loading="lazy" decoding="async"/>
                   </div>
                   <div className="flex-grow w-full">
                     <div className="flex justify-between items-start">
@@ -119,22 +120,22 @@ export const CheckoutPage = () => {
                         </Link>
                         <p className="font-body-md text-body-md text-on-surface-variant mt-1">{productInfo?.subtitle || 'Standard'}</p>
                       </div>
-                      <span className="font-headline-md text-headline-md text-secondary">${(item.price * item.quantity).toFixed(2)}</span>
+                      <span className="font-headline-md text-headline-md text-secondary">{formatPrice(item.price * item.quantity)}</span>
                     </div>
                     
                     <div className="flex items-center justify-between mt-6">
                       <div className="flex items-center gap-4">
-                        <div className="flex items-center border border-outline px-4 py-2">
+                        <div className="flex items-center border border-outline rounded-xl px-4 py-2">
                           <button
                             onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                            className="border border-outline w-8 h-8 flex items-center justify-center hover:text-secondary"
+                            className="border border-outline rounded-lg w-8 h-8 flex items-center justify-center hover:text-secondary"
                           >
                             <span className="material-symbols-outlined text-sm" data-icon="remove">remove</span>
                           </button>
                           <span className="px-6 font-label-md text-label-md">{item.quantity}</span>
                           <button
                             onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                            className="border border-outline w-8 h-8 flex items-center justify-center hover:text-secondary"
+                            className="border border-outline rounded-lg w-8 h-8 flex items-center justify-center hover:text-secondary"
                           >
                             <span className="material-symbols-outlined text-sm" data-icon="add">add</span>
                           </button>
@@ -159,12 +160,12 @@ export const CheckoutPage = () => {
             <h2 className="font-headline-md text-headline-md text-on-surface mb-6">Complete the Kit</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {recommendations.map(rec => (
-                <Link to={`/catalog/${rec.id}`} key={rec.id} className="border border-outline p-4 group cursor-pointer block">
-                  <div className="aspect-square border border-outline mb-3 overflow-hidden">
-                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt={rec.name} src={rec.image}/>
+                <Link to={`/catalog/${rec.id}`} key={rec.id} className="border border-outline rounded-2xl p-4 group cursor-pointer block">
+                  <div className="aspect-square border border-outline rounded-xl mb-3 overflow-hidden">
+                    <img className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt={rec.name} src={rec.image} loading="lazy" decoding="async"/>
                   </div>
                   <p className="font-label-sm text-label-sm text-on-surface-variant truncate">{rec.name}</p>
-                  <p className="font-label-md text-label-md text-on-surface">${rec.price.toFixed(2)}</p>
+                  <p className="font-label-md text-label-md text-on-surface">{formatPrice(rec.price)}</p>
                 </Link>
               ))}
             </div>
@@ -173,18 +174,18 @@ export const CheckoutPage = () => {
 
         {/* Order Summary Sidebar */}
         <aside className="lg:col-span-4 lg:sticky lg:top-28">
-          <div className="border border-outline p-8 space-y-6">
+          <div className="border border-outline rounded-3xl p-8 space-y-6">
             <h2 className="font-headline-md text-headline-md text-on-surface">Order Summary</h2>
             
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="font-body-md text-body-md text-on-surface-variant">Subtotal</span>
-                <span className="font-body-md text-body-md text-on-surface font-semibold">${subtotal.toFixed(2)}</span>
+                <span className="font-body-md text-body-md text-on-surface font-semibold">{formatPrice(subtotal)}</span>
               </div>
               {discount > 0 && (
                 <div className="flex justify-between items-center text-secondary">
                   <span className="font-body-md text-body-md">Discount</span>
-                  <span className="font-body-md text-body-md font-semibold">-${discount.toFixed(2)}</span>
+                  <span className="font-body-md text-body-md font-semibold">-{formatPrice(discount)}</span>
                 </div>
               )}
               <div className="flex justify-between items-center">
@@ -193,7 +194,7 @@ export const CheckoutPage = () => {
               </div>
               <div className="flex justify-between items-center">
                 <span className="font-body-md text-body-md text-on-surface-variant">Tax</span>
-                <span className="font-body-md text-body-md text-on-surface font-semibold">${tax.toFixed(2)}</span>
+                <span className="font-body-md text-body-md text-on-surface font-semibold">{formatPrice(tax)}</span>
               </div>
             </div>
             
@@ -201,11 +202,11 @@ export const CheckoutPage = () => {
             
             <div className="flex justify-between items-center">
               <span className="font-headline-md text-headline-md text-on-surface">Total</span>
-              <span className="font-headline-md text-headline-md text-on-surface">${finalTotal.toFixed(2)}</span>
+              <span className="font-headline-md text-headline-md text-on-surface">{formatPrice(finalTotal)}</span>
             </div>
             
             <div className="pt-4">
-              <div className="border border-outline p-2 flex items-center mb-6">
+              <div className="border border-outline rounded-xl p-2 flex items-center mb-6">
                 <input
                   className="bg-transparent border-none focus:ring-0 flex-grow font-body-md text-body-md px-4 outline-none"
                   placeholder="Promo Code"
@@ -213,7 +214,7 @@ export const CheckoutPage = () => {
                   value={promoCode}
                   onChange={(e) => setPromoCode(e.target.value)}
                 />
-                <button onClick={applyPromo} className="border border-outline px-6 py-2 font-label-md text-label-md text-primary hover:text-secondary transition-colors">Apply</button>
+                <button onClick={applyPromo} className="border border-outline rounded-lg px-6 py-2 font-label-md text-label-md text-primary hover:text-secondary transition-colors">Apply</button>
               </div>
               <Button
                 variant="solid"

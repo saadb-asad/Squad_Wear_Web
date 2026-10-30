@@ -1,0 +1,15 @@
+name = "squadgear-api"
+main = "src/index.ts"
+compatibility_date = "2024-09-03"
+
+[vars]
+ENVIRONMENT = "production"
+
+routes = [
+  { pattern = "api.squadattire.com/*", custom_domain = true }
+]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "squadgear-db"
+database_id = "41c1dd45-e172-436c-9e65-36a398579cc6"

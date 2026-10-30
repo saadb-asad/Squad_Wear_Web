@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, Numeric, Integer, ForeignKey, Text, DateTime, CheckConstraint, JSON
+from sqlalchemy import Column, String, Numeric, Integer, ForeignKey, Text, DateTime, CheckConstraint, JSON, Boolean
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from database import Base
@@ -37,6 +37,7 @@ class Product(Base):
     inventory_count = Column(Integer, CheckConstraint('inventory_count >= 0'), nullable=False, default=0)
     category = Column(String, nullable=False)
     display_order = Column(Integer, nullable=False, default=0)
+    is_published = Column(Boolean, nullable=False, default=True)
 
 class Order(Base):
     __tablename__ = "orders"

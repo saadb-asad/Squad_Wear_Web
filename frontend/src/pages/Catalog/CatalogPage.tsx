@@ -3,8 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useCart } from '../../contexts/CartContext';
 import { useProducts } from '../../contexts/ProductsContext';
 import { ProductCard } from '../../components/ui/ProductCard';
+import { formatPrice } from '../../utils/format';
 
-const CATEGORIES = ['Full Track Suits', 'Hoodies', 'Trousers'];
+const CATEGORIES = ['Tracksuits', 'Hoodies', 'Trousers'];
 
 export const CatalogPage = () => {
   const { addToCart } = useCart();
@@ -13,12 +14,16 @@ export const CatalogPage = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
-  const [priceRange, setPriceRange] = useState(500);
+  const [priceRange, setPriceRange] = useState(10000);
 
   useEffect(() => {
     const category = searchParams.get('category');
     if (category) {
-      setSelectedCategories([category]);
+      const normalizedCat = (category === 'Full Track Suits' || category === 'Tracksuits') ? 'Tracksuits' : category;
+      setSelectedCategories([normalizedCat]);
+    } else {
+      // Clear category filter when navigating to /catalog (Shop All)
+      setSelectedCategories([]);
     }
   }, [searchParams]);
 
@@ -36,7 +41,10 @@ export const CatalogPage = () => {
     if (searchQuery && !product.name.toLowerCase().includes(searchQuery) && !product.category.toLowerCase().includes(searchQuery)) {
       return false;
     }
-    if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) return false;
+    if (selectedCategories.length > 0) {
+      const pCat = (product.category === 'Full Track Suits' || product.category === 'Tracksuits') ? 'Tracksuits' : product.category;
+      if (!selectedCategories.includes(pCat)) return false;
+    }
     if (selectedSize && !product.sizes.includes(selectedSize)) return false;
     if (selectedColor && !product.colors.some(c => c.name === selectedColor)) return false;
     if (product.price > priceRange) return false;
@@ -57,7 +65,7 @@ export const CatalogPage = () => {
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar Filters */}
         <aside className="w-full md:w-64 shrink-0">
-          <div className="sticky top-24 space-y-8 border border-outline p-5 bg-surface">
+          <div className="sticky top-24 space-y-8 border border-outline rounded-2xl p-5 bg-surface">
             <div className="flex items-center justify-between border-b border-outline pb-3">
               <h3 className="font-heading font-bold text-xs uppercase tracking-widest text-on-surface">Filters</h3>
               <button
@@ -65,7 +73,7 @@ export const CatalogPage = () => {
                   setSelectedCategories([]);
                   setSelectedSize(null);
                   setSelectedColor(null);
-                  setPriceRange(500);
+                  setPriceRange(10000);
                 }}
                 className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant hover:text-on-surface underline"
               >
@@ -83,10 +91,10 @@ export const CatalogPage = () => {
                       type="checkbox"
                       checked={selectedCategories.includes(cat)}
                       onChange={() => handleCategoryToggle(cat)}
-                      className="accent-on-surface h-3.5 w-3.5"
+                      className="accent-on-surface h-3.5 w-3.5 rounded"
                     />
                     <span className={`font-heading text-xs uppercase tracking-wider ${selectedCategories.includes(cat) ? 'text-on-surface font-bold' : 'text-on-surface-variant group-hover:text-on-surface'}`}>
-                      {cat}
+                      {cat === 'Tracksuits' ? 'Full Track Suits' : cat}
                     </span>
                   </label>
                 ))}
@@ -101,7 +109,7 @@ export const CatalogPage = () => {
                   <button
                     key={size}
                     onClick={() => setSelectedSize(selectedSize === size ? null : size)}
-                    className={`py-1.5 border font-heading text-[10px] uppercase tracking-wider transition-colors ${
+                    className={`py-1.5 border rounded-lg font-heading text-[10px] uppercase tracking-wider transition-colors ${
                       selectedSize === size
                         ? 'border-on-surface bg-on-surface text-surface font-bold'
                         : 'border-outline text-on-surface hover:border-on-surface'
@@ -117,12 +125,13 @@ export const CatalogPage = () => {
             <section className="space-y-3">
               <div className="flex justify-between items-center">
                 <h4 className="font-heading text-[10px] uppercase tracking-widest text-on-surface-variant">Max Price</h4>
-                <span className="font-sans text-xs font-semibold text-on-surface">${priceRange}</span>
+                <span className="font-sans text-xs font-semibold text-on-surface">{formatPrice(priceRange)}</span>
               </div>
               <input
                 className="w-full accent-on-surface cursor-pointer"
-                max="500"
-                min="30"
+                max="10000"
+                min="1000"
+                step="500"
                 type="range"
                 value={priceRange}
                 onChange={(e) => setPriceRange(Number(e.target.value))}
@@ -140,16 +149,16 @@ export const CatalogPage = () => {
           </div>
 
           {filteredProducts.length === 0 ? (
-            <div className="py-20 text-center space-y-4 border border-outline bg-surface-container-low">
+            <div className="py-20 text-center space-y-4 border border-outline rounded-2xl bg-surface-container-low">
               <p className="font-heading text-xs uppercase tracking-widest text-on-surface-variant">No products found matching your filters</p>
               <button
                 onClick={() => {
                   setSelectedCategories([]);
                   setSelectedSize(null);
                   setSelectedColor(null);
-                  setPriceRange(500);
+                  setPriceRange(10000);
                 }}
-                className="px-6 py-2.5 border border-on-surface font-heading text-xs uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-colors"
+                className="px-6 py-2.5 border border-on-surface rounded-xl font-heading text-xs uppercase tracking-widest hover:bg-on-surface hover:text-surface transition-colors"
               >
                 Reset Filters
               </button>

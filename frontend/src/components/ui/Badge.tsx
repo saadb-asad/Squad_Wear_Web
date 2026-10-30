@@ -14,7 +14,7 @@ const VARIANT_STYLES: Record<BadgeVariant, string> = {
 };
 
 export const Badge = ({ variant, children }: BadgeProps) => (
-  <span className={`font-ui text-shout inline-block px-3 py-1 text-xs ${VARIANT_STYLES[variant]}`}>
+  <span className={`font-ui text-shout inline-block px-3 py-1 text-xs rounded-full ${VARIANT_STYLES[variant]}`}>
     {children}
   </span>
 );

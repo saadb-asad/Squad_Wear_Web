@@ -73,111 +73,25 @@ manager = ConnectionManager()
 import database
 from database import Base, use_sqlite_fallback
 
-SEED_PRODUCTS = [
-    {
-        "id": "apex-tech-hoodie", "sku": "SQD-APEX-TECH-HOODIE",
-        "name": "Apex Tech Hoodie", "subtitle": "Industrial Grey / Heavyweight",
-        "price": 120.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuBA8aYq6haC7i626RBAxGikRimxUIaCXW3sWd1UnyxtN_m2xiVcx8Is2fqlh-hlyJtRktD3Ob-g-R-Vpo8wvVax4TP9tcVuI9RNRQ1ys8k3i0imLsdPNfQkakzfznNpHlv33usRvykg2QhQK7EXd-6QiaWF6JUglpeNVk7q0QpQRLHeCTvkOd390S7-rxKiQdqOWboaAwMoBzUgtvFiy-xJTDcmAQ5qCR9Tf593FpCzW_uNnHqJs3kP8Q3VzTyQX-aWbawGDqA8P89g",
-        "hover_image": "https://lh3.googleusercontent.com/aida-public/AB6AXuB7RVti_D9Ep15yDLDJkNUIeP4Gf6RDf9_ZZtTSUafk1xNSP64P35KRtO4Z7u5BxtI1k1a0QvhUW61iylcTRLCL6QFg1P3rv8vBZzMsz6yXnD1KvM3l5NhddE-NzfVVKI-GvO6cV96v0vbIehRHx1QanpK-pFJPziOYfZVNcn8sRJgasKZSxLpaxG8bFiqnpMxSF1mvdkU-2eaRx5U8BYsh4NyzGWFxpYZR-kievm4CNYMJvIKlPoiuIagRaEuw923-GgT54YbA6x-V",
-        "badge": "New Drop",
-        "description": "Engineered for the modern urban landscape. Our Apex Tech Hoodie features a bespoke cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [
-            {"name": "Stealth Grey", "hex": "#3d3d3d"},
-            {"name": "Midnight Black", "hex": "#1a1a1a"},
-            {"name": "Industrial Grey", "hex": "#e5e5e5"},
-        ],
-        "inventory_count": 25, "category": "Hoodies", "display_order": 0,
-    },
-    {
-        "id": "stealth-cargo-jogger", "sku": "SQD-STEALTH-CARGO-JOGGER",
-        "name": "Stealth Cargo Trousers", "subtitle": "Midnight Black / Ripstop",
-        "price": 95.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuA-zGPVr8F43eZRbcgSLtL0A2cJduWP1zwq-G4IwMqnAXza-xleI70RSqL0P6pTiogXW1zJ-ta3PLQuqwnf3TznSdAlaez6WUUEv9EsQwDFleDpLJdn5DOM1pKeHHAuUn5EK8SY0Rq4wXpGEGgtX0IABus1Y6bLqMkLJHOhscJCbrVQGeG3mKLtI81Ff30v6oIkWEkUmy1fHYhtQN9-E_zeUOTQxZfrrDrGir7JgtaXfVputTsHL50suK_x7RZ0E2ezV5tDc72KkwsH",
-        "hover_image": None,
-        "badge": None,
-        "description": "Modern tactical trousers in matte black, featuring reinforced knee panels and multiple functional cargo pockets with teal zipper pulls.",
-        "sizes": ["30", "32", "34", "36"],
-        "colors": [{"name": "Midnight Black", "hex": "#1a1a1a"}],
-        "inventory_count": 25, "category": "Trousers", "display_order": 1,
-    },
-    {
-        "id": "vector-core-tee", "sku": "SQD-VECTOR-CORE-TEE",
-        "name": "Vector Tech Tracksuit", "subtitle": "Optic White / Full Set",
-        "price": 145.00, "original_price": 180.00,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuChhhWwdFkw6JeM2lQj7uHd6zHCbDlUBxlCHp2VyinovZaxAdFiIOQjYcQ0VRSRs3ANk0Un63yF84Br9sFSwh0cEsLRrewGXzQUrOZGcCHVj_mhZhj5DSTtl2q4-IDHyMU9LdI92W_VbxgiJCTMQBjv1o5FCcmnaXzE-lrO0l4c69qR_TU0M_0cleQt3Bi9V0qb9Q84fW64ubOe8SFzegttyD_EhhH3kkCWjY2wwqU7LKsXX_iXqUtDgx3aUJgVng3MWLpdkmp_hSWC",
-        "hover_image": None,
-        "badge": None,
-        "description": "A premium technical tracksuit in optic white and charcoal, featuring an oversized track jacket and matching tapered track pants.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [{"name": "Optic White", "hex": "#ffffff"}],
-        "inventory_count": 25, "category": "Full Track Suits", "display_order": 2,
-    },
-    {
-        "id": "storm-shell-v2", "sku": "SQD-STORM-SHELL-V2",
-        "name": "Storm Shell Tracksuit", "subtitle": "Forest Teal / Waterproof Set",
-        "price": 210.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCeFU7BfWYTIq4feA0tS37_M_Fj_jU8r3lUwEAK36s2pZ78EOvUs8xqyyCS1epz-1MyFZ2gDDEkSDOKizsV7lDE6rHgufMzAuOoKQJZAutCy6aHF2Qkly1Y7Ok6smNsY6WgZVsnnepBwggXiq3aIpm3rLe_DeAwB_6TenruHOAnZbcs8G1wUEACw0k-FtfdZeiYlIXc0G4KgmeTdcd5WTrIfFFPpOHM5-36gX8EbTu28B-hMTukKt8CN3V7ThVck9eNL6iSnKOXwLL3",
-        "hover_image": None,
-        "badge": None,
-        "description": "A futuristic technical tracksuit set in muted forest teal, featuring waterproof zip jacket and articulated track pants.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [{"name": "Forest Teal", "hex": "#0a4242"}],
-        "inventory_count": 25, "category": "Full Track Suits", "display_order": 3,
-    },
-    {
-        "id": "kinetix-hi-top", "sku": "SQD-KINETIX-HI-TOP",
-        "name": "Kinetix Tech Trousers", "subtitle": "Stone Grey / Modular",
-        "price": 115.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCs_tF23I_0G3NubpwVqPOSk1R2dOESOUs5jtPsrNGxC0Q4e8RwUYtAfDmJJeEVsviJEjvj8coq_Rphsiij9BpHClf5suKO81IGbSPYK3hCSdr8DPTAF9H-w5zEJaWJKOyITQjASdFZNbMZu0F36J7qF5wmEdQ5Ecm6JGoaAkUbh9OeqDBBLGIVgioolldL3otPrMY7T0JR6So_i65k2WlD7Ef52mRGBAYS9wHCnaKdU17UnKfgcqlw_peDZPAkqcwxkznkzawquk16",
-        "hover_image": None,
-        "badge": None,
-        "description": "Multi-pocket modular techwear trousers in stone grey with adjustable ankle cuffs and articulated knees.",
-        "sizes": ["30", "32", "34", "36"],
-        "colors": [{"name": "Stone Grey", "hex": "#8c8c8c"}],
-        "inventory_count": 25, "category": "Trousers", "display_order": 4,
-    },
-    {
-        "id": "signal-sling-bag", "sku": "SQD-SIGNAL-SLING-BAG",
-        "name": "Signal Stealth Tracksuit", "subtitle": "Carbon Black / Weatherproof Set",
-        "price": 165.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuANW-fMLouqfrFpOy2qJROnDWOAl7x25XjxkDTGdkGw9SZpMmnLvB9XykTPfLjaOMqRykuAkOWNJpaDSHD0-oSI_Yi1MToGbxL0BLtIFaLv76PSheDhwA86lul4SIEj_q2CIULbttSvQkA0myxY02ilQIQDMH3LIFboUoN_HgYoBd8CURraAq4xPP3cPR-UFDCsuXaU7XOuQ5_6q-tN5waIgRS4xBhjR66h_h7LPy-CzuIAVQFd1Eq8r6fUtPQ_XAwRjbMOTdqHmrwQ",
-        "hover_image": None,
-        "badge": None,
-        "description": "A sleek carbon black technical tracksuit with weather-resistant panels and ergonomic fit.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [{"name": "Carbon Black", "hex": "#111111"}],
-        "inventory_count": 0, "category": "Full Track Suits", "display_order": 5,
-    },
-    {
-        "id": "core-heavyweight-hoodie", "sku": "SQD-CORE-HEAVYWEIGHT-HOODIE",
-        "name": "Core Heavyweight Hoodie", "subtitle": "Industrial Grey / Heavyweight",
-        "price": 145.00, "original_price": None,
-        "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuDOShzYyebbEZcW7zMY2IdXnt2mN4bluylu_e_4BLg6zrYumO2u5enwq8-mQGjZPuLLgshq1TloNlmV_Be1yZ_4qXoMJm4KM8isxAHIyeelQ7dWth6SLFoBhj3fN7nSM4PTfyaTnRJm8GDtH8lCKqXRIwPQHI4XN8vgNBYEoxT1PwEKeeM0rzBbRFfbYBGeeYSivJHGsljp4A161E5-SnnC6WQZjQn_yaW0pp1VdYELKDL4AHaNzsIEyeZ4M7U5m1--DiCO5WSKebb_",
-        "hover_image": None,
-        "badge": "COLLECTION 01 / ESSENTIALS",
-        "description": "Engineered for the modern urban landscape. Our Core Heavyweight Hoodie features a bespoke 500GSM cross-weave fleece, designed to hold its architectural shape while providing unparalleled comfort. Finished with precision-engineered hardware.",
-        "sizes": ["S", "M", "L", "XL"],
-        "colors": [
-            {"name": "Stealth Grey", "hex": "#3d3d3d"},
-            {"name": "Midnight Black", "hex": "#1a1a1a"},
-            {"name": "Industrial Grey", "hex": "#e5e5e5"},
-        ],
-        "inventory_count": 25, "category": "Hoodies", "display_order": 6,
-    },
-]
+SEED_PRODUCTS = []
+
+from sqlalchemy import text
 
 @app.on_event("startup")
 async def startup_event():
     try:
         async with database.engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
+            await conn.execute(text("ALTER TABLE products ADD COLUMN IF NOT EXISTS is_published BOOLEAN NOT NULL DEFAULT TRUE"))
     except Exception as e:
         print(f"Warning: Primary database connection failed ({e}), switching to SQLite fallback...")
         use_sqlite_fallback()
         async with database.engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
+            try:
+                await conn.execute(text("ALTER TABLE products ADD COLUMN is_published BOOLEAN NOT NULL DEFAULT TRUE"))
+            except Exception:
+                pass
 
     async with database.AsyncSessionLocal() as session:
         result = await session.execute(select(User).where(User.email == "admin@squadattire.com"))
@@ -215,7 +129,7 @@ async def startup_event():
 @app.get("/api/products")
 @limiter.limit("60/minute")
 async def get_products(request: Request, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Product).order_by(Product.name))
+    result = await db.execute(select(Product).where(Product.is_published == True).order_by(Product.display_order, Product.name))
     products = result.scalars().all()
     return [
         {
@@ -232,9 +146,140 @@ async def get_products(request: Request, db: AsyncSession = Depends(get_db)):
             "sizes": p.sizes,
             "colors": p.colors,
             "category": p.category,
+            "isPublished": p.is_published,
         }
         for p in products
     ]
+
+@app.get("/api/products/preview")
+@limiter.limit("60/minute")
+async def get_products_preview(request: Request, db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Product).order_by(Product.display_order, Product.name))
+    products = result.scalars().all()
+    return [
+        {
+            "id": p.id,
+            "name": p.name,
+            "subtitle": p.subtitle,
+            "price": float(p.price),
+            "originalPrice": float(p.original_price) if p.original_price is not None else None,
+            "image": p.image,
+            "hoverImage": p.hover_image,
+            "badge": p.badge,
+            "soldOut": p.inventory_count <= 0,
+            "description": p.description,
+            "sizes": p.sizes,
+            "colors": p.colors,
+            "category": p.category,
+            "isPublished": p.is_published,
+        }
+        for p in products
+    ]
+
+@app.get("/api/admin/products")
+async def get_all_admin_products(
+    db: AsyncSession = Depends(get_db),
+    admin_user: User = Depends(get_current_internal_admin)
+):
+    result = await db.execute(select(Product).order_by(Product.display_order, Product.name))
+    products = result.scalars().all()
+    return [
+        {
+            "id": p.id,
+            "name": p.name,
+            "subtitle": p.subtitle,
+            "price": float(p.price),
+            "originalPrice": float(p.original_price) if p.original_price is not None else None,
+            "image": p.image,
+            "hoverImage": p.hover_image,
+            "badge": p.badge,
+            "soldOut": p.inventory_count <= 0,
+            "description": p.description,
+            "sizes": p.sizes,
+            "colors": p.colors,
+            "category": p.category,
+            "isPublished": p.is_published,
+        }
+        for p in products
+    ]
+
+@app.post("/api/admin/products/upload")
+async def upload_draft_products(
+    products_data: List[Dict[str, Any]],
+    publish_immediately: bool = False,
+    db: AsyncSession = Depends(get_db),
+    admin_user: User = Depends(get_current_internal_admin)
+):
+    created_count = 0
+    updated_count = 0
+    for p_item in products_data:
+        prod_id = p_item.get("id") or str(uuid.uuid4())
+        sku = p_item.get("sku") or f"SQD-{prod_id.upper()[:8]}"
+        
+        result = await db.execute(select(Product).where((Product.id == prod_id) | (Product.sku == sku)))
+        existing = result.scalar_one_or_none()
+        
+        if existing:
+            existing.name = p_item.get("name", existing.name)
+            existing.subtitle = p_item.get("subtitle", existing.subtitle)
+            existing.price = p_item.get("price", existing.price)
+            existing.original_price = p_item.get("originalPrice", p_item.get("original_price", existing.original_price))
+            existing.image = p_item.get("image", existing.image)
+            existing.hover_image = p_item.get("hoverImage", p_item.get("hover_image", existing.hover_image))
+            existing.badge = p_item.get("badge", existing.badge)
+            existing.description = p_item.get("description", existing.description)
+            existing.sizes = p_item.get("sizes", existing.sizes)
+            existing.colors = p_item.get("colors", existing.colors)
+            existing.category = p_item.get("category", existing.category)
+            existing.inventory_count = p_item.get("inventoryCount", p_item.get("inventory_count", existing.inventory_count))
+            existing.is_published = publish_immediately
+            updated_count += 1
+        else:
+            new_prod = Product(
+                id=prod_id,
+                sku=sku,
+                name=p_item["name"],
+                subtitle=p_item.get("subtitle"),
+                price=p_item["price"],
+                original_price=p_item.get("originalPrice", p_item.get("original_price")),
+                image=p_item["image"],
+                hover_image=p_item.get("hoverImage", p_item.get("hover_image")),
+                badge=p_item.get("badge"),
+                description=p_item.get("description", ""),
+                sizes=p_item.get("sizes", []),
+                colors=p_item.get("colors", []),
+                category=p_item.get("category", "General"),
+                inventory_count=p_item.get("inventoryCount", p_item.get("inventory_count", 10)),
+                is_published=publish_immediately
+            )
+            db.add(new_prod)
+            created_count += 1
+            
+    await db.commit()
+    return {
+        "status": "success",
+        "created": created_count,
+        "updated": updated_count,
+        "is_published": publish_immediately,
+        "message": f"Successfully uploaded {created_count + updated_count} products as {'LIVE' if publish_immediately else 'DRAFT'}"
+    }
+
+@app.post("/api/admin/publish-catalog")
+async def publish_catalog(
+    db: AsyncSession = Depends(get_db),
+    admin_user: User = Depends(get_current_internal_admin)
+):
+    result = await db.execute(select(Product).where(Product.is_published == False))
+    draft_products = result.scalars().all()
+    count = len(draft_products)
+    for p in draft_products:
+        p.is_published = True
+    await db.commit()
+    return {
+        "status": "success",
+        "published_count": count,
+        "message": f"Catalog published! {count} draft products are now live on the website."
+    }
 
 @app.post("/api/auth/register", response_model=UserResponse)
 async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):

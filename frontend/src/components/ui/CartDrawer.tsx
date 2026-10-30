@@ -3,6 +3,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useProducts } from '../../contexts/ProductsContext';
 import { FREE_SHIPPING_THRESHOLD } from '../../config';
 import { Button } from './Button';
+import { formatPrice } from '../../utils/format';
 
 export const CartDrawer = () => {
   const { items, removeFromCart, updateQuantity, total, isDrawerOpen, closeDrawer } = useCart();
@@ -18,7 +19,7 @@ export const CartDrawer = () => {
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
       <div className="absolute inset-0 bg-on-surface/50 backdrop-blur-xs" onClick={closeDrawer} />
-      <div className="relative flex h-full w-full max-w-md flex-col bg-surface border-l border-outline shadow-2xl">
+      <div className="relative flex h-full w-full max-w-md flex-col bg-surface border-l border-outline rounded-l-3xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-outline px-6 py-4">
           <div className="flex items-center gap-2">
@@ -43,8 +44,8 @@ export const CartDrawer = () => {
               Free Shipping Unlocked!
             </p>
           )}
-          <div className="mt-2 h-1.5 w-full bg-outline/30 overflow-hidden">
-            <div className="h-full bg-on-surface transition-all duration-300" style={{ width: `${progressPct}%` }} />
+          <div className="mt-2 h-2 w-full bg-outline/30 rounded-full overflow-hidden">
+            <div className="h-full bg-on-surface rounded-full transition-all duration-300" style={{ width: `${progressPct}%` }} />
           </div>
         </div>
 
@@ -58,7 +59,7 @@ export const CartDrawer = () => {
                 <div className="grid w-full grid-cols-3 gap-3">
                   {suggestions.map(p => (
                     <Link key={p.id} to={`/catalog/${p.id}`} onClick={closeDrawer} className="block group">
-                      <img src={p.image} alt={p.name} className="aspect-square w-full border border-outline object-cover transition-transform duration-300 group-hover:scale-105" />
+                      <img src={p.image} alt={p.name} loading="lazy" decoding="async" className="aspect-square w-full border border-outline rounded-xl object-cover transition-transform duration-300 group-hover:scale-105" />
                       <p className="font-heading mt-1.5 truncate text-[10px] uppercase tracking-wider text-on-surface">{p.name}</p>
                     </Link>
                   ))}
@@ -74,7 +75,9 @@ export const CartDrawer = () => {
                     <img
                       src={product?.image}
                       alt={item.name}
-                      className="h-20 w-20 flex-shrink-0 border border-outline object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      className="h-20 w-20 flex-shrink-0 border border-outline rounded-xl object-cover"
                     />
                     <div className="flex flex-1 flex-col justify-between">
                       <div className="flex justify-between gap-2">
@@ -84,10 +87,10 @@ export const CartDrawer = () => {
                           </span>
                           <span className="font-heading text-xs font-semibold uppercase tracking-wider text-on-surface">{item.name}</span>
                         </div>
-                        <span className="font-sans text-xs font-medium text-on-surface">${(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="font-sans text-xs font-medium text-on-surface">{formatPrice(item.price * item.quantity)}</span>
                       </div>
                       <div className="flex items-center justify-between mt-2">
-                        <div className="flex items-center border border-outline text-xs">
+                        <div className="flex items-center border border-outline rounded-lg text-xs overflow-hidden">
                           <button onClick={() => updateQuantity(item.productId, item.quantity - 1)} aria-label="Decrease quantity" className="px-2 py-1 hover:bg-surface-container-low">-</button>
                           <span className="px-3 font-sans text-xs font-medium">{item.quantity}</span>
                           <button onClick={() => updateQuantity(item.productId, item.quantity + 1)} aria-label="Increase quantity" className="px-2 py-1 hover:bg-surface-container-low">+</button>
@@ -111,7 +114,7 @@ export const CartDrawer = () => {
         <div className="border-t border-outline px-6 py-6 bg-surface">
           <div className="mb-4 flex items-center justify-between">
             <span className="font-heading text-xs uppercase tracking-widest text-on-surface-variant">Subtotal</span>
-            <span className="font-sans text-lg font-bold text-on-surface">${total.toFixed(2)}</span>
+            <span className="font-sans text-lg font-bold text-on-surface">{formatPrice(total)}</span>
           </div>
           <p className="font-sans text-[11px] text-on-surface-variant mb-4">Taxes and shipping calculated at checkout.</p>
           <Button
@@ -120,7 +123,7 @@ export const CartDrawer = () => {
             className="w-full font-heading text-xs uppercase tracking-widest py-3.5"
             onClick={() => { closeDrawer(); navigate('/checkout'); }}
           >
-            Checkout — ${total.toFixed(2)}
+            Checkout — {formatPrice(total)}
           </Button>
         </div>
       </div>

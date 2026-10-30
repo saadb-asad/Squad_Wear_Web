@@ -8,7 +8,6 @@ import logoUrl from '../../assets/logo.png';
 const CATEGORIES = [
   { name: 'Full Track Suits', path: '/catalog?category=Full%20Track%20Suits' },
   { name: 'Hoodies', path: '/catalog?category=Hoodies' },
-  { name: 'Trousers', path: '/catalog?category=Trousers' },
 ];
 
 export const Navbar = () => {
@@ -32,7 +31,7 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="w-full sticky top-0 bg-surface z-50 border-b border-outline">
+    <header className="w-full sticky top-0 bg-surface/80 backdrop-blur-md z-50 border-b border-outline/50 transition-all duration-300">
       <nav className="w-full max-w-max-width mx-auto px-4 lg:px- margin-desktop py-3.5 flex items-center justify-between gap-4">
         {/* Mobile menu button */}
         <button
@@ -85,7 +84,7 @@ export const Navbar = () => {
               id="search-input"
               type="text"
               placeholder="Search apparel..."
-              className="w-full pl-8 pr-3 py-1.5 bg-surface-container-low border border-outline rounded-none font-sans text-xs focus:outline-none focus:border-on-surface"
+              className="w-full pl-8 pr-3 py-1.5 bg-surface-container-low border border-outline rounded-full font-sans text-xs focus:outline-none focus:border-on-surface"
               value={searchTerm}
               onChange={handleSearchChange}
             />
@@ -121,12 +120,12 @@ export const Navbar = () => {
 
       {/* Mobile Navigation Drawer */}
       {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-outline bg-surface px-6 py-4 space-y-4">
+        <div className="md:hidden border-t border-outline/50 bg-surface/90 backdrop-blur-md px-6 py-4 space-y-4">
           <form onSubmit={handleSearch} className="relative w-full mb-3">
             <input
               type="text"
               placeholder="Search apparel..."
-              className="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-outline font-sans text-xs"
+              className="w-full pl-9 pr-3 py-2 bg-surface-container-low border border-outline rounded-xl font-sans text-xs"
               value={searchTerm}
               onChange={handleSearchChange}
             />

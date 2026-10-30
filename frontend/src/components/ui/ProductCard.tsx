@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { Product } from '../../data/mockData';
 import { Badge } from './Badge';
+import { formatPrice } from '../../utils/format';
 
 interface ProductCardProps {
   product: Product;
@@ -11,17 +12,21 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   const isSale = product.originalPrice != null && product.originalPrice > product.price;
 
   return (
-    <div className="group flex flex-col border border-outline bg-surface rounded-none overflow-hidden transition-all duration-300 hover:border-on-surface/40">
-      <Link to={`/catalog/${product.id}`} className="relative block aspect-[4/5] overflow-hidden bg-surface-container-low">
+    <div className="group flex flex-col border border-outline bg-surface rounded-2xl overflow-hidden transition-all duration-300 hover:border-on-surface/40 hover:shadow-lg">
+      <Link to={`/catalog/${product.id}`} className="relative block aspect-[4/5] overflow-hidden bg-surface-container-low rounded-t-2xl">
         <img
           src={product.image}
           alt={product.name}
+          loading="lazy"
+          decoding="async"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
         />
         {product.hoverImage && (
           <img
             src={product.hoverImage}
             alt=""
+            loading="lazy"
+            decoding="async"
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 group-hover:opacity-100"
           />
@@ -49,11 +54,11 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
           <div className="flex items-baseline gap-2">
             {isSale && (
               <span className="font-sans text-xs text-on-surface-variant line-through">
-                ${product.originalPrice!.toFixed(2)}
+                {formatPrice(product.originalPrice!)}
               </span>
             )}
             <span className="font-sans text-sm font-medium text-on-surface">
-              ${product.price.toFixed(2)}
+              {formatPrice(product.price)}
             </span>
           </div>
 
@@ -61,7 +66,7 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
             onClick={() => onAddToCart(product)}
             disabled={product.soldOut}
             aria-label={`Add ${product.name} to cart`}
-            className="px-3 py-1.5 border border-on-surface font-heading text-[10px] uppercase tracking-widest text-on-surface transition-all duration-200 hover:bg-on-surface hover:text-surface disabled:cursor-not-allowed disabled:opacity-40"
+            className="px-3 py-1.5 border border-on-surface rounded-lg font-heading text-[10px] uppercase tracking-widest text-on-surface transition-all duration-200 hover:bg-on-surface hover:text-surface disabled:cursor-not-allowed disabled:opacity-40"
           >
             Quick Add
           </button>
