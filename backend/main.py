@@ -281,6 +281,64 @@ async def publish_catalog(
         "message": f"Catalog published! {count} draft products are now live on the website."
     }
 
+# --- Admin Sales Summary Endpoints ---
+@app.get("/api/admin/sales/weekly")
+async def get_weekly_sales(db: AsyncSession = Depends(get_db), admin_user: User = Depends(get_current_internal_admin)):
+    """Return total sales per day for the last 7 days."""
+    from datetime import datetime, timedelta
+    start_date = datetime.utcnow() - timedelta(days=7)
+    result = await db.execute(
+        select(
+            func.date_trunc('day', Order.created_at).label('day'),
+            func.sum(Order.total_amount).label('total')
+        ).where(Order.created_at >= start_date)
+         .group_by('day')
+         .order_by('day')
+    )
+    rows = result.all()
+    return [{"date": r.day.date().isoformat(), "total": float(r.total)} for r in rows]
+
+@app.get("/api/admin/sales/monthly")
+async def get_monthly_sales(db: AsyncSession = Depends(get_db), admin_user: User = Depends(get_current_internal_admin)):
+    """Return total sales per month for the last 12 months."""
+    from datetime import datetime, timedelta
+    start_date = datetime.utcnow() - timedelta(days=365)
+    result = await db.execute(
+        select(
+            func.date_trunc('month', Order.created_at).label('month'),
+            func.sum(Order.total_amount).label('total')
+        ).where(Order.created_at >= start_date)
+         .group_by('month')
+         .order_by('month')
+    )
+    rows = result.all()
+    return [{"month": r.month.date().isoformat(), "total": float(r.total)} for r in rows]
+
+# --- Updated Order Status Endpoint to support cancellation and broadcast ---
+@app.put("/api/orders/{order_id}/status")
+async def update_order_status(request: Request, order_id: str, status: str, current_user: User = Depends(get_current_internal_admin), db: AsyncSession = Depends(get_db)):
+    result = await db.execute(select(Order).where(Order.id == order_id))
+    order = result.scalar_one_or_none()
+    if not order:
+        return {"error": "Order not found"}
+    order.status = status
+    await db.commit()
+    # Broadcast updates
+    await manager.broadcast({
+        "type": "ORDER_UPDATED",
+        "order_id": order_id,
+        "status": status,
+        "timestamp": datetime.utcnow().isoformat()
+    })
+    if status == "cancelled":
+        await manager.broadcast({
+            "type": "ORDER_CANCELLED",
+            "order_id": order_id,
+            "customer": order.user.email if order.user else None,
+            "timestamp": datetime.utcnow().isoformat()
+        })
+    return {"id": order.id, "status": order.status}
+
 @app.post("/api/auth/register", response_model=UserResponse)
 async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).where(User.email == user.email))

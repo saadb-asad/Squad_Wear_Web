@@ -15,7 +15,9 @@
     "lucide-react": "latest",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "react-router-dom": "latest"
+    "react-router-dom": "latest",
+    "react-chartjs-2": "^5.2.0",
+    "chart.js": "^4.4.2"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",

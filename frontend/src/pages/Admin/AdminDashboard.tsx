@@ -5,6 +5,9 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { API_BASE_URL } from '../../config';
+import { Line } from 'react-chartjs-2'; // Chart.js line chart
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 
 // --- Mock Data ---
@@ -34,8 +37,13 @@ export const AdminDashboard = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [isOnline, setIsOnline] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [weeklySales, setWeeklySales] = useState<Array<{date:string,total:number}>>([]);
+  const [monthlySales, setMonthlySales] = useState<Array<{month:string,total:number}>>([]);
+  const [cancellationNotices, setCancellationNotices] = useState<Array<{orderId:string,timestamp:string}>>([]);
 
   const filteredOrders = orders.filter(order => order.id.toLowerCase().includes(searchQuery.toLowerCase()));
+
+
 
   useEffect(() => {
     if (!isLoading && (!isAuthenticated || user?.role !== 'internal_admin')) {
@@ -93,6 +101,26 @@ export const AdminDashboard = () => {
     return () => {
       ws.close();
     };
+  }, [token]);
+
+  // Fetch weekly and monthly sales data for charts
+  useEffect(() => {
+    if (!token) return;
+    const fetchSales = async () => {
+      try {
+        const [weeklyRes, monthlyRes] = await Promise.all([
+          fetch(`${API_BASE_URL}/api/admin/sales/weekly`, { headers: { Authorization: `Bearer ${token}` } }),
+          fetch(`${API_BASE_URL}/api/admin/sales/monthly`, { headers: { Authorization: `Bearer ${token}` } })
+        ]);
+        const weeklyData = await weeklyRes.json();
+        const monthlyData = await monthlyRes.json();
+        setWeeklySales(weeklyData);
+        setMonthlySales(monthlyData);
+      } catch (err) {
+        console.error('Error fetching sales data:', err);
+      }
+    };
+    fetchSales();
   }, [token]);
 
   const updateOrderStatus = async (orderId: string, newStatus: OrderStatus) => {
@@ -155,6 +183,27 @@ export const AdminDashboard = () => {
     });
 
     doc.save(`SquadWear_Report_${new Date().toISOString().split('T')[0]}.pdf`);
+    };
+
+    // Export PDF for a single order
+    const generateOrderPDF = (order: Order) => {
+      const doc = new jsPDF();
+      doc.setFontSize(16);
+      doc.text(`Order #${order.id}`, 14, 20);
+      doc.text(`Customer: ${order.customerName}`, 14, 28);
+      doc.text(`Date: ${new Date(order.date).toLocaleString()}`, 14, 36);
+      doc.text(`Status: ${order.status}`, 14, 44);
+      doc.text('Items:', 14, 52);
+      const tableRows = order.items.map(item => [item.productName, item.quantity.toString(), `$${(item.price * item.quantity).toFixed(2)}`]);
+      autoTable(doc, {
+        startY: 58,
+        head: [['Product', 'Qty', 'Total']],
+        body: tableRows,
+        theme: 'grid',
+      });
+      doc.text(`Total Amount: $${order.totalAmount.toFixed(2)}`, 14, doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 10 : 120);
+      doc.save(`Order_${order.id}.pdf`);
+    };
   };
 
   if (isLoading || !isAuthenticated || user?.role !== 'internal_admin') {
@@ -191,6 +240,39 @@ export const AdminDashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+        {/* Sales Charts */}
+        <div className="lg:col-span-12 mb-8">
+          <h2 className="font-headline-md text-headline-md text-on-surface mb-4">Weekly Sales</h2>
+          {weeklySales.length > 0 && (
+            <Line
+              data={{
+                labels: weeklySales.map(d => d.date),
+                datasets: [{
+                  label: 'Revenue',
+                  data: weeklySales.map(d => d.total),
+                  borderColor: '#3b82f6',
+                  backgroundColor: 'rgba(59,130,246,0.1)',
+                }]
+              }}
+              options={{ responsive: true, plugins: { legend: { position: 'top' } } }}
+            />
+          )}
+          <h2 className="font-headline-md text-headline-md text-on-surface mt-8 mb-4">Monthly Sales</h2>
+          {monthlySales.length > 0 && (
+            <Line
+              data={{
+                labels: monthlySales.map(d => d.month),
+                datasets: [{
+                  label: 'Revenue',
+                  data: monthlySales.map(d => d.total),
+                  borderColor: '#10b981',
+                  backgroundColor: 'rgba(16,185,129,0.1)',
+                }]
+              }}
+              options={{ responsive: true, plugins: { legend: { position: 'top' } } }}
+            />
+          )}
+        </div>
         {/* Left Column: Order List */}
         <div className="lg:col-span-8 flex flex-col gap-4">
           <div className="neo-extruded bg-surface p-4 rounded-2xl flex items-center gap-3">
@@ -295,7 +377,13 @@ export const AdminDashboard = () => {
                   </div>
                 )}
               </div>
-            </div>
+            <button
+  onClick={() => generateOrderPDF(selectedOrder)}
+  className="neo-extruded-sm neo-interactive mt-4 w-full py-2 rounded-xl bg-surface text-on-surface font-label-md"
+>
+  📄 Export Order PDF
+</button>
+</div>
           ) : (
             <div className="neo-recessed bg-surface-container-low rounded-[32px] flex items-center justify-center h-64 text-on-surface-variant font-body-md">
               Select an order to view details
@@ -303,6 +391,19 @@ export const AdminDashboard = () => {
           )}
         </div>
       </div>
+{/* Cancellation Notices */}
+{cancellationNotices.length > 0 && (
+  <div className="lg:col-span-12 mt-8 p-4 neo-extruded bg-surface rounded-2xl">
+    <h3 className="font-headline-sm text-on-surface mb-2">Cancellation Notices</h3>
+    <ul className="list-disc list-inside space-y-1">
+      {cancellationNotices.map((n, i) => (
+        <li key={i} className="text-on-surface-variant">
+          Order {n.orderId} cancelled at {new Date(n.timestamp).toLocaleTimeString()}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
     </main>
   );
 };
