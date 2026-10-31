@@ -359,29 +359,10 @@ async def verify_otp(otp_data: OTPVerify, db: AsyncSession = Depends(get_db)):
 async def read_users_me(current_user: User = Depends(get_current_user)):
     return current_user
 
-@app.get("/api/products")
-@limiter.limit("60/minute")
-async def get_products(request: Request, db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Product).order_by(Product.display_order))
-    products = result.scalars().all()
-    return [
-        {
-            "id": p.id,
-            "name": p.name,
-            "subtitle": p.subtitle,
-            "price": float(p.price),
-            "originalPrice": float(p.original_price) if p.original_price is not None else None,
-            "image": p.image,
-            "hoverImage": p.hover_image,
-            "badge": p.badge,
-            "soldOut": p.inventory_count <= 0,
-            "description": p.description,
-            "sizes": p.sizes,
-            "colors": p.colors,
-            "category": p.category,
-        }
-        for p in products
-    ]
+# @app.get("/api/products")  # duplicate removed
+# @limiter.limit("60/minute")
+# async def get_products(request: Request, db: AsyncSession = Depends(get_db)):
+
 
 from pydantic import BaseModel
 class UserUpdate(BaseModel):
