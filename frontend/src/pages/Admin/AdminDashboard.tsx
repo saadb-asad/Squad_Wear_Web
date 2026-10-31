@@ -39,7 +39,7 @@ export const AdminDashboard = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [weeklySales, setWeeklySales] = useState<Array<{date:string,total:number}>>([]);
   const [monthlySales, setMonthlySales] = useState<Array<{month:string,total:number}>>([]);
-  const [cancellationNotices, setCancellationNotices] = useState<Array<{orderId:string,timestamp:string}>>([]);
+  const [cancellationNotices, setCancellationNotices] = useState<Array<{orderId:string,customer:string,timestamp:string}>>([]);
 
   const filteredOrders = orders.filter(order => order.id.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -89,6 +89,22 @@ export const AdminDashboard = () => {
         );
         setSelectedOrder(current => 
           (current && current.id === data.order_id) ? { ...current, status: data.status as OrderStatus } : current
+        );
+      } else if (data.type === 'ORDER_CANCELLED') {
+        console.log(`[WebSocket] Order ${data.order_id} cancelled`);
+        setCancellationNotices(prev => [{
+          orderId: data.order_id,
+          customer: data.customer || 'Unknown',
+          timestamp: data.timestamp || new Date().toISOString()
+        }, ...prev.filter(n => n.orderId !== data.order_id)].slice(0, 20));
+        // Update order status in list
+        setOrders(currentOrders => 
+          currentOrders.map(o => 
+            o.id === data.order_id ? { ...o, status: 'cancelled' as OrderStatus } : o
+          )
+        );
+        setSelectedOrder(current => 
+          (current && current.id === data.order_id) ? { ...current, status: 'cancelled' as OrderStatus } : current
         );
       }
     };
@@ -201,10 +217,9 @@ export const AdminDashboard = () => {
         body: tableRows,
         theme: 'grid',
       });
-      doc.text(`Total Amount: $${order.totalAmount.toFixed(2)}`, 14, doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 10 : 120);
+      doc.text(`Total Amount: $${order.totalAmount.toFixed(2)}`, 14, (doc as any).lastAutoTable?.finalY ? (doc as any).lastAutoTable.finalY + 10 : 120);
       doc.save(`Order_${order.id}.pdf`);
     };
-  };
 
   if (isLoading || !isAuthenticated || user?.role !== 'internal_admin') {
     return (
@@ -398,12 +413,13 @@ export const AdminDashboard = () => {
     <ul className="list-disc list-inside space-y-1">
       {cancellationNotices.map((n, i) => (
         <li key={i} className="text-on-surface-variant">
-          Order {n.orderId} cancelled at {new Date(n.timestamp).toLocaleTimeString()}
+          Order {n.orderId} ({n.customer}) cancelled at {new Date(n.timestamp).toLocaleTimeString()}
+          <button onClick={() => setCancellationNotices(prev => prev.filter(x => x.orderId !== n.orderId))} className="ml-2 underline">Dismiss</button>
         </li>
       ))}
     </ul>
   </div>
 )}
-    </main>
+</main>
   );
 };

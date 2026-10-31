@@ -19,20 +19,20 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import selectinload
 
-from database import get_db, limiter
-from models import Order, OrderItem, User, Product
+from backend.database import get_db, limiter
+from backend.models import Order, OrderItem, User, Product
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from fastapi import Response, Form, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 
-from auth import (
+from backend.auth import (
     UserCreate, Token, UserResponse, OTPVerify,
     verify_password, get_password_hash, create_access_token, get_current_user,
     get_current_internal_admin
 )
 
-from payfast_utils import generate_signature, validate_itn, PAYFAST_MERCHANT_ID, PAYFAST_MERCHANT_KEY, PAYFAST_URL
+from backend.payfast_utils import generate_signature, validate_itn, PAYFAST_MERCHANT_ID, PAYFAST_MERCHANT_KEY, PAYFAST_URL
 
 app = FastAPI(title="SquadWear API")
 
@@ -70,8 +70,8 @@ class ConnectionManager:
 
 manager = ConnectionManager()
 
-import database
-from database import Base, use_sqlite_fallback
+import backend.database as database
+from backend.database import Base, use_sqlite_fallback
 
 SEED_PRODUCTS = []
 
@@ -317,27 +317,29 @@ async def get_monthly_sales(db: AsyncSession = Depends(get_db), admin_user: User
 # --- Updated Order Status Endpoint to support cancellation and broadcast ---
 @app.put("/api/orders/{order_id}/status")
 async def update_order_status(request: Request, order_id: str, status: str, current_user: User = Depends(get_current_internal_admin), db: AsyncSession = Depends(get_db)):
-    result = await db.execute(select(Order).where(Order.id == order_id))
+    result = await db.execute(select(Order).options(selectinload(Order.user)).where(Order.id == order_id))
     order = result.scalar_one_or_none()
     if not order:
         return {"error": "Order not found"}
     order.status = status
+    customer = order.user.email if order.user else None
     await db.commit()
     # Broadcast updates
-    await manager.broadcast({
-        "type": "ORDER_UPDATED",
-        "order_id": order_id,
-        "status": status,
-        "timestamp": datetime.utcnow().isoformat()
-    })
     if status == "cancelled":
         await manager.broadcast({
             "type": "ORDER_CANCELLED",
             "order_id": order_id,
-            "customer": order.user.email if order.user else None,
+            "customer": customer,
             "timestamp": datetime.utcnow().isoformat()
         })
-    return {"id": order.id, "status": order.status}
+    else:
+        await manager.broadcast({
+            "type": "ORDER_UPDATED",
+            "order_id": order_id,
+            "status": status,
+            "timestamp": datetime.utcnow().isoformat()
+        })
+    return {"id": order.id, "status": status}
 
 @app.post("/api/auth/register", response_model=UserResponse)
 async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):

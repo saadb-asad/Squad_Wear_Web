@@ -8,8 +8,8 @@ from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 
-from database import get_db
-from models import User
+from backend.database import get_db
+from backend.models import User
 from dotenv import load_dotenv
 from pydantic import BaseModel
 

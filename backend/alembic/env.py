@@ -9,6 +9,8 @@ import sys
 
 # Add backend directory to sys.path so we can import models
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+# Add repo root so the `backend` package resolves
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -19,7 +21,7 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-from models import Base
+from backend.models import Base
 target_metadata = Base.metadata
 
 def get_url():
